@@ -1,5 +1,6 @@
 import select from '@inquirer/select';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
+import md5ModuleLauncher from './modules/md5/launcher.js';
 
 /**
  * Module List
@@ -23,8 +24,8 @@ const MODULES = [
     name: 'MD5',
     value: 'md5',
     description: 'Message-Digest Algorithm',
-    launcher: undefined,
-    disabled: '@TODO',
+    launcher: md5ModuleLauncher,
+    disabled: '',
   },
 ];
 

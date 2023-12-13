@@ -35,7 +35,7 @@ export default async function moduleLauncher() {
       const uuid = await input({ message: 'Enter the uuid v4' });
       Utilities.print('UUIDService.validate', [
         uuid,
-        `${UUIDService.validate(uuid) ? 'VALID' : 'INVALID'}`,
+        `Is ${UUIDService.validate(uuid) ? 'a VALID' : 'an INVALID'} uuid v4`,
       ]);
       break;
     }
