@@ -29,17 +29,20 @@ export default async function moduleLauncher() {
   // execute the apropriate action
   switch (answer) {
     case 'hash': {
-      const message = await input({ message: 'Enter the message you wish to hash' });
+      const message = await input({
+        message: 'Enter the message you wish to hash',
+        validate: ((v) => v.length > 0),
+      });
       Utilities.print('MD5Service.hash', [
         'Original:',
         message,
         '\n\nmd5 Hash:',
         MD5Service.hash(message),
-      ], true, true);
+      ], true);
       break;
     }
     case 'validate': {
-      const hash = await input({ message: 'Enter the md5 hash' });
+      const hash = await input({ message: 'Enter the md5 hash', validate: ((v) => v.length > 0) });
       Utilities.print('MD5Service.validate', [
         hash,
         `Is ${MD5Service.validate(hash) ? 'a VALID' : 'an INVALID'} md5 hash`,

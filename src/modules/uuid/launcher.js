@@ -29,10 +29,10 @@ export default async function moduleLauncher() {
   // execute the apropriate action
   switch (answer) {
     case 'generate':
-      Utilities.print('UUIDService.generate', [UUIDService.generate()], true, true);
+      Utilities.print('UUIDService.generate', [UUIDService.generate()], true);
       break;
     case 'validate': {
-      const uuid = await input({ message: 'Enter the uuid v4' });
+      const uuid = await input({ message: 'Enter the uuid v4', validate: ((v) => v.length > 0) });
       Utilities.print('UUIDService.validate', [
         uuid,
         `Is ${UUIDService.validate(uuid) ? 'a VALID' : 'an INVALID'} uuid v4`,
