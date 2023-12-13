@@ -1,34 +1,48 @@
-import select, { Separator } from '@inquirer/select';
-import { exec } from 'child_process';
+import select from '@inquirer/select';
+import uuidModuleLauncher from './modules/uuid/launcher.js';
+
+/**
+ * Module List
+ */
+const MODULES = [
+  {
+    name: 'Password',
+    value: 'password',
+    description: 'Generation and analysis of strong passwords',
+    launcher: undefined,
+    disabled: '@TODO',
+  },
+  {
+    name: 'UUID',
+    value: 'uuid',
+    description: 'Generation and validation of Universally Unique Identifiers',
+    launcher: uuidModuleLauncher,
+    disabled: '',
+  },
+  {
+    name: 'MD5',
+    value: 'md5',
+    description: 'Message-Digest Algorithm',
+    launcher: undefined,
+    disabled: '@TODO',
+  },
+];
+
+
+
+
 
 /**
  * Module Menu
  */
 const answer = await select({
-  message: 'Select a package manager',
-  choices: [
-    {
-      name: 'npm',
-      value: 'npm',
-      description: 'npm is the most popular package manager',
-    },
-    {
-      name: 'UUID',
-      value: 'uuid',
-      description: 'Universally Unique Identifier Management',
-    },
-    new Separator(),
-    {
-      name: 'jspm',
-      value: 'jspm',
-      disabled: true,
-    },
-    {
-      name: 'pnpm',
-      value: 'pnpm',
-      disabled: '(pnpm is not available)',
-    },
-  ],
+  message: 'Select a module',
+  choices: MODULES.map((module) => ({
+    name: module.name,
+    value: module.value,
+    description: module.description,
+    disabled: module.disabled,
+  })),
 });
 
 
@@ -37,13 +51,13 @@ const answer = await select({
 
 /**
  * Module Execution
+ * Retrieve the module based on the user's selection and execute the launcher.
  */
-exec(`node ./src/modules/${answer}/index.js`, (err, stdout, stderr) => {
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
-
-  // the *entire* stdout (buffered)
-  console.log(stdout);
-});
+try {
+  const module = MODULES.find((mod) => mod.value === answer);
+  await module.launcher();
+  process.exit(0);
+} catch (e) {
+  console.error(e);
+  process.exit(1);
+}

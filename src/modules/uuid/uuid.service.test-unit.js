@@ -1,4 +1,4 @@
-import UUIDService from './uuid.service';
+import UUIDService from './uuid.service.js';
 
 
 
@@ -17,6 +17,9 @@ describe('UUID Management', () => {
     expect(typeof uuid).toBe('string');
     expect(uuid.length).toBe(36);
     expect(UUIDService.validate(uuid)).toBe(true);
+    expect(
+      /^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$/.test(uuid),
+    ).toBe(true);
   });
 
   test('can identify invalid uuids', () => {

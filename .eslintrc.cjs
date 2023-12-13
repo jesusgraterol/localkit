@@ -29,5 +29,7 @@ module.exports = {
   },
   rules: {
     'no-multiple-empty-lines': ['error', { max: 5, maxEOF: 0 }],
+    'import/extensions': ['error', 'ignorePackages', { '': 'never' }],
+    'no-console': 'off',
   },
 };

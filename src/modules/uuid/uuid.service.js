@@ -17,7 +17,6 @@ class UUIDService {
     return uuidv4();
   }
 
-
   /**
    * Ensures the provided value is a valid uuid and that is version 4.
    * @param {*} uuid
