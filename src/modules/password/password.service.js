@@ -1,3 +1,4 @@
+import { generate } from 'generate-password';
 import { passwordStrength } from 'check-password-strength';
 
 /**
@@ -5,8 +6,17 @@ import { passwordStrength } from 'check-password-strength';
  * Service in charge of managing the generation and strength analysis of Passwords.
  */
 class PasswordService {
+  /**
+   * the list of characters that won't be included into passwords in order to avoid issues. e.g.
+   * when using one of these values in a .env file.
+   */
+  static #EXCLUDE_CHARACTERS = '"\'={}`';
+
+  // the min accepted strength when generating new passwords. Anything less should throw an error
+  static #MIN_STRENGTH = 1;
+
   // the aliases that describe the strength of a password
-  static STRENGTH_ALIAS = ['Too weak', 'Weak', 'Medium', 'Strong'];
+  static STRENGTH_ALIAS = ['Very Weak', 'Weak', 'Medium', 'Strong'];
 
   // the options that will be used to calculate the strength of a given password
   static #STRENGTH_OPTIONS = [
@@ -14,13 +24,13 @@ class PasswordService {
       id: 0,
       value: PasswordService.STRENGTH_ALIAS[0],
       minDiversity: 0, // Default is 0
-      minLength: 6, // Default is 0
+      minLength: 2, // Default is 0
     },
     {
       id: 1,
       value: PasswordService.STRENGTH_ALIAS[1],
-      minDiversity: 3, // Default is 2
-      minLength: 10, // Default is 6
+      minDiversity: 0, // Default is 2
+      minLength: 6, // Default is 6
     },
     {
       id: 2,
@@ -32,7 +42,7 @@ class PasswordService {
       id: 3,
       value: PasswordService.STRENGTH_ALIAS[3],
       minDiversity: 4, // Default is 4
-      minLength: 22, // Default is 10
+      minLength: 32, // Default is 10
     },
   ];
 
@@ -41,16 +51,37 @@ class PasswordService {
 
 
   /**
-   * ...
+   * Generates a brand new "random" password based on the given configuration. Note that if the
+   * strength of the password is Weak or less, it will throw an error.
+   * @param {*} passwordLength
+   * @param {*} includeNumbers
+   * @param {*} includeLowerCase
+   * @param {*} includeUpperCase
+   * @param {*} includeSymbols
    * @returns string
    */
-  static generate() {
+  static generate(
+    passwordLength,
+    includeNumbers,
+    includeLowerCase,
+    includeUpperCase,
+    includeSymbols,
+  ) {
     // generate the password
-    const password = '123';
+    const password = generate({
+      length: passwordLength,
+      numbers: includeNumbers,
+      lowercase: includeLowerCase,
+      uppercase: includeUpperCase,
+      symbols: includeSymbols,
+      exclude: this.#EXCLUDE_CHARACTERS,
+      strict: true,
+    });
 
     // ensure the password is not too weak
-    if (PasswordService.calculateStrength(password) <= 1) {
-      throw new Error(`The generated password: ${password} is too weak and should not be used.`);
+    const strength = PasswordService.calculateStrength(password);
+    if (strength < PasswordService.#MIN_STRENGTH) {
+      throw new Error(`The generated password: ${password} is ${PasswordService.STRENGTH_ALIAS[strength]} and should not be used.`);
     }
 
     // finally, return it
@@ -65,7 +96,7 @@ class PasswordService {
    * Calculates the strength of a given password. Note that it will be an integer ranging from
    * 0 (Too Weak) to 3 (Strong).
    * @param {*} password
-   * @returns @TODO
+   * @returns number
    */
   static calculateStrength(password) {
     const result = passwordStrength(password, PasswordService.#STRENGTH_OPTIONS);

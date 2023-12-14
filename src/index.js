@@ -1,4 +1,5 @@
 import select from '@inquirer/select';
+import passwordModuleLauncher from './modules/password/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
 import md5ModuleLauncher from './modules/md5/launcher.js';
 
@@ -9,23 +10,20 @@ const MODULES = [
   {
     name: 'Password',
     value: 'password',
-    description: 'Generation and analysis of strong passwords',
-    launcher: undefined,
-    disabled: '@TODO',
+    description: 'Generation and analysis of account passwords',
+    launcher: passwordModuleLauncher,
   },
   {
     name: 'UUID',
     value: 'uuid',
     description: 'Generation and validation of Universally Unique Identifiers',
     launcher: uuidModuleLauncher,
-    disabled: '',
   },
   {
     name: 'MD5',
     value: 'md5',
     description: 'Message-Digest Algorithm',
     launcher: md5ModuleLauncher,
-    disabled: '',
   },
 ];
 
@@ -42,7 +40,7 @@ const answer = await select({
     name: module.name,
     value: module.value,
     description: module.description,
-    disabled: module.disabled,
+    disabled: module.launcher === undefined ? '@TODO' : false,
   })),
 });
 
