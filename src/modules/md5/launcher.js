@@ -1,7 +1,7 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
 import MD5Service from './md5.service.js';
-import Utilities from '../utilities/utilities.js';
+import Utilities from '../shared/utilities/utilities.js';
 
 /**
  * Module Launcher

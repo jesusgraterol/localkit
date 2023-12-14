@@ -1,7 +1,7 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
 import UUIDService from './uuid.service.js';
-import Utilities from '../utilities/utilities.js';
+import Utilities from '../shared/utilities/utilities.js';
 
 /**
  * Module Launcher
@@ -29,13 +29,16 @@ export default async function moduleLauncher() {
   // execute the apropriate action
   switch (answer) {
     case 'generate':
-      Utilities.print('UUIDService.generate', [UUIDService.generate()], true);
+      Utilities.print('UUIDService.generate', [
+        'Generated ID:',
+        UUIDService.generate(),
+      ], true);
       break;
     case 'validate': {
       const uuid = await input({ message: 'Enter the uuid v4', validate: ((v) => v.length > 0) });
       Utilities.print('UUIDService.validate', [
+        `${UUIDService.validate(uuid) ? 'VALID' : 'INVALID'} uuid v4:`,
         uuid,
-        `Is ${UUIDService.validate(uuid) ? 'a VALID' : 'an INVALID'} uuid v4`,
       ]);
       break;
     }
