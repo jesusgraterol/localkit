@@ -15,13 +15,11 @@ export default async function moduleLauncher() {
         name: 'Generate',
         value: 'generate',
         description: 'Generate a universally unique identifier v4',
-        disabled: '',
       },
       {
         name: 'Validate',
         value: 'validate',
         description: 'Validate a universally unique identifier v4',
-        disabled: '',
       },
     ],
   });

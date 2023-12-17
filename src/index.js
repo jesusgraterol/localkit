@@ -1,6 +1,7 @@
 import select from '@inquirer/select';
 import passwordModuleLauncher from './modules/password/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
+import aes256ModuleLauncher from './modules/aes256/launcher.js';
 import md5ModuleLauncher from './modules/md5/launcher.js';
 
 /**
@@ -20,9 +21,15 @@ const MODULES = [
     launcher: uuidModuleLauncher,
   },
   {
+    name: 'AES256',
+    value: 'aes256',
+    description: 'Encryption and Decryption of messages with the aes256-ctr algorithm',
+    launcher: aes256ModuleLauncher,
+  },
+  {
     name: 'MD5',
     value: 'md5',
-    description: 'Message-Digest Algorithm',
+    description: 'Message-Digest Algorithm Hashing',
     launcher: md5ModuleLauncher,
   },
 ];
@@ -34,6 +41,7 @@ const MODULES = [
 /**
  * Module Menu
  */
+console.log('LOCALKIT\n');
 const answer = await select({
   message: 'Select a module',
   choices: MODULES.map((module) => ({

@@ -12,9 +12,6 @@ class PasswordService {
    */
   static #EXCLUDE_CHARACTERS = '"\'={}`';
 
-  // the min accepted strength when generating new passwords. Anything less should throw an error
-  static #MIN_STRENGTH = 1;
-
   // the aliases that describe the strength of a password
   static STRENGTH_ALIAS = ['Very Weak', 'Weak', 'Medium', 'Strong'];
 
@@ -58,6 +55,7 @@ class PasswordService {
    * @param {*} includeLowerCase
    * @param {*} includeUpperCase
    * @param {*} includeSymbols
+   * @param {?} minStrength
    * @returns string
    */
   static generate(
@@ -66,6 +64,7 @@ class PasswordService {
     includeLowerCase,
     includeUpperCase,
     includeSymbols,
+    minStrength = 1,
   ) {
     // generate the password
     const password = generate({
@@ -80,7 +79,7 @@ class PasswordService {
 
     // ensure the password is not too weak
     const strength = PasswordService.calculateStrength(password);
-    if (strength < PasswordService.#MIN_STRENGTH) {
+    if (strength < minStrength) {
       throw new Error(`The generated password: ${password} is ${PasswordService.STRENGTH_ALIAS[strength]} and should not be used.`);
     }
 

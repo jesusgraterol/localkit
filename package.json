@@ -32,6 +32,7 @@
   "dependencies": {
     "@inquirer/prompts": "^3.3.0",
     "@inquirer/select": "^1.3.1",
+    "aes256": "^1.1.0",
     "check-password-strength": "^2.0.7",
     "date-fns": "^2.30.0",
     "generate-password": "^1.7.1",

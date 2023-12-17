@@ -15,13 +15,11 @@ export default async function moduleLauncher() {
         name: 'Hash',
         value: 'hash',
         description: 'Hash any message using the md5 algorithm',
-        disabled: '',
       },
       {
         name: 'Validate',
         value: 'validate',
         description: 'Check if a string is a valid md5 hash',
-        disabled: '',
       },
     ],
   });
