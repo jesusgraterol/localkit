@@ -16,6 +16,7 @@ The key features are:
 
 
 
+<br/>
 
 ## Getting Started
 
@@ -40,6 +41,7 @@ npm install
 
 
 
+<br/>
 
 ## Usage
 
@@ -50,6 +52,7 @@ npm start
 
 
 
+<br/>
 
 ## Deployment
 
@@ -58,6 +61,7 @@ npm start
 
 
 
+<br/>
 
 ## Built With
 
@@ -66,6 +70,7 @@ npm start
 
 
 
+<br/>
 
 ## Running the Tests
 
@@ -83,6 +88,7 @@ N/A
 
 
 
+<br/>
 
 ## @TODO
 
@@ -94,6 +100,7 @@ N/A
 
 
 
+<br/>
 
 ## License
 
@@ -102,6 +109,7 @@ N/A
 
 
 
+<br/>
 
 ## Acknowledgments
 
