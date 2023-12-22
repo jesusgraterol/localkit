@@ -5,6 +5,8 @@ import aes256 from 'aes256';
  * Service in charge of encrypting and decrypting messages by making use of the aes256 algorithm.
  * Note this class makes use of the following lib to simplify the implementation:
  * https://github.com/JamesMGreene/node-aes256
+ * IMPORTANT: the symmetric session key (a.k.a. secret, a.k.a. passphrase) can be of any size
+ * because it is hashed using SHA-256.
  */
 class AES256Service {
   /**

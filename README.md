@@ -10,7 +10,7 @@ The key features are:
 - Generation and validation of UUIDs (Universally Unique Identifiers)
 - Encryption and decryption of messages with the AES256 Algorithm
 - Hashing of messages with the MD5 Algorithm
-- Generation and validation of OTP (One Time Password) secrets and codes (@TODO)
+- Generation and validation of OTP (One Time Password) secrets and tokens
 - Youtube Video/Audio download (@TODO)
 
 
@@ -23,7 +23,6 @@ The key features are:
 ### Requirements
 
 - GIT
-- Python ^v3
 - NodeJS ^v21.0.0
 - NPM ^v10.2.0
 
@@ -92,9 +91,8 @@ N/A
 
 ## @TODO
 
-- Implement the OTP (One Time Password) Module
 - Implement the Youtube Downloader (mp4 & mp3)
-- Implement the JavaScript/Typescript file template generators
+- Implement the JavaScript/Typescript/CSS file template generators
 - Publish the package on npm and adapt it so it can be installed globally, allowing it to be used as a proper CLI
 
 
@@ -120,3 +118,4 @@ N/A
 - [generate-password](https://github.com/brendanashworth/generate-password)
 - [node-md5](https://github.com/pvorb/node-md5)
 - [uuid](https://github.com/uuidjs/uuid)
+- [otplib](https://github.com/yeojz/otplib)

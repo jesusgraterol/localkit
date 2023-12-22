@@ -5,6 +5,10 @@ import { format } from 'date-fns';
  * Provides commonly used functionality in order to main consistency across modules.
  */
 class Utilities {
+  /* **************
+   * MISC HELPERS *
+   ************** */
+
   /**
    * Outputs the given content to the terminal.
    * @param {*} title
@@ -15,7 +19,7 @@ class Utilities {
   static print(title, content, includeDate = false, includeBorders = true) {
     if (includeBorders) console.log('\n========================================\n');
     console.log(`${title}`);
-    if (includeDate) console.log(`${format(new Date(), 'dd/MM/yyyy, hh:mm:ss a')}`);
+    if (includeDate) console.log(Utilities.formatDate());
     console.log('\n');
     if (typeof content === 'string') {
       console.log(content);
@@ -27,6 +31,22 @@ class Utilities {
       throw new Error('The content must be a string or a string array.');
     }
     if (includeBorders) console.log('\n========================================');
+  }
+
+
+
+
+
+  /**
+   * Formats a timestamp or the current time if none is provided.
+   * @param {?} timestamp
+   * @returns string
+   */
+  static formatDate(timestamp = undefined) {
+    return format(
+      typeof timestamp === 'number' ? new Date(timestamp) : new Date(),
+      'dd/MM/yyyy, hh:mm:ss a',
+    );
   }
 }
 
