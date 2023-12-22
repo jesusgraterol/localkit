@@ -36,17 +36,17 @@ class OTPService {
    * @returns string
    */
   static generateSecret() {
-    return '';
+    return authenticator.generateSecret();
   }
 
 
   /**
-   * Validates a given OTP secret.
+   * Validates the format of a given OTP secret.
    * @param {*} secret
    * @returns boolean
    */
-  static isSecretValid(secret) {
-    return secret === '';
+  static isSecretFormatValid(secret) {
+    return typeof secret === 'string' && /^[0-9a-zA-Z]{16,64}$/.test(secret);
   }
 
 
@@ -62,16 +62,17 @@ class OTPService {
    * @returns string
    */
   static generateToken(secret) {
-    return secret;
+    return authenticator.generate(secret);
   }
 
   /**
-   * Validates the format of a given token.
+   * Validates the format of a given token. IMPORTANT: it does not check the validity based on the
+   * secret.
    * @param {*} token
    * @returns boolean
    */
-  static isTokenValid(token) {
-    return token === '';
+  static isTokenFormatValid(token) {
+    return typeof token === 'string' && /^[0-9]{6}$/.test(token);
   }
 }
 
