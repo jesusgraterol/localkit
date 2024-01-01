@@ -48,7 +48,9 @@ const MODULES = [
 /**
  * Module Menu
  */
-console.log('LOCALKIT\n');
+console.log('############');
+console.log('# LOCALKIT #');
+console.log('############\n');
 const answer = await select({
   message: 'Select a module',
   choices: MODULES.map((module) => ({
