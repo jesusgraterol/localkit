@@ -44,21 +44,34 @@ export default async function moduleLauncher() {
      * Generate Token
      */
     case 'generate_token': {
+      // retrieve the secret
       const secret = await input({
         message: 'Enter the OTP Secret',
         validate: ((v) => OTPService.isSecretFormatValid(v)),
       });
-      let generateAnother = 'yes';
-      while (generateAnother === 'yes') {
-        Utilities.print('OTPService.generateToken', [
-          'Active OTP Token:',
-          OTPService.generateToken(secret),
-        ]);
-        // eslint-disable-next-line no-await-in-loop
-        generateAnother = await select({
-          message: 'Generate Another Token?',
-          choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
-        });
+
+      // retrieve the duration of the token generator
+      const tokensTotal = await select({
+        message: 'Select the duration of the Token Generator Instance',
+        choices: [
+          { name: '5 minutes', value: 10 }, { name: '30 minutes', value: 60 },
+          { name: '1 hour', value: 120 }, { name: '2 hours', value: 240 },
+          { name: '6 hours', value: 720 }, { name: '12 hours', value: 1440 },
+        ],
+      });
+
+      // generate tokens until the requirement has been met
+      let prevToken;
+      let generated = 0;
+      while (generated < tokensTotal) {
+        const token = OTPService.generateToken(secret);
+        if (token !== prevToken) {
+          generated += 1;
+          console.log(`${generated}/${tokensTotal}) ${Utilities.formatDate()}: ${token}`);
+          // eslint-disable-next-line no-await-in-loop
+          await Utilities.delay(5);
+        }
+        prevToken = token;
       }
       break;
     }

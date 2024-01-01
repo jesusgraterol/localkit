@@ -48,6 +48,17 @@ class Utilities {
       'dd/MM/yyyy, hh:mm:ss a',
     );
   }
+
+
+
+
+  /**
+   * Creates a delay which duration is based on the amount of provided seconds.
+   * @returns Promise<void>
+   */
+  static delay(seconds) {
+    return new Promise((resolve) => { setTimeout(resolve, seconds * 1000); });
+  }
 }
 
 

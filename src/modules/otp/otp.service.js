@@ -14,8 +14,10 @@ import { authenticator } from 'otplib';
  * token right after it expires. By setting the accepted window to 2, the UX is improved and the
  * impact on security is low as it only extends the token's validity by ~1 minute for past tokens
  * and 1 minute for future tokens, instead of 30 seconds (default).
+ * - step: number -> The time step in seconds. The Google Authenticator implementation rotates
+ * tokens every 30 seconds.
  */
-authenticator.options = { window: 2 };
+authenticator.options = { window: 2, step: 30 };
 
 
 
