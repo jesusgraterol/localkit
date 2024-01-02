@@ -67,7 +67,7 @@ export default async function moduleLauncher() {
         const token = OTPService.generateToken(secret);
         if (token !== prevToken) {
           generated += 1;
-          console.log(`${generated}/${tokensTotal}) ${Utilities.formatDate()}: ${token}`);
+          console.log(`${generated}/${tokensTotal}) ${Utilities.formatDate(undefined, 'hh:mm:ss a')}: ${token}`);
           // eslint-disable-next-line no-await-in-loop
           await Utilities.delay(5);
         }

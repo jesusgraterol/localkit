@@ -40,12 +40,13 @@ class Utilities {
   /**
    * Formats a timestamp or the current time if none is provided.
    * @param {?} timestamp
+   * @param {?} dateFormat
    * @returns string
    */
-  static formatDate(timestamp = undefined) {
+  static formatDate(timestamp = undefined, dateFormat = 'dd/MM/yyyy, hh:mm:ss a') {
     return format(
       typeof timestamp === 'number' ? new Date(timestamp) : new Date(),
-      'dd/MM/yyyy, hh:mm:ss a',
+      dateFormat,
     );
   }
 

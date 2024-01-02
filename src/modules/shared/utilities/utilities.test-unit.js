@@ -28,7 +28,11 @@ describe('Date Formatting', () => {
   });
 
   test('can properly format a time from the past', () => {
-    const date = Utilities.formatDate(1672622975000);
-    expect(date).toEqual('01/01/2023, 09:29:35 PM');
+    expect(Utilities.formatDate(1672622975000)).toEqual('01/01/2023, 09:29:35 PM');
+    expect(
+      Utilities.formatDate(1672622975000, 'dd/MM/yyyy, hh:mm:ss a'),
+    ).toEqual('01/01/2023, 09:29:35 PM');
+    expect(Utilities.formatDate(1672622975000, 'dd/MM/yyyy')).toEqual('01/01/2023');
+    expect(Utilities.formatDate(1672622975000, 'hh:mm:ss a')).toEqual('09:29:35 PM');
   });
 });
