@@ -44,10 +44,7 @@ class Utilities {
    * @returns string
    */
   static formatDate(timestamp = undefined, dateFormat = 'dd/MM/yyyy, hh:mm:ss a') {
-    return format(
-      typeof timestamp === 'number' ? new Date(timestamp) : new Date(),
-      dateFormat,
-    );
+    return format(typeof timestamp === 'number' ? new Date(timestamp) : new Date(), dateFormat);
   }
 
 
