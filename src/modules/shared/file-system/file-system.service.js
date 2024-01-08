@@ -1,9 +1,12 @@
 import fs from 'fs';
-// import pathHelper from 'path';
+import pathHelper from 'path';
 
 /**
  * File System Service
  * Service in charge of simplifying the interaction with files and directories.
+ * IMPORTANT: this module could've been written using the synchronous API. However, since these
+ * actions are commonly used across projects, the asynchronous API was used instead so the methods
+ * can be easily transported to any NodeJS Server.
  */
 class FileSystemService {
   /**
@@ -15,7 +18,7 @@ class FileSystemService {
     return new Promise((resolve) => {
       fs.access(path, (error) => {
         // If there is an error, means the path doesnt exist. Otherwise, it does
-        resolve(error !== null);
+        resolve(error === null);
       });
     });
   }
@@ -77,12 +80,16 @@ class FileSystemService {
    * @TODO Stringify the file contents if it is a JSON and the data is an object
    */
   static writeFile(filePath, data) {
-    return new Promise((resolve, reject) => {
-      fs.writeFile(filePath, data, 'utf-8', (err) => {
-        // Handle errors
-        if (err) reject(err);
+    // init the file extension
+    const ext = pathHelper.extname(filePath);
 
-        // Resolve the promise
+    // if it is a json file and the provided data is an object, stringify it. Otherwise, leave it
+    const content = ext === '.json' && typeof data === 'object' ? JSON.stringify(data) : data;
+
+    // write the file to disk
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filePath, content, 'utf-8', (err) => {
+        if (err) reject(err);
         resolve();
       });
     });
@@ -102,14 +109,17 @@ class FileSystemService {
       throw new Error(`The file ${filePath} does not exist.`);
     }
 
+    // init the file extension
+    const ext = pathHelper.extname(filePath);
+
     // read it and return its contents
     return new Promise((resolve, reject) => {
       fs.readFile(filePath, (err, data) => {
-        // Handle errors
         if (err) reject(err);
 
-        // Resolve the promise
-        resolve(data.toString());
+        // init the file's content and parse it if it is JSON. Otherwise, return it as is
+        const content = data.toString();
+        resolve(ext === '.json' ? JSON.parse(content) : content);
       });
     });
   }
