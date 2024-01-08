@@ -1,8 +1,9 @@
 import select from '@inquirer/select';
 import passwordModuleLauncher from './modules/password/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
-import aes256ModuleLauncher from './modules/aes256/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
+import youtubeDownloaderModuleLauncher from './modules/youtube-downloader/launcher.js';
+import aes256ModuleLauncher from './modules/aes256/launcher.js';
 import md5ModuleLauncher from './modules/md5/launcher.js';
 
 /**
@@ -22,16 +23,22 @@ const MODULES = [
     launcher: uuidModuleLauncher,
   },
   {
-    name: 'AES256',
-    value: 'aes256',
-    description: 'Encryption and Decryption of messages with the aes256-ctr algorithm',
-    launcher: aes256ModuleLauncher,
-  },
-  {
     name: 'OTP',
     value: 'otp',
     description: 'One Time Password Generation and verification',
     launcher: otpModuleLauncher,
+  },
+  {
+    name: 'Youtube Downloader',
+    value: 'youtube_downloader',
+    description: 'Download videos and/or audio files from Youtube',
+    launcher: youtubeDownloaderModuleLauncher,
+  },
+  {
+    name: 'AES256',
+    value: 'aes256',
+    description: 'Encryption and Decryption of messages with the aes256-ctr algorithm',
+    launcher: aes256ModuleLauncher,
   },
   {
     name: 'MD5',
@@ -59,6 +66,7 @@ const answer = await select({
     description: module.description,
     disabled: module.launcher === undefined ? '@TODO' : false,
   })),
+  loop: false,
 });
 
 

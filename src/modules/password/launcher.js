@@ -22,6 +22,7 @@ export default async function moduleLauncher() {
         description: 'Calculate the strength of a password',
       },
     ],
+    loop: false,
   });
 
   // execute the apropriate action
@@ -41,21 +42,25 @@ export default async function moduleLauncher() {
           message: 'Include Numbers?',
           default: 'yes',
           choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
+          loop: false,
         }),
         includeLowerCase: await select({
           message: 'Include LowerCase Letters?',
           default: 'yes',
           choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
+          loop: false,
         }),
         includeUpperCase: await select({
           message: 'Include UpperCase Letters?',
           default: 'yes',
           choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
+          loop: false,
         }),
         includeSymbols: await select({
           message: 'Include Symbols?',
           default: 'yes',
           choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
+          loop: false,
         }),
       };
 

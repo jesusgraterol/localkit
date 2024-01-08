@@ -22,6 +22,7 @@ export default async function moduleLauncher() {
         description: 'Generate a OTP Token',
       },
     ],
+    loop: false,
   });
 
   // execute the apropriate action
@@ -58,6 +59,7 @@ export default async function moduleLauncher() {
           { name: '1 hour', value: 120 }, { name: '2 hours', value: 240 },
           { name: '6 hours', value: 720 }, { name: '12 hours', value: 1440 },
         ],
+        loop: false,
       });
 
       // generate tokens until the requirement has been met

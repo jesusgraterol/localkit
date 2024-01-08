@@ -22,6 +22,7 @@ export default async function moduleLauncher() {
         description: 'Check if a string is a valid md5 hash',
       },
     ],
+    loop: false,
   });
 
   // execute the apropriate action

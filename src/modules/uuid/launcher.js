@@ -22,6 +22,7 @@ export default async function moduleLauncher() {
         description: 'Validate a universally unique identifier v4',
       },
     ],
+    loop: false,
   });
 
   // execute the apropriate action

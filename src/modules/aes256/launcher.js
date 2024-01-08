@@ -22,6 +22,7 @@ export default async function moduleLauncher() {
         description: 'Decrypt a previously encrypted message with the password',
       },
     ],
+    loop: false,
   });
 
   // execute the apropriate action
