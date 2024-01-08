@@ -14,7 +14,7 @@ fluentffmpeg.setFfmpegPath(ffmpegPath.path);
  * Youtube Downloader Service
  * Service in charge of downloading Youtube Videos.
  */
-class YoutubeDownloaderService {
+class YouTubeDownloaderService {
   /* ******************
    * DOWNLOAD ACTIONS *
    ****************** */
@@ -27,7 +27,7 @@ class YoutubeDownloaderService {
   static downloadVideo(url) {
     return new Promise((resolve, reject) => {
       // build the file name (videoID.extension)
-      const fileName = YoutubeDownloaderService.#getFileName(url, 'mp4');
+      const fileName = YouTubeDownloaderService.#getFileName(url, 'mp4');
 
       // init the audio and video streams
       const audio = ytdl(url, { quality: 'highestaudio' });
@@ -86,7 +86,7 @@ class YoutubeDownloaderService {
   static downloadAudio(url) {
     return new Promise((resolve, reject) => {
       // build the file name (videoID.extension)
-      const fileName = YoutubeDownloaderService.#getFileName(url, 'mp3');
+      const fileName = YouTubeDownloaderService.#getFileName(url, 'mp3');
 
       // init the stream and download the audio file
       const stream = ytdl(url, { quality: 'highestaudio' });
@@ -125,7 +125,7 @@ class YoutubeDownloaderService {
    * @returns string
    */
   static #getFileName(url, format) {
-    return `${YoutubeDownloaderService.#getVideoID(url)}.${format}`;
+    return `${YouTubeDownloaderService.#getVideoID(url)}.${format}`;
   }
 
   /**
@@ -144,4 +144,4 @@ class YoutubeDownloaderService {
 /**
  * Module Exports
  */
-export default YoutubeDownloaderService;
+export default YouTubeDownloaderService;

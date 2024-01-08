@@ -1,6 +1,6 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
-import YoutubeDownloader from './youtube-downloader.service.js';
+import YouTubeDownloaderService from './youtube-downloader.service.js';
 import Utilities from '../shared/utilities/utilities.js';
 
 /**
@@ -27,14 +27,14 @@ export default async function moduleLauncher() {
     }),
     url: await input({
       message: 'Enter the URL',
-      validate: ((v) => YoutubeDownloader.isURLValid(v)),
+      validate: ((v) => YouTubeDownloaderService.isURLValid(v)),
     }),
   };
 
   // execute the apropriate action
   switch (answers.action) {
     case 'download_video': {
-      const fileName = await YoutubeDownloader.downloadVideo(answers.url);
+      const fileName = await YouTubeDownloaderService.downloadVideo(answers.url);
       Utilities.print('YoutubeDownloader.downloadVideo', [
         'Downloaded Video:',
         fileName,
@@ -42,7 +42,7 @@ export default async function moduleLauncher() {
       break;
     }
     case 'download_audio': {
-      const fileName = await YoutubeDownloader.downloadAudio(answers.url);
+      const fileName = await YouTubeDownloaderService.downloadAudio(answers.url);
       Utilities.print('YoutubeDownloader.downloadAudio', [
         'Downloaded Audio:',
         fileName,

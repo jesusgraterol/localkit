@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 import select from '@inquirer/select';
+import FileSystemService from './modules/shared/file-system/file-system.service.js';
 import passwordModuleLauncher from './modules/password/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
@@ -30,9 +31,9 @@ const MODULES = [
     launcher: otpModuleLauncher,
   },
   {
-    name: 'Youtube Downloader',
+    name: 'YouTube Downloader',
     value: 'youtube_downloader',
-    description: 'Download videos and/or audio files from Youtube',
+    description: 'Download videos and/or audio files from YouTube',
     launcher: youtubeDownloaderModuleLauncher,
   },
   {
@@ -56,9 +57,9 @@ const MODULES = [
 /**
  * Module Menu
  */
-console.log('############');
-console.log('# LOCALKIT #');
-console.log('############\n');
+const packageDotJSONAbsolutePath = '/usr/local/lib/node_modules/localkit/package.json';
+const packageDotJSON = await FileSystemService.readFile(packageDotJSONAbsolutePath);
+console.log(`\nLOCALKIT v${packageDotJSON.version}\n`);
 const answer = await select({
   message: 'Select a module',
   choices: MODULES.map((module) => ({
