@@ -8,10 +8,10 @@ The key features are:
 
 - Generation and analysis of passwords
 - Generation and validation of UUIDs (Universally Unique Identifiers)
+- Generation and validation of OTP (One Time Password) secrets and tokens
+- Youtube Video/Audio Files Download
 - Encryption and decryption of messages with the AES256 Algorithm
 - Hashing of messages with the MD5 Algorithm
-- Generation and validation of OTP (One Time Password) secrets and tokens
-- Youtube Video/Audio download (@TODO)
 
 
 
@@ -91,7 +91,6 @@ N/A
 
 ## @TODO
 
-- Implement the Youtube Downloader (mp4 & mp3)
 - Implement the JavaScript/Typescript/CSS file template generators
 - Publish the package on npm and adapt it so it can be installed globally, allowing it to be used as a proper CLI
 
@@ -119,3 +118,4 @@ N/A
 - [node-md5](https://github.com/pvorb/node-md5)
 - [uuid](https://github.com/uuidjs/uuid)
 - [otplib](https://github.com/yeojz/otplib)
+- [ytdl](https://github.com/fent/node-ytdl-core)

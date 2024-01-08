@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import select from '@inquirer/select';
 import passwordModuleLauncher from './modules/password/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
