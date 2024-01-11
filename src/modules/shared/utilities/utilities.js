@@ -10,6 +10,23 @@ class Utilities {
    ************** */
 
   /**
+   * Builds the header of the CLI based on the extracted version.
+   * @param {*} version
+   * @returns string
+   */
+  static buildCLIHeader(version) {
+    let header = 'LOCALKIT';
+    if (typeof version === 'string') {
+      header += ` v${version}`;
+    }
+    return `\n${header}\n`;
+  }
+
+
+
+
+
+  /**
    * Outputs the given content to the terminal.
    * @param {*} title
    * @param {*} content

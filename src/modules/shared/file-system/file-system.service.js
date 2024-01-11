@@ -9,6 +9,23 @@ import pathHelper from 'path';
  * can be easily transported to any NodeJS Server.
  */
 class FileSystemService {
+  /* ************
+   * PROPERTIES *
+   ************ */
+
+  // the list of possible paths in which the package.json file can be found
+  static #PACKAGE_FILE_PATHS = [
+    '/usr/local/lib/node_modules/localkit/package.json',
+  ];
+
+
+
+
+
+  /* ********************
+   * GENERAL MANAGEMENT *
+   ******************** */
+
   /**
    * Verifies if a given path exists (file or directory).
    * @param {*} path
@@ -151,6 +168,32 @@ class FileSystemService {
         resolve();
       });
     });
+  }
+
+
+
+
+  /* **************
+   * MISC HELPERS *
+   ************** */
+
+  /**
+   * Attempts to read the package file resursively. If it is unable to do so, it returns undefined.
+   * @param {*} nextIndex
+   * @returns Promise<string|undefined>
+   */
+  static async readPackageFile(nextIndex = 0) {
+    // declare the base case
+    if (nextIndex === FileSystemService.#PACKAGE_FILE_PATHS.length) {
+      return undefined;
+    }
+
+    // attempt to read the file
+    try {
+      return await FileSystemService.readFile(FileSystemService.#PACKAGE_FILE_PATHS[nextIndex]);
+    } catch (e) {
+      return FileSystemService.readPackageFile(nextIndex + 1);
+    }
   }
 }
 

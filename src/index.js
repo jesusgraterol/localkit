@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 import select from '@inquirer/select';
 import FileSystemService from './modules/shared/file-system/file-system.service.js';
+import Utilities from './modules/shared/utilities/utilities.js';
 import passwordModuleLauncher from './modules/password/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
@@ -57,9 +58,8 @@ const MODULES = [
 /**
  * Module Menu
  */
-const packageDotJSONAbsolutePath = '/usr/local/lib/node_modules/localkit/package.json';
-const packageDotJSON = await FileSystemService.readFile(packageDotJSONAbsolutePath);
-console.log(`\nLOCALKIT v${packageDotJSON.version}\n`);
+const packageFile = await FileSystemService.readPackageFile();
+console.log(Utilities.buildCLIHeader(packageFile?.version));
 const answer = await select({
   message: 'Select a module',
   choices: MODULES.map((module) => ({
