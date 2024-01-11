@@ -71,7 +71,9 @@ $ npm start
 
 ## Deployment
 
-@TODO
+```bash
+$ npm publish
+```
 
 
 
@@ -91,10 +93,10 @@ $ npm start
 
 ```bash
 # Unit Tests
-npm run test:unit
+$ npm run test:unit
 
 # Integration Tests
-npm run test:integration
+$ npm run test:integration
 
 # E2E Tests
 N/A
