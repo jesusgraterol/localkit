@@ -20,6 +20,22 @@ The key features are:
 
 ## Getting Started
 
+1) Install the CLI Globally
+```bash
+$ npm install -g localkit
+```
+
+2) Run it with:
+```bash
+$ localkit
+```
+
+<br/>
+
+## Forking Instructions
+
+If you wish to make use of the LocaLKit CLI to perform sensitive operations, I suggest that you fork this repository and lock all dependencies in the `package.json` file (equivalent to using the  `--save-exact` flag) for security reasons.
+
 ### Requirements
 
 - GIT
@@ -30,12 +46,12 @@ The key features are:
 
 1) Clone the repository
 ```bash
-git clone git@github.com:jesusgraterol/localkit.git
+$ git clone git@github.com:jesusgraterol/localkit.git
 ```
 
 2) Install the dependencies
 ```bash
-npm install
+$ npm install
 ```
 
 
@@ -45,7 +61,7 @@ npm install
 ## Usage
 
 ```bash
-npm start
+$ npm start
 ```
 
 
@@ -91,8 +107,8 @@ N/A
 
 ## @TODO
 
+- Implement the PWA Assets' Generators
 - Implement the JavaScript/Typescript/CSS file template generators
-- Publish the package on npm and adapt it so it can be installed globally, allowing it to be used as a proper CLI
 
 
 
