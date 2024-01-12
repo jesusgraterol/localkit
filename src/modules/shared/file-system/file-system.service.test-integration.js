@@ -4,6 +4,91 @@ import FileSystemService from './file-system.service.js';
 // the base path that will be used for the tests
 const basePath = UUIDService.generate();
 
+describe('General Management', () => {
+  beforeAll(() => { });
+
+  afterAll(() => { });
+
+  beforeEach(async () => {
+    await FileSystemService.makeDirectory(basePath);
+  });
+
+  afterEach(async () => {
+    await FileSystemService.deleteDirectory(basePath);
+  });
+
+  test('can read an empty directory:', async () => {
+    const { directories, files } = await FileSystemService.readPathContent(basePath);
+    expect(directories.length).toBe(0);
+    expect(files.length).toBe(0);
+  });
+
+  test('can read a directory with multiple files in it:', async () => {
+    await Promise.all([
+      FileSystemService.writeFile(`${basePath}/file-01.txt`, 'Hello World!'),
+      FileSystemService.writeFile(`${basePath}/file-02.json`, { foo: 'bar', baz: 123 }),
+      FileSystemService.writeFile(`${basePath}/file-03`, 'This file has no format :o'),
+    ]);
+    const { directories, files } = await FileSystemService.readPathContent(basePath);
+    expect(directories.length).toBe(0);
+    expect(files.length).toBe(3);
+    expect(files[0].baseName).toBe('file-01.txt');
+    expect(files[1].baseName).toBe('file-02.json');
+    expect(files[2].baseName).toBe('file-03');
+  });
+
+  test('can read a directory with multiple directories in it:', async () => {
+    await Promise.all([
+      FileSystemService.makeDirectory(`${basePath}/dir-c`),
+      FileSystemService.makeDirectory(`${basePath}/dir-a`),
+      FileSystemService.makeDirectory(`${basePath}/dir-b`),
+    ]);
+    const { directories, files } = await FileSystemService.readPathContent(basePath);
+    expect(files.length).toBe(0);
+    expect(directories.length).toBe(3);
+    expect(directories[0].baseName).toBe('dir-a');
+    expect(directories[1].baseName).toBe('dir-b');
+    expect(directories[2].baseName).toBe('dir-c');
+  });
+
+  test('can read a directory with multiple directories and files in it:', async () => {
+    await Promise.all([
+      FileSystemService.makeDirectory(`${basePath}/dir-c`),
+      FileSystemService.makeDirectory(`${basePath}/dir-a`),
+      FileSystemService.makeDirectory(`${basePath}/dir-b`),
+      FileSystemService.writeFile(`${basePath}/file-01.txt`, 'Hello World!'),
+      FileSystemService.writeFile(`${basePath}/file-02.json`, { foo: 'bar', baz: 123 }),
+      FileSystemService.writeFile(`${basePath}/file-03`, 'This file has no format :o'),
+    ]);
+    const { directories, files } = await FileSystemService.readPathContent(basePath);
+    expect(files.length).toBe(3);
+    expect(directories.length).toBe(3);
+  });
+
+  test('can filter files by extension:', async () => {
+    await Promise.all([
+      FileSystemService.writeFile(`${basePath}/file-01.txt`, 'Hello World!'),
+      FileSystemService.writeFile(`${basePath}/file-02.json`, { foo: 'bar', baz: 123 }),
+      FileSystemService.writeFile(`${basePath}/file-03`, 'This file has no format :o'),
+    ]);
+    const query1 = await FileSystemService.readPathContent(basePath, ['.txt']);
+    expect(query1.files.length).toBe(1);
+    expect(query1.files[0].baseName).toEqual('file-01.txt');
+
+    const query2 = await FileSystemService.readPathContent(basePath, ['.json']);
+    expect(query2.files.length).toBe(1);
+    expect(query2.files[0].baseName).toEqual('file-02.json');
+
+    const query3 = await FileSystemService.readPathContent(basePath, ['']);
+    expect(query3.files.length).toBe(1);
+    expect(query3.files[0].baseName).toEqual('file-03');
+  });
+});
+
+
+
+
+
 describe('Directory Management', () => {
   beforeAll(async () => {
     await FileSystemService.makeDirectory(basePath);

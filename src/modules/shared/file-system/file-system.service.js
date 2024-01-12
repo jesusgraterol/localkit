@@ -40,6 +40,82 @@ class FileSystemService {
     });
   }
 
+  /**
+   * Reads all the contents for a given path and separates them into directories and files.
+   * @param {*} path
+   * @param {?} includeExtensions
+   * @returns Promise<{directories: IPathItem[], files: IPathItem[]}[]>
+   */
+  static readPathContent(path, includeExtensions = []) {
+    return new Promise((resolve, reject) => {
+      fs.readdir(path, async (error, content) => {
+        if (error) reject(error);
+
+        // init the content lists
+        const directories = [];
+        const files = [];
+
+        // read the contents and apply the file filter (if provided)
+        const items = await Promise.all(content.map(
+          (contentItem) => FileSystemService.#buildPathItem(`${path}/${contentItem}`),
+        ));
+        items.forEach((item) => {
+          if (!item.isFile) {
+            directories.push(item);
+          } else if (!includeExtensions.length || includeExtensions.includes(item.ext)) {
+            files.push(item);
+          }
+        });
+
+        // finally, sort the items alphabetically and resolve them
+        files.sort(FileSystemService.#sortByName);
+        directories.sort(FileSystemService.#sortByName);
+        resolve({ directories, files });
+      });
+    });
+  }
+
+  /**
+   * Builds an item object based on a given path.
+   * @param {*} path
+   * @returns Promise<IPathItem>
+   */
+  static #buildPathItem(path) {
+    return new Promise((resolve, reject) => {
+      fs.lstat(path, (error, stats) => {
+        if (error) reject(error);
+        resolve({
+          path,
+          baseName: pathHelper.basename(path),
+          ext: pathHelper.extname(path),
+          isFile: stats.isFile(),
+          creation: Math.round(stats.birthtimeMs),
+        });
+      });
+    });
+  }
+
+  /**
+   * Sort function used to organize files by name alphabetically.
+   * @param {*} a
+   * @param {*} b
+   * @returns number
+   */
+  static #sortByName(a, b) {
+    const nameA = a.baseName.toUpperCase(); // ignore upper and lowercase
+    const nameB = b.baseName.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  }
+
+
 
 
 
