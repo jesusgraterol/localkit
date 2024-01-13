@@ -177,7 +177,6 @@ class FaviconBuilderService {
     receipt += '\n...';
     receipt += `\n<link rel="icon" type="image/png" sizes="${FaviconBuilderService.#prettifyDimensions(largestReq)}" href="${FaviconBuilderService.#getFaviconNameByDimensions(largestReq)}">`;
 
-
     // finally, return the receipt
     return receipt;
   }
