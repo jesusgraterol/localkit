@@ -44,6 +44,8 @@
     "generate-password": "^1.7.1",
     "md5": "^2.3.0",
     "otplib": "^12.0.1",
+    "png-to-ico": "^2.1.8",
+    "sharp": "^0.33.2",
     "uuid": "^9.0.1",
     "ytdl-core": "^4.11.5"
   }

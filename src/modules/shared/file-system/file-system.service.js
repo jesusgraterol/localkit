@@ -42,6 +42,7 @@ class FileSystemService {
 
   /**
    * Reads all the contents for a given path and separates them into directories and files.
+   * Note: if the includeExtensions filter is provided, ensure the extensions are lowercase.
    * @param {*} path
    * @param {?} includeExtensions
    * @returns Promise<{directories: IPathItem[], files: IPathItem[]}[]>
@@ -62,7 +63,10 @@ class FileSystemService {
         items.forEach((item) => {
           if (!item.isFile) {
             directories.push(item);
-          } else if (!includeExtensions.length || includeExtensions.includes(item.ext)) {
+          } else if (
+            !includeExtensions.length
+            || includeExtensions.includes(item.ext.toLowerCase())
+          ) {
             files.push(item);
           }
         });
@@ -170,7 +174,6 @@ class FileSystemService {
    * @param {*} filePath
    * @param {*} data
    * @returns Promise<void>
-   * @TODO Stringify the file contents if it is a JSON and the data is an object
    */
   static writeFile(filePath, data) {
     // init the file extension
@@ -182,6 +185,21 @@ class FileSystemService {
     // write the file to disk
     return new Promise((resolve, reject) => {
       fs.writeFile(filePath, content, 'utf-8', (err) => {
+        if (err) reject(err);
+        resolve();
+      });
+    });
+  }
+
+  /**
+   * Writes a file which content is a Buffer.
+   * @param {*} filePath
+   * @param {*} buffer
+   * @returns Promise<void>
+   */
+  static writeFileBuffer(filePath, buffer) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filePath, buffer, (err) => {
         if (err) reject(err);
         resolve();
       });

@@ -137,3 +137,4 @@ N/A
 - [uuid](https://github.com/uuidjs/uuid)
 - [otplib](https://github.com/yeojz/otplib)
 - [ytdl](https://github.com/fent/node-ytdl-core)
+- [sharp](https://github.com/lovell/sharp)
