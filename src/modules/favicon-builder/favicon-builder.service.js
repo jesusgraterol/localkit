@@ -64,7 +64,7 @@ class FaviconBuilderService {
 
     // generate the .ico file for legacy browsers
     const icoBuffer = await pngToIco(sourcePath);
-    await FileSystemService.writeFileBuffer(`${id}/favicon.ico`, icoBuffer);
+    await FileSystemService.writeFile(`${id}/favicon.ico`, icoBuffer);
 
     // generate the receipt of the build
     await FileSystemService.writeFile(
@@ -142,6 +142,13 @@ class FaviconBuilderService {
     return `${buildID}/favicons/${FaviconBuilderService.#getFaviconNameByDimensions(dimensions)}`;
   }
 
+
+
+
+  /* ***************
+   * BUILD RECEIPT *
+   *************** */
+
   /**
    * Builds the receipt once all the build files have been generated.
    * @param {*} sourcePath
@@ -182,7 +189,7 @@ class FaviconBuilderService {
   }
 
   /**
-   * Generates the list of favicon variations generated during the build
+   * Generates the list of favicon variations created during the build.
    * @param {*} prefix
    * @returns string
    */

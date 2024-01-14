@@ -10,6 +10,7 @@ The key features are:
 - Generation and validation of UUIDs (Universally Unique Identifiers)
 - Generation and validation of OTP (One Time Password) secrets and tokens
 - Youtube Video/Audio Files Download
+- Favicon Builder
 - Encryption and decryption of messages with the AES256 Algorithm
 - Hashing of messages with the MD5 Algorithm
 
@@ -54,15 +55,12 @@ $ git clone git@github.com:jesusgraterol/localkit.git
 $ npm install
 ```
 
-
-
-<br/>
-
-## Usage
-
+3) Run it
 ```bash
 $ npm start
 ```
+
+
 
 
 
@@ -97,9 +95,6 @@ $ npm run test:unit
 
 # Integration Tests
 $ npm run test:integration
-
-# E2E Tests
-N/A
 ```
 
 
@@ -138,3 +133,4 @@ N/A
 - [otplib](https://github.com/yeojz/otplib)
 - [ytdl](https://github.com/fent/node-ytdl-core)
 - [sharp](https://github.com/lovell/sharp)
+- [png-to-ico](https://github.com/steambap/png-to-ico)

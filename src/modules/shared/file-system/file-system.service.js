@@ -182,24 +182,15 @@ class FileSystemService {
     // if it is a json file and the provided data is an object, stringify it. Otherwise, leave it
     const content = ext === '.json' && typeof data === 'object' ? JSON.stringify(data) : data;
 
+    // if the data is not a Buffer, set the encoding standard to be used
+    let opts;
+    if (!Buffer.isBuffer(content)) {
+      opts = { encoding: 'utf-8' };
+    }
+
     // write the file to disk
     return new Promise((resolve, reject) => {
-      fs.writeFile(filePath, content, 'utf-8', (err) => {
-        if (err) reject(err);
-        resolve();
-      });
-    });
-  }
-
-  /**
-   * Writes a file which content is a Buffer.
-   * @param {*} filePath
-   * @param {*} buffer
-   * @returns Promise<void>
-   */
-  static writeFileBuffer(filePath, buffer) {
-    return new Promise((resolve, reject) => {
-      fs.writeFile(filePath, buffer, (err) => {
+      fs.writeFile(filePath, content, opts, (err) => {
         if (err) reject(err);
         resolve();
       });
