@@ -134,3 +134,13 @@ $ npm run test:integration
 - [ytdl](https://github.com/fent/node-ytdl-core)
 - [sharp](https://github.com/lovell/sharp)
 - [png-to-ico](https://github.com/steambap/png-to-ico)
+
+
+
+
+
+<br/>
+
+## Sources
+
+- [Adding favicons in a multi-browser multi-platform world](https://mobiforge.com/design-development/adding-favicons-in-a-multi-browser-multi-platform-world)
