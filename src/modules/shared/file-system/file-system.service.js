@@ -202,7 +202,6 @@ class FileSystemService {
    * it and return the object instead of a raw string.
    * @param {*} filePath
    * @returns Promise<string|object>
-   * @TODO Parse the file contents if it is a JSON
    */
   static async readFile(filePath) {
     // ensure the file exists

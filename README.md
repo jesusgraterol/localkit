@@ -6,13 +6,13 @@ The LocalKit CLI provides a series of utilities that can be used by web develope
 
 The key features are:
 
-- Generation and analysis of passwords
-- Generation and validation of UUIDs (Universally Unique Identifiers)
-- Generation and validation of OTP (One Time Password) secrets and tokens
-- Youtube Video/Audio Files Download
-- Favicon Builder
-- Encryption and decryption of messages with the AES256 Algorithm
-- Hashing of messages with the MD5 Algorithm
+- [Generation and analysis of passwords](./readme-assets/modules/PASSWORD.md)
+- [Generation and validation of UUIDs (Universally Unique Identifiers)](./readme-assets/modules/UUID.md)
+- [Generation and validation of OTP (One Time Password) secrets and tokens](./readme-assets/modules/OTP.md)
+- [Youtube Video/Audio Files Download](./readme-assets/modules/YOUTUBE_DOWNLOADER.md)
+- [Favicon Builder](./readme-assets/modules/FAVICON_BUILDER.md)
+- [Encryption and decryption of messages with the AES256 Algorithm](./readme-assets/modules/AES256.md)
+- [Hashing of messages with the MD5 Algorithm](./readme-assets/modules/MD5.md)
 
 
 
@@ -47,7 +47,7 @@ If you wish to make use of the LocaLKit CLI to perform sensitive operations, I s
 
 1) Clone the repository
 ```bash
-$ git clone git@github.com:jesusgraterol/localkit.git
+$ git clone git@github.com:your-username/localkit.git
 ```
 
 2) Install the dependencies
@@ -134,7 +134,7 @@ $ npm run test:integration
 - [ytdl](https://github.com/fent/node-ytdl-core)
 - [sharp](https://github.com/lovell/sharp)
 - [png-to-ico](https://github.com/steambap/png-to-ico)
-
+- [ffmpeg](https://ffmpeg.org/)
 
 
 
