@@ -275,7 +275,7 @@ const fileSystemServiceFactory = () => {
   /* **************
    * MODULE BUILD *
    ************** */
-  return {
+  return Object.freeze({
     // general management
     pathExists,
     readPathContent,
@@ -292,7 +292,7 @@ const fileSystemServiceFactory = () => {
 
     // misc helpers
     readPackageFile,
-  };
+  });
 };
 
 

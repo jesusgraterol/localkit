@@ -74,13 +74,13 @@ const utilitiesFactory = () => {
   /* **************
    * MODULE BUILD *
    ************** */
-  return {
+  return Object.freeze({
     // misc helpers
     formatDate,
     buildCLIHeader,
     print,
     delay,
-  };
+  });
 };
 
 
