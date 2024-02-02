@@ -5,27 +5,45 @@ import {
 } from 'uuid';
 
 /**
- * UUID Service
+ * UUID Service Factory
  * Service in charge of managing Universally Unique Identifiers.
  */
-class UUIDService {
+const uuidServiceFactory = () => {
   /**
    * Creates an RFC version 4 (random) UUID.
    * @returns string
    */
-  static generate() {
-    return uuidv4();
-  }
+  const generate = () => uuidv4();
+
 
   /**
    * Ensures the provided value is a valid uuid and that is version 4.
    * @param {*} uuid
    * @returns boolean
    */
-  static validate(uuid) {
-    return uuidValidate(uuid) && uuidVersion(uuid) === 4;
-  }
-}
+  const validate = (uuid) => uuidValidate(uuid) && uuidVersion(uuid) === 4;
+
+
+
+
+
+  /* **************
+   * MODULE BUILD *
+   ************** */
+  return Object.freeze({
+    generate,
+    validate,
+  });
+};
+
+
+
+
+/**
+ * Global Instance
+ */
+const UUIDService = uuidServiceFactory();
+
 
 
 

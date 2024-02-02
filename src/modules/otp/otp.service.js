@@ -24,11 +24,11 @@ authenticator.options = { window: 2, step: 30 };
 
 
 /**
- * OTP Service
+ * OTP Service Factory
  * Service in charge of generating OTP Secrets and tokens. The lib used to simplify the process is:
  * https://github.com/JamesMGreene/node-aes256
  */
-class OTPService {
+const otpServiceFactory = () => {
   /* *******************
    * SECRET MANAGEMENT *
    ******************* */
@@ -37,19 +37,14 @@ class OTPService {
    * Generates a secret that can be used to initialize an OTP instance and generate tokens.
    * @returns string
    */
-  static generateSecret() {
-    return authenticator.generateSecret();
-  }
-
+  const generateSecret = () => authenticator.generateSecret();
 
   /**
    * Validates the format of a given OTP secret.
    * @param {*} secret
    * @returns boolean
    */
-  static isSecretFormatValid(secret) {
-    return typeof secret === 'string' && /^[0-9a-zA-Z]{16,64}$/.test(secret);
-  }
+  const isSecretFormatValid = (secret) => typeof secret === 'string' && /^[0-9a-zA-Z]{16,64}$/.test(secret);
 
 
 
@@ -63,9 +58,7 @@ class OTPService {
    * @param {*} secret
    * @returns string
    */
-  static generateToken(secret) {
-    return authenticator.generate(secret);
-  }
+  const generateToken = (secret) => authenticator.generate(secret);
 
   /**
    * Validates the format of a given token. IMPORTANT: it does not check the validity based on the
@@ -73,10 +66,34 @@ class OTPService {
    * @param {*} token
    * @returns boolean
    */
-  static isTokenFormatValid(token) {
-    return typeof token === 'string' && /^[0-9]{6}$/.test(token);
-  }
-}
+  const isTokenFormatValid = (token) => typeof token === 'string' && /^[0-9]{6}$/.test(token);
+
+
+
+
+
+  /* **************
+   * MODULE BUILD *
+   ************** */
+  return Object.freeze({
+    // secret management
+    generateSecret,
+    isSecretFormatValid,
+
+    // token management
+    generateToken,
+    isTokenFormatValid,
+  });
+};
+
+
+
+
+/**
+ * Global Instance
+ */
+const OTPService = otpServiceFactory();
+
 
 
 

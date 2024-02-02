@@ -65,7 +65,7 @@ export default async function moduleLauncher() {
       };
 
       // generate the password
-      const password = PasswordService.generate(
+      const password = PasswordService.generatePassword(
         Number(answers.passwordLength),
         answers.includeNumbers === 'yes',
         answers.includeLowerCase === 'yes',
@@ -74,7 +74,7 @@ export default async function moduleLauncher() {
       );
 
       // output it
-      Utilities.print('PasswordService.generate', [
+      Utilities.print('PasswordService.generatePassword', [
         `${PasswordService.STRENGTH_ALIAS[PasswordService.calculateStrength(password)]} Password:`,
         password,
       ], true);

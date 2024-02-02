@@ -13,11 +13,11 @@ describe('Password Generator', () => {
   afterEach(() => { });
 
   test('can generate passwords with any configuration', () => {
-    expect(/^[0-9a-z]{10}$/.test(PasswordService.generate(10, true, true, false, false))).toBe(true);
-    expect(/^[0-9a-zA-Z]{20}$/.test(PasswordService.generate(20, true, true, true, false))).toBe(true);
-    expect(/^[a-zA-Z]{35}$/.test(PasswordService.generate(35, false, true, true, false))).toBe(true);
-    expect(/^[!@#$%^&*()+_\-=}{[\]|:;"/?.><,`~]{35}$/.test(PasswordService.generate(35, false, false, false, true))).toBe(true);
-    expect(/^.{100}$/.test(PasswordService.generate(100, true, true, true, true))).toBe(true);
+    expect(/^[0-9a-z]{10}$/.test(PasswordService.generatePassword(10, true, true, false, false))).toBe(true);
+    expect(/^[0-9a-zA-Z]{20}$/.test(PasswordService.generatePassword(20, true, true, true, false))).toBe(true);
+    expect(/^[a-zA-Z]{35}$/.test(PasswordService.generatePassword(35, false, true, true, false))).toBe(true);
+    expect(/^[!@#$%^&*()+_\-=}{[\]|:;"/?.><,`~]{35}$/.test(PasswordService.generatePassword(35, false, false, false, true))).toBe(true);
+    expect(/^.{100}$/.test(PasswordService.generatePassword(100, true, true, true, true))).toBe(true);
   });
 });
 

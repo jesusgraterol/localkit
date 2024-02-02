@@ -14,7 +14,7 @@ const fileSystemServiceFactory = () => {
    ************ */
 
   // the list of possible paths in which the package.json file can be found
-  const _PACKAGE_FILE_PATHS = [
+  const __PACKAGE_FILE_PATHS = [
     '/usr/local/lib/node_modules/localkit/package.json',
   ];
 
@@ -256,13 +256,13 @@ const fileSystemServiceFactory = () => {
    */
   const readPackageFile = async (nextIndex = 0) => {
     // declare the base case
-    if (nextIndex === _PACKAGE_FILE_PATHS.length) {
+    if (nextIndex === __PACKAGE_FILE_PATHS.length) {
       return undefined;
     }
 
     // attempt to read the file
     try {
-      return await readFile(_PACKAGE_FILE_PATHS[nextIndex]);
+      return await readFile(__PACKAGE_FILE_PATHS[nextIndex]);
     } catch (e) {
       return readPackageFile(nextIndex + 1);
     }
