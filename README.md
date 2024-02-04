@@ -6,13 +6,13 @@ The LocalKit CLI provides a series of utilities that can be used by web develope
 
 The key features are:
 
-- [Generation and analysis of passwords](./readme-assets/modules/PASSWORD.md)
-- [Generation and validation of UUIDs (Universally Unique Identifiers)](./readme-assets/modules/UUID.md)
-- [Generation and validation of OTP (One Time Password) secrets and tokens](./readme-assets/modules/OTP.md)
-- [Youtube Video/Audio Files Download](./readme-assets/modules/YOUTUBE_DOWNLOADER.md)
-- [Favicon Builder](./readme-assets/modules/FAVICON_BUILDER.md)
-- [Encryption and decryption of messages with the AES256 Algorithm](./readme-assets/modules/AES256.md)
-- [Hashing of messages with the MD5 Algorithm](./readme-assets/modules/MD5.md)
+- [Generation and analysis of passwords](./readme-assets/modules/PASSWORD/README.md)
+- [Generation and validation of UUIDs (Universally Unique Identifiers)](./readme-assets/modules/UUID/README.md)
+- [Generation and validation of OTP (One Time Password) secrets and tokens](./readme-assets/modules/OTP/README.md)
+- [Youtube Video/Audio Files Download](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md)
+- [Favicon Builder](./readme-assets/modules/FAVICON_BUILDER/README.md)
+- [Encryption and decryption of messages with the AES256 Algorithm](./readme-assets/modules/AES256/README.md)
+- [Hashing of messages with the MD5 Algorithm](./readme-assets/modules/MD5/README.md)
 
 
 

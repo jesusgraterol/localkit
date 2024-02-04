@@ -1,6 +1,6 @@
 {
   "name": "localkit",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "The LocalKit CLI provides a series of utilities that can be used by web developers to enhance their workflow. Note that this CLI can be used when connected to the Internet and in offline mode for more sensitive operations.",
   "main": "./src/index.js",
   "type": "module",

@@ -7,6 +7,7 @@ import uuidModuleLauncher from './modules/uuid/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
 import youtubeDownloaderModuleLauncher from './modules/youtube-downloader/launcher.js';
 import faviconBuilderModuleLauncher from './modules/favicon-builder/launcher.js';
+// import pwaAssetGeneratorModuleLauncher from './modules/pwa-asset-generator/launcher.js';
 import aes256ModuleLauncher from './modules/aes256/launcher.js';
 import md5ModuleLauncher from './modules/md5/launcher.js';
 
@@ -43,6 +44,12 @@ const MODULES = [
     value: 'favicon_builder',
     description: 'Build all the favicon files required by modern web apps',
     launcher: faviconBuilderModuleLauncher,
+  },
+  {
+    name: 'PWA Asset Generator',
+    value: 'pwa_asset_generator',
+    description: 'Generate all the images required for a PWA to be published',
+    launcher: undefined,
   },
   {
     name: 'AES256',
