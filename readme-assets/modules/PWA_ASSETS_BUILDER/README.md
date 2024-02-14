@@ -1,5 +1,5 @@
 [<- Back](../../../README.md)
 
-# PWA Asset Generator
+# PWA Assets Builder
 
 @TODO

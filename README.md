@@ -11,7 +11,7 @@ The key features are:
 - [Generation and validation of OTP (One Time Password) secrets and tokens](./readme-assets/modules/OTP/README.md)
 - [Youtube Video/Audio Files Download](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md)
 - [Favicon Builder](./readme-assets/modules/FAVICON_BUILDER/README.md)
-- [PWA Asset Generator](./readme-assets/modules/FAVICON_BUILDER/README.md)
+- [PWA Assets Builder](./readme-assets/modules/PWA_ASSETS_BUILDER/README.md)
 - [Encryption and decryption of messages with the AES256 Algorithm](./readme-assets/modules/AES256/README.md)
 - [Hashing of messages with the MD5 Algorithm](./readme-assets/modules/MD5/README.md)
 
