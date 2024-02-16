@@ -129,7 +129,7 @@ const faviconBuilderServiceFactory = () => {
     receipt += '\n\nOUTPUT:';
     receipt += `\n${buildID}`;
     receipt += '\n    favicon.ico';
-    receipt += '\n    source.ico';
+    receipt += '\n    source.png';
     receipt += '\n    favicons/';
     receipt += `\n${__generateFaviconVariationsReceipt('        ')}`;
 
@@ -138,7 +138,8 @@ const faviconBuilderServiceFactory = () => {
     const largestReq = __OUTPUT_DIMENSIONS.at(-1);
     receipt += '\n\nUSAGE:';
     receipt += '\n1) Include the favicon.ico into the project\'s root';
-    receipt += `\n2) Place the ${buildID}/favicons/ directory inside of the project's root`;
+    // eslint-disable-next-line no-template-curly-in-string
+    receipt += '\n2) Place the favicons directory inside of the project\'s root. Resulting in /${PROJECT_ROOT}/favicons';
     receipt += '\n3) Include the following tags inside of the app\'s <head>...</head>:';
     receipt += '\n<!-- Favicon -->';
     receipt += `\n<link rel="icon" type="image/png" sizes="${__prettifyDimensions(smallestReq)}" href="${__getFaviconNameByDimensions(smallestReq)}">`;
