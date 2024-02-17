@@ -4,16 +4,16 @@
 
 The LocalKit CLI provides a series of utilities that can be used by web developers to enhance their workflow. Note that this CLI can be used when connected to the Internet and in offline mode for more sensitive operations.
 
-The key features are:
+The key modules are:
 
-- [Generation and analysis of passwords](./readme-assets/modules/PASSWORD/README.md)
-- [Generation and validation of UUIDs (Universally Unique Identifiers)](./readme-assets/modules/UUID/README.md)
-- [Generation and validation of OTP (One Time Password) secrets and tokens](./readme-assets/modules/OTP/README.md)
-- [Youtube Video/Audio Files Download](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md)
-- [Favicon Builder](./readme-assets/modules/FAVICON_BUILDER/README.md)
-- [PWA Assets Builder](./readme-assets/modules/PWA_ASSETS_BUILDER/README.md)
-- [Encryption and decryption of messages with the AES256 Algorithm](./readme-assets/modules/AES256/README.md)
-- [Hashing of messages with the MD5 Algorithm](./readme-assets/modules/MD5/README.md)
+- [Password: generate and analyze passwords](./readme-assets/modules/PASSWORD/README.md)
+- [UUID: generate and validate UUIDs (Universally Unique Identifiers)](./readme-assets/modules/UUID/README.md)
+- [OTP: generate OTP (One Time Password) secrets and tokens](./readme-assets/modules/OTP/README.md)
+- [YoutubeDownloader: download videos/audio files from YouTube](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md)
+- [Favicon Builder: build all the favicon files required by modern web apps](./readme-assets/modules/FAVICON_BUILDER/README.md)
+- [PWA Assets Builder: build all the images required for a PWA to be published](./readme-assets/modules/PWA_ASSETS_BUILDER/README.md)
+- [AES256: encrypt and decrypt messages with the AES256 algorithm](./readme-assets/modules/AES256/README.md)
+- [MD5: hash and validate messages with the MD5 Algorithm](./readme-assets/modules/MD5/README.md)
 
 
 
@@ -105,7 +105,6 @@ $ npm run test:integration
 
 ## @TODO
 
-- Implement the PWA Assets' Generators
 - Implement the JavaScript/Typescript/CSS file template generators
 
 

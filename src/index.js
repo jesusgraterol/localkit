@@ -18,25 +18,25 @@ const MODULES = [
   {
     name: 'Password',
     value: 'password',
-    description: 'Generation and analysis of account passwords',
+    description: 'Generate and analyze passwords',
     launcher: passwordModuleLauncher,
   },
   {
     name: 'UUID',
     value: 'uuid',
-    description: 'Generation and validation of Universally Unique Identifiers',
+    description: 'Generate and validate UUIDs (Universally Unique Identifiers)',
     launcher: uuidModuleLauncher,
   },
   {
     name: 'OTP',
     value: 'otp',
-    description: 'One Time Password Generation and verification',
+    description: 'Generate OTP (One Time Password) secrets and tokens',
     launcher: otpModuleLauncher,
   },
   {
     name: 'YouTube Downloader',
     value: 'youtube_downloader',
-    description: 'Download videos and/or audio files from YouTube',
+    description: 'Gownload videos/audio files from YouTube',
     launcher: youtubeDownloaderModuleLauncher,
   },
   {
@@ -48,19 +48,19 @@ const MODULES = [
   {
     name: 'PWA Assets Builder',
     value: 'pwa_assets_builder',
-    description: 'Generate all the images required for a PWA to be published',
+    description: 'Build all the images required for a PWA to be published',
     launcher: pwaAssetsBuilderModuleLauncher,
   },
   {
     name: 'AES256',
     value: 'aes256',
-    description: 'Encryption and Decryption of messages with the aes256-ctr algorithm',
+    description: 'Encrypt and decrypt messages with the AES256 algorithm',
     launcher: aes256ModuleLauncher,
   },
   {
     name: 'MD5',
     value: 'md5',
-    description: 'Message-Digest Algorithm Hashing',
+    description: 'Hash and validate messages with the MD5 Algorithm',
     launcher: md5ModuleLauncher,
   },
 ];
