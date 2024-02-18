@@ -155,31 +155,39 @@ const faviconBuilderServiceFactory = () => {
     // initialize the identifier
     const id = Utilities.generateBuildID('favicon');
 
-    // create the dirs
+    // create the build dir
     await FileSystemService.makeDirectory(id);
-    await FileSystemService.makeDirectory(`${id}/favicons`);
 
-    // generate all the output sizes
-    await Promise.all(__OUTPUT_DIMENSIONS.map((dim) => sourceFile.resize(
-      dim.width,
-      dim.height,
-    ).toFile(__getFaviconPathByDimensions(id, dim))));
+    try {
+      // create the variations directory
+      await FileSystemService.makeDirectory(`${id}/favicons`);
 
-    // create a copy of the source file
-    await FileSystemService.copyFile(sourcePath, `${id}/source.png`);
+      // generate all the output sizes
+      await Promise.all(__OUTPUT_DIMENSIONS.map((dim) => sourceFile.resize(
+        dim.width,
+        dim.height,
+      ).toFile(__getFaviconPathByDimensions(id, dim))));
 
-    // generate the .ico file for legacy browsers
-    const icoBuffer = await pngToIco(sourcePath);
-    await FileSystemService.writeFile(`${id}/favicon.ico`, icoBuffer);
+      // create a copy of the source file
+      await FileSystemService.copyFile(sourcePath, `${id}/source.png`);
 
-    // generate the receipt of the build
-    await FileSystemService.writeFile(
-      `${id}/receipt.txt`,
-      __generateBuildReceipt(sourcePath, id),
-    );
+      // generate the .ico file for legacy browsers
+      const icoBuffer = await pngToIco(sourcePath);
+      await FileSystemService.writeFile(`${id}/favicon.ico`, icoBuffer);
 
-    // finally, return the build id
-    return id;
+      // generate the receipt of the build
+      await FileSystemService.writeFile(
+        `${id}/receipt.txt`,
+        __generateBuildReceipt(sourcePath, id),
+      );
+
+      // finally, return the build id
+      return id;
+    } catch (e) {
+      // in case of failure, remove the build directory and rethrow the error
+      await FileSystemService.deleteDirectory(id);
+      throw e;
+    }
   };
 
 
