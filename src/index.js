@@ -2,6 +2,14 @@
 import select from '@inquirer/select';
 import FileSystemService from './modules/shared/file-system/file-system.service.js';
 import Utilities from './modules/shared/utilities/utilities.js';
+
+
+
+
+
+/**
+ * Module Launchers
+ */
 import passwordModuleLauncher from './modules/password/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
@@ -10,6 +18,10 @@ import faviconBuilderModuleLauncher from './modules/favicon-builder/launcher.js'
 import pwaAssetsBuilderModuleLauncher from './modules/pwa-assets-builder/launcher.js';
 import aes256ModuleLauncher from './modules/aes256/launcher.js';
 import md5ModuleLauncher from './modules/md5/launcher.js';
+
+
+
+
 
 /**
  * Module List

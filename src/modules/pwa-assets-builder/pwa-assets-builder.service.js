@@ -1,4 +1,6 @@
-
+import sharp from 'sharp';
+import Utilities from '../shared/utilities/utilities.js';
+import FileSystemService from '../shared/file-system/file-system.service.js';
 
 /**
  * PWA Assets Builder Service Factory
@@ -33,13 +35,15 @@ const pwaAssetsBuilderServiceFactory = () => {
    *************** */
 
   /**
-   * ... pwa-assets-build-${TIMESTAMP}
+   * Performs the build action and outputs the result in a directory like
+   * pwa-assets-build-${TIMESTAMP}
    * @param {*} logoSourcePath
    * @param {*} backgroundColor
-   * @returns Promise<void>
+   * @returns Promise<string>
    */
   const build = async (logoSourcePath, backgroundColor) => {
-    // ...
+    // read the logo
+    const logoSourceFile = sharp(logoSourcePath);
   };
 
 

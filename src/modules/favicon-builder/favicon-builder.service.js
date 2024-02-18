@@ -42,26 +42,11 @@ const faviconBuilderServiceFactory = () => {
    ************** */
 
   /**
-   * Retrieves the identifier of the current build. This value will be used to create the root
-   * directory of the build.
-   * @returns string
-   */
-  const __getBuildID = () => `favicon-build-${Date.now()}`;
-
-  /**
-   * Converts a dimensions object into a string. For example:
-   * { width: 256, height: 256 } -> '256x256'
-   * @param {*} dimensions
-   * @returns string
-   */
-  const __prettifyDimensions = (dimensions) => `${dimensions.width}x${dimensions.height}`;
-
-  /**
    * Generates the name of a favicon file based on its dimensions.
    * @param {*} dimensions
    * @returns string
    */
-  const __getFaviconNameByDimensions = (dimensions) => `favicon-${__prettifyDimensions(dimensions)}.png`;
+  const __getFaviconNameByDimensions = (dimensions) => `favicon-${Utilities.prettifyImageDimensions(dimensions)}.png`;
 
   /**
    * Builds the path for a favicon based on its dimension.
@@ -85,7 +70,7 @@ const faviconBuilderServiceFactory = () => {
     const metadata = await source.metadata();
     const largestReq = __OUTPUT_DIMENSIONS.at(-1);
     if (largestReq.width > metadata.width || largestReq.height > metadata.height) {
-      throw new Error(`The dimensions of the source file should be: ${__prettifyDimensions(largestReq)} minimum`);
+      throw new Error(`The dimensions of the source file should be: ${Utilities.prettifyImageDimensions(largestReq)} minimum`);
     }
 
     // return the instance of the source file
@@ -142,9 +127,9 @@ const faviconBuilderServiceFactory = () => {
     receipt += '\n2) Place the favicons directory inside of the project\'s root. Resulting in /${PROJECT_ROOT}/favicons';
     receipt += '\n3) Include the following tags inside of the app\'s <head>...</head>:';
     receipt += '\n<!-- Favicon -->';
-    receipt += `\n<link rel="icon" type="image/png" sizes="${__prettifyDimensions(smallestReq)}" href="${__getFaviconNameByDimensions(smallestReq)}">`;
+    receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(smallestReq)}" href="${__getFaviconNameByDimensions(smallestReq)}">`;
     receipt += '\n...';
-    receipt += `\n<link rel="icon" type="image/png" sizes="${__prettifyDimensions(largestReq)}" href="${__getFaviconNameByDimensions(largestReq)}">`;
+    receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(largestReq)}" href="${__getFaviconNameByDimensions(largestReq)}">`;
 
     // finally, return the receipt
     return receipt;
@@ -161,14 +146,14 @@ const faviconBuilderServiceFactory = () => {
   /**
    * Performs the build action and outputs the result in a directory like favicon-build-${TIMESTAMP}
    * @param {*} sourcePath
-   * @returns Promise<void>
+   * @returns Promise<string>
    */
   const build = async (sourcePath) => {
     // read the source path
     const sourceFile = await __readSourcePath(sourcePath);
 
     // initialize the identifier
-    const id = __getBuildID();
+    const id = Utilities.generateBuildID('favicon');
 
     // create the dirs
     await FileSystemService.makeDirectory(id);

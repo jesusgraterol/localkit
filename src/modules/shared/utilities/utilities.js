@@ -6,10 +6,32 @@ import { format } from 'date-fns';
  * Provides commonly used functionality in order to main consistency across modules.
  */
 const utilitiesFactory = () => {
+  /* ***************
+   * BUILD HELPERS *
+   *************** */
+
+  /**
+   * Generates the identifier of the current build. This value will be used to create the root
+   * directory of the build.
+   * @returns string
+   */
+  const generateBuildID = (buildName) => `${buildName}-build-${Date.now()}`;
+
+  /**
+   * Converts a dimensions object into a string. For example:
+   * { width: 256, height: 256 } -> '256x256'
+   * @param {*} dimensions
+   * @returns string
+   */
+  const prettifyImageDimensions = ({ width = 0, height = 0 } = {}) => `${width}x${height}`;
+
+
+
+
+
   /* **************
    * MISC HELPERS *
    ************** */
-
 
   /**
    * Formats a timestamp or the current time if none is provided.
@@ -75,6 +97,10 @@ const utilitiesFactory = () => {
    * MODULE BUILD *
    ************** */
   return Object.freeze({
+    // build helpers
+    generateBuildID,
+    prettifyImageDimensions,
+
     // misc helpers
     formatDate,
     buildCLIHeader,
