@@ -1,3 +1,8 @@
 node_modules
 
+# build dirs
+pwa-assets-build-*/
+favicon-build-*/
+
+# sample assets
 *-assetsample.png
