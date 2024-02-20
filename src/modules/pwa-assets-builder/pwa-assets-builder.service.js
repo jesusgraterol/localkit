@@ -149,14 +149,14 @@ const pwaAssetsBuilderServiceFactory = () => {
 
   /**
    * Builds all the assets for a given category.
-   * @param {*} buildID
+   * @param {*} assetsRootPath
    * @param {*} logoSourcePath
    * @param {*} backgroundColor
    * @param {*} category
    */
-  const __buildCategory = async (buildID, logoSourcePath, backgroundColor, category) => {
+  const __buildCategory = async (assetsRootPath, logoSourcePath, backgroundColor, category) => {
     // create the base dir
-    const baseDirPath = `${buildID}/${category}`;
+    const baseDirPath = `${assetsRootPath}/${category}`;
     await FileSystemService.makeDirectory(baseDirPath);
 
     // build all the assets
@@ -176,25 +176,21 @@ const pwaAssetsBuilderServiceFactory = () => {
    * @returns Promise<string>
    */
   const build = async (logoSourcePath, backgroundColor) => {
-    // read the logo
-    const logoSourceFile = await sharp(logoSourcePath).toBuffer();
-
-    // initialize the identifier
+    // initialize the identifier as well as the assets' root path
     const id = Utilities.generateBuildID('pwa-assets');
+    const assetsRootPath = `${id}/pwa-assets`;
 
-    // init the assets' categories
-    const categories = Object.keys(__OUTPUT);
-
-    // create the build dir
+    // create the build and the assets root dirs
     await FileSystemService.makeDirectory(id);
+    await FileSystemService.makeDirectory(assetsRootPath);
 
     try {
       // generate all the assets for all of the categories
-      await Promise.all(categories.map((cat) => __buildCategory(
-        id,
-        logoSourceFile,
+      await Promise.all(Object.keys(__OUTPUT).map((category) => __buildCategory(
+        assetsRootPath,
+        logoSourcePath,
         backgroundColor,
-        cat,
+        category,
       )));
 
       // generate the receipt
