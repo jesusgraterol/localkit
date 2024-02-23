@@ -19,8 +19,11 @@ const pwaAssetsBuilderServiceFactory = () => {
   const __OUTPUT = {
     icons: [
       { dimensions: { width: 48, height: 48 }, logoScale: 0.037 },
+      { dimensions: { width: 72, height: 72 }, logoScale: 0.047 },
+      { dimensions: { width: 96, height: 96 }, logoScale: 0.058 },
+      { dimensions: { width: 120, height: 120 }, logoScale: 0.07 },
 
-      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
+      //{ dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
   };
 
