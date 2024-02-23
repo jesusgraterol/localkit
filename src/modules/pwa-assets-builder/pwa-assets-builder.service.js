@@ -185,8 +185,11 @@ const pwaAssetsBuilderServiceFactory = () => {
     await FileSystemService.makeDirectory(assetsRootPath);
 
     try {
+      // init the output's categories
+      const categories = Object.keys(__OUTPUT);
+
       // generate all the assets for all of the categories
-      await Promise.all(Object.keys(__OUTPUT).map((category) => __buildCategory(
+      await Promise.all(categories.map((category) => __buildCategory(
         assetsRootPath,
         logoSourcePath,
         backgroundColor,
