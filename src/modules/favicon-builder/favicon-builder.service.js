@@ -46,7 +46,7 @@ const faviconBuilderServiceFactory = () => {
    * @param {*} dimensions
    * @returns string
    */
-  const __getFaviconNameByDimensions = (dimensions) => `favicon-${Utilities.prettifyImageDimensions(dimensions)}.png`;
+  const __getFaviconNameByDimensions = (dimensions) => `${Utilities.prettifyImageDimensions(dimensions)}.png`;
 
   /**
    * Builds the path for a favicon based on its dimension.
@@ -127,9 +127,9 @@ const faviconBuilderServiceFactory = () => {
     receipt += '\n2) Place the favicons directory inside of the project\'s root. Resulting in /${PROJECT_ROOT}/favicons';
     receipt += '\n3) Include the following tags inside of the app\'s <head>...</head>:';
     receipt += '\n<!-- Favicon -->';
-    receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(smallestReq)}" href="${__getFaviconNameByDimensions(smallestReq)}">`;
+    receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(smallestReq)}" href="favicons/${__getFaviconNameByDimensions(smallestReq)}">`;
     receipt += '\n...';
-    receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(largestReq)}" href="${__getFaviconNameByDimensions(largestReq)}">`;
+    receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(largestReq)}" href="favicons/${__getFaviconNameByDimensions(largestReq)}">`;
 
     // finally, return the receipt
     return receipt;

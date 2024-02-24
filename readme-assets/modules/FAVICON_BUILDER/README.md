@@ -41,23 +41,23 @@ favicon-build-${TIMESTAMP}
     favicon.ico
     source.png
     favicons/
-        ├───favicon-16x16.png
-        ├───favicon-32x32.png
-        ├───favicon-48x48.png
-        ├───favicon-64x64.png
-        ├───favicon-96x96.png
-        ├───favicon-112x112.png
-        ├───favicon-128x128.png
-        ├───favicon-144x144.png
-        ├───favicon-160x160.png
-        ├───favicon-176x176.png
-        ├───favicon-192x192.png
-        ├───favicon-208x208.png
-        ├───favicon-224x224.png
-        ├───favicon-240x240.png
-        ├───favicon-256x256.png
-        ├───favicon-384x384.png
-        └───favicon-512x512.png
+        ├───16x16.png
+        ├───32x32.png
+        ├───48x48.png
+        ├───64x64.png
+        ├───96x96.png
+        ├───112x112.png
+        ├───128x128.png
+        ├───144x144.png
+        ├───160x160.png
+        ├───176x176.png
+        ├───192x192.png
+        ├───208x208.png
+        ├───224x224.png
+        ├───240x240.png
+        ├───256x256.png
+        ├───384x384.png
+        └───512x512.png
 ```
 
 ### Usage
@@ -67,23 +67,23 @@ favicon-build-${TIMESTAMP}
 3. Include the tags within the `<head>...</head>`:
 ```html
 <!-- Favicon -->
-<link rel="icon" type="image/png" sizes="512x512" href="favicons/favicon-512x512.png">
-<link rel="icon" type="image/png" sizes="384x384" href="favicons/favicon-384x384.png">
-<link rel="icon" type="image/png" sizes="256x256" href="favicons/favicon-256x256.png">
-<link rel="icon" type="image/png" sizes="240x240" href="favicons/favicon-240x240.png">
-<link rel="icon" type="image/png" sizes="224x224" href="favicons/favicon-224x224.png">
-<link rel="icon" type="image/png" sizes="208x208" href="favicons/favicon-208x208.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicons/favicon-192x192.png">
-<link rel="icon" type="image/png" sizes="176x176" href="favicons/favicon-176x176.png">
-<link rel="icon" type="image/png" sizes="160x160" href="favicons/favicon-160x160.png">
-<link rel="icon" type="image/png" sizes="144x144" href="favicons/favicon-144x144.png">
-<link rel="icon" type="image/png" sizes="128x128" href="favicons/favicon-128x128.png">
-<link rel="icon" type="image/png" sizes="112x112" href="favicons/favicon-112x112.png">
-<link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="64x64" href="favicons/favicon-64x64.png">
-<link rel="icon" type="image/png" sizes="48x48" href="favicons/favicon-48x48.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicons/512x512.png">
+<link rel="icon" type="image/png" sizes="384x384" href="favicons/384x384.png">
+<link rel="icon" type="image/png" sizes="256x256" href="favicons/256x256.png">
+<link rel="icon" type="image/png" sizes="240x240" href="favicons/240x240.png">
+<link rel="icon" type="image/png" sizes="224x224" href="favicons/224x224.png">
+<link rel="icon" type="image/png" sizes="208x208" href="favicons/208x208.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicons/192x192.png">
+<link rel="icon" type="image/png" sizes="176x176" href="favicons/176x176.png">
+<link rel="icon" type="image/png" sizes="160x160" href="favicons/160x160.png">
+<link rel="icon" type="image/png" sizes="144x144" href="favicons/144x144.png">
+<link rel="icon" type="image/png" sizes="128x128" href="favicons/128x128.png">
+<link rel="icon" type="image/png" sizes="112x112" href="favicons/112x112.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicons/96x96.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicons/64x64.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicons/48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicons/32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicons/16x16.png">
 ```
 
 
