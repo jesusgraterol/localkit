@@ -144,3 +144,11 @@ $ npm run test:integration
 ## Sources
 
 - [Adding favicons in a multi-browser multi-platform world](https://mobiforge.com/design-development/adding-favicons-in-a-multi-browser-multi-platform-world)
+- [How to enhance your PWA with HTML tags for iOS and Android](https://www.modyo.com/developer-tips/how-to-enhance-your-pwa-with-html-tags-for-ios-and-android)
+- [Adaptive icon support in PWAs with maskable icons](https://web.dev/articles/maskable-icon)
+- [Define icons and a theme color](https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/icon-theme-color)
+- [awesome-meta-and-manifest](https://github.com/gokulkrishh/awesome-meta-and-manifest)
+- [PWABuilder](https://www.pwabuilder.com/imageGenerator)
+
+
+

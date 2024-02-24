@@ -20,10 +20,17 @@ const pwaAssetsBuilderServiceFactory = () => {
     icons: [
       { dimensions: { width: 48, height: 48 }, logoScale: 0.037 },
       { dimensions: { width: 72, height: 72 }, logoScale: 0.047 },
-      { dimensions: { width: 96, height: 96 }, logoScale: 0.058 },
-      { dimensions: { width: 120, height: 120 }, logoScale: 0.07 },
-
-      //{ dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
+      { dimensions: { width: 96, height: 96 }, logoScale: 0.06 },
+      { dimensions: { width: 120, height: 120 }, logoScale: 0.072 },
+      { dimensions: { width: 128, height: 128 }, logoScale: 0.076 },
+      { dimensions: { width: 144, height: 144 }, logoScale: 0.087 },
+      { dimensions: { width: 152, height: 152 }, logoScale: 0.092 },
+      { dimensions: { width: 168, height: 168 }, logoScale: 0.105 },
+      { dimensions: { width: 180, height: 180 }, logoScale: 0.112 },
+      { dimensions: { width: 192, height: 192 }, logoScale: 0.12 },
+      { dimensions: { width: 384, height: 384 }, logoScale: 0.24 },
+      { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
+      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
   };
 
