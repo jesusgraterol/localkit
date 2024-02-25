@@ -149,6 +149,6 @@ $ npm run test:integration
 - [Define icons and a theme color](https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/icon-theme-color)
 - [awesome-meta-and-manifest](https://github.com/gokulkrishh/awesome-meta-and-manifest)
 - [PWABuilder](https://www.pwabuilder.com/imageGenerator)
-
+- [pwa-asset-generator](https://github.com/elegantapp/pwa-asset-generator)
 
 

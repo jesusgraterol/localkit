@@ -1,10 +1,10 @@
-import sharp from 'sharp';
 import Utilities from '../shared/utilities/utilities.js';
 import FileSystemService from '../shared/file-system/file-system.service.js';
+import PWAAssetsBuilderUtils from './pwa-assets-builder.utils.js';
 
 /**
  * PWA Assets Builder Service Factory
- * ...
+ * Service in charge of building all the assets required for a PWA to be properly published.
  */
 const pwaAssetsBuilderServiceFactory = () => {
   /* *******************
@@ -36,102 +36,11 @@ const pwaAssetsBuilderServiceFactory = () => {
 
 
 
+
+
   /* **************
-   * MISC HELPERS *
+   * ASSETS BUILD *
    ************** */
-
-  /**
-   * Verifies if a given background color is valid.
-   * @param {*} hex
-   * @returns boolean
-   */
-  const isBackgroundColorValid = (hex) => /^#[a-zA-Z0-9]{6}$/.test(hex);
-
-
-
-
-  /* ***************
-   * BUILD HELPERS *
-   *************** */
-
-  /**
-   * Generates the file path for an asset.
-   * @param {*} dimensions
-   * @param {?} ext
-   * @returns string
-   */
-  const __generateAssetName = (dimensions, ext = '.png') => `${Utilities.prettifyImageDimensions(dimensions)}${ext}`;
-
-  /**
-   * Creates the image that will be used for the background in every asset.
-   * @param {*} dimensions
-   * @param {*} backgroundColor
-   * @returns sharp.Sharp
-   */
-  const __generateBackgroundImage = (dimensions, backgroundColor) => sharp({
-    create: {
-      width: dimensions.width,
-      height: dimensions.height,
-      channels: 3,
-      background: backgroundColor,
-    },
-  });
-
-  /**
-   * Scales a given pixel number based.
-   * @param {*} pixels
-   * @param {*} scale
-   * @returns number
-   */
-  const __scale = (pixels, scale) => Math.ceil(pixels * scale);
-
-  /**
-   * Scales a given dimensions object.
-   * @param {*} dimensions
-   * @param {*} scale
-   * @returns object { width: number, height: number }
-   */
-  const __calculateScaledDimensions = (dimensions, scale) => ({
-    width: __scale(dimensions.width, scale),
-    height: __scale(dimensions.height, scale),
-  });
-
-  /**
-   * Generates the Buffer of the scaled logo image.
-   * @param {*} logoSourcePath
-   * @param {*} asset
-   * @returns Promise<Buffer>
-   */
-  const __generateLogoImage = async (logoSourcePath, asset) => {
-    // initialize the file instance as well as the metadata
-    const logoImage = sharp(logoSourcePath);
-    const metadata = await logoImage.metadata();
-    if (
-      metadata.width !== __LOGO_DIMENSIONS_REQUIREMENT.width
-      || metadata.height !== __LOGO_DIMENSIONS_REQUIREMENT.height
-    ) {
-      throw new Error(`The required logo dimensions are: ${__LOGO_DIMENSIONS_REQUIREMENT.width}x${__LOGO_DIMENSIONS_REQUIREMENT.height}. Received: ${metadata.width}x${metadata.height}`);
-    }
-
-    // calculate the scaled dimensions
-    const scaledDimensions = __calculateScaledDimensions(
-      { width: metadata.width, height: metadata.height },
-      asset.logoScale,
-    );
-
-    // return the scaled logo
-    return sharp(logoSourcePath).resize(
-      scaledDimensions.width,
-      scaledDimensions.height,
-    ).toBuffer();
-  };
-
-
-
-
-  /* ***************
-   * BUILD PROCESS *
-   *************** */
 
   /**
    * Builds an asset and saves it in the appropriate category.
@@ -143,18 +52,22 @@ const pwaAssetsBuilderServiceFactory = () => {
    */
   const __buildAsset = async (baseDirPath, logoSourcePath, backgroundColor, asset) => {
     // generate the background image
-    const bgImage = __generateBackgroundImage(
+    const bgImage = PWAAssetsBuilderUtils.generateBackgroundImage(
       { width: asset.dimensions.width, height: asset.dimensions.height },
       backgroundColor,
     );
 
     // generate the logo image
-    const logoImage = await __generateLogoImage(logoSourcePath, asset);
+    const logoImage = await PWAAssetsBuilderUtils.generateLogoImage(
+      logoSourcePath,
+      asset,
+      __LOGO_DIMENSIONS_REQUIREMENT,
+    );
 
     // compose the asset image and save it
     await bgImage.composite(
       [{ input: logoImage, blend: 'over' }],
-    ).toFile(`${baseDirPath}/${__generateAssetName(asset.dimensions)}`);
+    ).toFile(`${baseDirPath}/${PWAAssetsBuilderUtils.generateAssetName(asset.dimensions)}`);
   };
 
   /**
@@ -177,6 +90,13 @@ const pwaAssetsBuilderServiceFactory = () => {
       asset,
     )));
   };
+
+
+
+
+  /* ***************
+   * BUILD PROCESS *
+   *************** */
 
   /**
    * Performs the build action and outputs the result in a directory like
@@ -206,8 +126,14 @@ const pwaAssetsBuilderServiceFactory = () => {
         category,
       )));
 
+      // generate the manifest file
+      // @TODO
+
       // generate the receipt
       // @TODO
+
+      // create a copy of the source file
+      await FileSystemService.copyFile(logoSourcePath, `${id}/source.png`);
 
       // finally, return the id
       return id;
@@ -224,9 +150,6 @@ const pwaAssetsBuilderServiceFactory = () => {
    * MODULE BUILD *
    ************** */
   return Object.freeze({
-    // misc helpers
-    isBackgroundColorValid,
-
     // build process
     build,
   });

@@ -2,6 +2,7 @@ import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
 import Utilities from '../shared/utilities/utilities.js';
 import FileSystemService from '../shared/file-system/file-system.service.js';
+import PWAAssetsBuilderValidations from './pwa-assets-builder.validations.js';
 import PWAAssetsBuilderService from './pwa-assets-builder.service.js';
 
 /**
@@ -24,7 +25,7 @@ export default async function moduleLauncher() {
   // collect the background color (the project's primary color)
   const bgColor = await input({
     message: 'Enter the background color',
-    validate: PWAAssetsBuilderService.isBackgroundColorValid,
+    validate: PWAAssetsBuilderValidations.isHexadecimalColorValid,
   });
 
   // execute the build
