@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer';
 import sharp from 'sharp';
 import PWAAssetsBuilderUtils from './pwa-assets-builder.utils.js';
 
@@ -7,11 +8,12 @@ import PWAAssetsBuilderUtils from './pwa-assets-builder.utils.js';
  * The mock implementation in order to prevent side effects by calling the real sharp factory func.
  */
 const MOCK_DIMENSIONS = { width: 128, height: 128 };
+const MOCK_LOGO_IMAGE = Buffer.from('mock_logo_image');
 jest.mock('sharp', () => jest.fn(() => ({
   metadata: () => Promise.resolve(MOCK_DIMENSIONS),
-  resize: jest.fn(() => ({
-    toBuffer: Promise.resolve(),
-  })),
+  resize: () => ({
+    toBuffer: () => Promise.resolve(MOCK_LOGO_IMAGE),
+  }),
 })));
 
 
@@ -53,7 +55,13 @@ describe('Assets Build Utilities', () => {
     )).rejects.toThrow('The required logo dimensions are: 512x512. Received: 128x128');
   });
 
-  test.skip('cannot generate a logo image', async () => {
-    expect(2 + 2).toBe(4);
+  test('can generate a logo image', async () => {
+    const logoImage = await PWAAssetsBuilderUtils.generateLogoImage(
+      'fakePath.png',
+      { logoScale: 0.5 },
+      { width: 128, height: 128 },
+    );
+    expect(sharp).toHaveBeenCalledWith('fakePath.png');
+    expect(MOCK_LOGO_IMAGE.equals(logoImage)).toBe(true);
   });
 });
