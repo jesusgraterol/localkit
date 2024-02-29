@@ -1,4 +1,4 @@
-import Utilities from './utilities';
+import Utilities from './utilities.js';
 
 // RegEx to validate formatted dates
 const dateRegEx = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4},\s[0-9]{2}:[0-9]{2}:[0-9]{2}\s(AM|PM)/;

@@ -1,5 +1,5 @@
-import UUIDService from '../../uuid/uuid.service';
-import FileSystemService from './file-system.service';
+import UUIDService from '../../uuid/uuid.service.js';
+import FileSystemService from './file-system.service.js';
 
 // the base path that will be used for the tests
 const basePath = UUIDService.generate();

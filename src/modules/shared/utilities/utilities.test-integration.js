@@ -1,4 +1,4 @@
-import Utilities from './utilities';
+import Utilities from './utilities.js';
 
 describe('Asynchronous Delayer', () => {
   beforeAll(() => { });
