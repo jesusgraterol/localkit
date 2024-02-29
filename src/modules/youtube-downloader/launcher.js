@@ -1,5 +1,6 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
+import YoutubeDownloaderValidations from './youtube-downloader.validations.js';
 import YouTubeDownloaderService from './youtube-downloader.service.js';
 import Utilities from '../shared/utilities/utilities.js';
 
@@ -27,7 +28,7 @@ export default async function moduleLauncher() {
     }),
     url: await input({
       message: 'Enter the URL',
-      validate: ((v) => YouTubeDownloaderService.isURLValid(v)),
+      validate: ((v) => YoutubeDownloaderValidations.isURLValid(v)),
     }),
   };
 

@@ -3,8 +3,7 @@ import ytdl from 'ytdl-core';
 import ffmpegPath from '@ffmpeg-installer/ffmpeg';
 import ffmpeg from 'ffmpeg-static';
 import fluentffmpeg from 'fluent-ffmpeg';
-
-
+import YouTubeDownloaderUtils from './youtube-downloader.utils.js';
 
 
 
@@ -22,39 +21,9 @@ fluentffmpeg.setFfmpegPath(ffmpegPath.path);
  * Service in charge of downloading Youtube Videos.
  */
 const youtubeDownloaderServiceFactory = () => {
-  /* **************
-   * MISC HELPERS *
-   ************** */
-
-  /**
-   * Ensures the provided URL belongs to Youtube and that the video ID can be extracted.
-   * @param {*} url
-   * @returns boolean
-   */
-  const isURLValid = (url) => ytdl.validateURL(url);
-
-  /**
-   * Extracts the video ID from a Youtube URL. Throws an error if it is unable to do so.
-   * @param {*} url
-   * @returns string
-   */
-  const __getVideoID = (url) => ytdl.getURLVideoID(url);
-
-  /**
-   * Retrieves the name of the file based on a URL and a format.
-   * @param {*} url
-   * @param {*} format
-   * @returns string
-   */
-  const __getFileName = (url, format) => `${__getVideoID(url)}.${format}`;
-
-
-
-
-
-  /* ******************
-   * DOWNLOAD ACTIONS *
-   ****************** */
+  /* ****************
+   * VIDEO DOWNLOAD *
+   **************** */
 
   /**
    * Downloads a Youtube Video & Audio based on a given URL.
@@ -63,7 +32,7 @@ const youtubeDownloaderServiceFactory = () => {
    */
   const downloadVideo = (url) => new Promise((resolve, reject) => {
     // build the file name (videoID.extension)
-    const fileName = __getFileName(url, 'mp4');
+    const fileName = YouTubeDownloaderUtils.getFileName(url, 'mp4');
 
     // init the audio and video streams
     const audio = ytdl(url, { quality: 'highestaudio' });
@@ -113,6 +82,13 @@ const youtubeDownloaderServiceFactory = () => {
     video.pipe(ffmpegProcess.stdio[5]);
   });
 
+
+
+
+  /* ****************
+   * AUDIO DOWNLOAD *
+   **************** */
+
   /**
    * Downloads a Youtube Video and it extracts the audio based on a given URL.
    * @param {*} url
@@ -120,7 +96,7 @@ const youtubeDownloaderServiceFactory = () => {
    */
   const downloadAudio = (url) => new Promise((resolve, reject) => {
     // build the file name (videoID.extension)
-    const fileName = __getFileName(url, 'mp3');
+    const fileName = YouTubeDownloaderUtils.getFileName(url, 'mp3');
 
     // init the stream and download the audio file
     const stream = ytdl(url, { quality: 'highestaudio' });
@@ -136,15 +112,17 @@ const youtubeDownloaderServiceFactory = () => {
   });
 
 
+
+
+
   /* **************
    * MODULE BUILD *
    ************** */
   return Object.freeze({
-    // misc helpers
-    isURLValid,
-
-    // download actions
+    // video download
     downloadVideo,
+
+    // audio download
     downloadAudio,
   });
 };
