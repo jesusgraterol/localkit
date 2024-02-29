@@ -5,4 +5,5 @@ pwa-assets-build-*/
 favicon-build-*/
 
 # sample assets
-*-assetsample.png
+# these files are now stored in the project in order to simplify automated and manual testing.
+# *-assetsample.png
