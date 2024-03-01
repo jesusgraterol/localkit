@@ -26,5 +26,6 @@ describe('Build Process', () => {
       ),
     );
     expect(variations.every((exists) => exists === true)).toBe(true);
+    await FileSystemService.deleteDirectory(id);
   });
 });
