@@ -90,7 +90,7 @@ const faviconBuilderUtilsFactory = () => {
     receipt += '\n    favicon.ico';
     receipt += '\n    source.png';
     receipt += '\n    favicons/';
-    receipt += `\n${__generateFaviconVariationsReceipt('        ')}`;
+    receipt += `\n${__generateFaviconVariationsReceipt('        ', outputDimensions)}`;
 
     // usage
     const smallestReq = outputDimensions[0];
