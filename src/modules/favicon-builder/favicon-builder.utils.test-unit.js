@@ -19,7 +19,9 @@ describe('Misc Helpers', () => {
     sharp.mockRestore();
   });
 
-  beforeEach(() => { });
+  beforeEach(() => {
+    sharp.mockClear();
+  });
 
   afterEach(() => { });
 

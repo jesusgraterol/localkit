@@ -25,7 +25,9 @@ describe('Assets Build Utilities', () => {
     sharp.mockRestore();
   });
 
-  beforeEach(() => { });
+  beforeEach(() => {
+    sharp.mockClear();
+  });
 
   afterEach(() => { });
 
