@@ -7,3 +7,6 @@ favicon-build-*/
 # sample assets
 # these files are now stored in the project in order to simplify automated and manual testing.
 # *-assetsample.png
+
+# mock files used as helpers for trying Node APIs
+*-mock.js

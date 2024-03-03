@@ -45,14 +45,17 @@ const fileSystemServiceFactory = () => {
    */
   const _buildPathItem = (path) => new Promise((resolve, reject) => {
     fs.lstat(path, (error, stats) => {
-      if (error) reject(error);
-      resolve({
-        path,
-        baseName: pathHelper.basename(path),
-        ext: pathHelper.extname(path),
-        isFile: stats.isFile(),
-        creation: Math.round(stats.birthtimeMs),
-      });
+      if (error) {
+        reject(error);
+      } else {
+        resolve({
+          path,
+          baseName: pathHelper.basename(path),
+          ext: pathHelper.extname(path),
+          isFile: stats.isFile(),
+          creation: Math.round(stats.birthtimeMs),
+        });
+      }
     });
   });
 
@@ -85,31 +88,33 @@ const fileSystemServiceFactory = () => {
    */
   const readPathContent = (path, includeExtensions = []) => new Promise((resolve, reject) => {
     fs.readdir(path, async (error, content) => {
-      if (error) reject(error);
+      if (error) {
+        reject(error);
+      } else {
+        // init the content lists
+        const directories = [];
+        const files = [];
 
-      // init the content lists
-      const directories = [];
-      const files = [];
+        // read the contents and apply the file filter (if provided)
+        const items = await Promise.all(content.map(
+          (contentItem) => _buildPathItem(`${path}/${contentItem}`),
+        ));
+        items.forEach((item) => {
+          if (!item.isFile) {
+            directories.push(item);
+          } else if (
+            !includeExtensions.length
+            || includeExtensions.includes(item.ext.toLowerCase())
+          ) {
+            files.push(item);
+          }
+        });
 
-      // read the contents and apply the file filter (if provided)
-      const items = await Promise.all(content.map(
-        (contentItem) => _buildPathItem(`${path}/${contentItem}`),
-      ));
-      items.forEach((item) => {
-        if (!item.isFile) {
-          directories.push(item);
-        } else if (
-          !includeExtensions.length
-          || includeExtensions.includes(item.ext.toLowerCase())
-        ) {
-          files.push(item);
-        }
-      });
-
-      // finally, sort the items alphabetically and resolve them
-      files.sort(_sortByName);
-      directories.sort(_sortByName);
-      resolve({ directories, files });
+        // finally, sort the items alphabetically and resolve them
+        files.sort(_sortByName);
+        directories.sort(_sortByName);
+        resolve({ directories, files });
+      }
     });
   });
 
@@ -128,8 +133,11 @@ const fileSystemServiceFactory = () => {
    */
   const deleteDirectory = (path) => new Promise((resolve, reject) => {
     fs.rm(path, { force: true, recursive: true }, (error) => {
-      if (error) reject(error);
-      resolve();
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
     });
   });
 
@@ -147,8 +155,11 @@ const fileSystemServiceFactory = () => {
     // create the directory
     return new Promise((resolve, reject) => {
       fs.mkdir(path, (err) => {
-        if (err) reject(err);
-        resolve();
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
       });
     });
   };
@@ -183,8 +194,11 @@ const fileSystemServiceFactory = () => {
     // write the file to disk
     return new Promise((resolve, reject) => {
       fs.writeFile(filePath, content, opts, (err) => {
-        if (err) reject(err);
-        resolve();
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
       });
     });
   };
@@ -208,11 +222,13 @@ const fileSystemServiceFactory = () => {
     // read it and return its contents
     return new Promise((resolve, reject) => {
       fs.readFile(filePath, (err, data) => {
-        if (err) reject(err);
-
-        // init the file's content and parse it if it is JSON. Otherwise, return it as is
-        const content = data.toString();
-        resolve(ext === '.json' ? JSON.parse(content) : content);
+        if (err) {
+          reject(err);
+        } else {
+          // init the file's content and parse it if it is JSON. Otherwise, return it as is
+          const content = data.toString();
+          resolve(ext === '.json' ? JSON.parse(content) : content);
+        }
       });
     });
   };
@@ -224,8 +240,11 @@ const fileSystemServiceFactory = () => {
    */
   const deleteFile = (path) => new Promise((resolve, reject) => {
     fs.unlink(path, (error) => {
-      if (error) reject(error);
-      resolve();
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
     });
   });
 
@@ -237,8 +256,11 @@ const fileSystemServiceFactory = () => {
    */
   const copyFile = (originPath, destinationPath) => new Promise((resolve, reject) => {
     fs.copyFile(originPath, destinationPath, (error) => {
-      if (error) reject(error);
-      resolve();
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
     });
   });
 
