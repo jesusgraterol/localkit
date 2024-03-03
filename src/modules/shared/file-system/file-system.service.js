@@ -43,7 +43,7 @@ const fileSystemServiceFactory = () => {
    * @param {*} path
    * @returns Promise<IPathItem>
    */
-  const _buildPathItem = (path) => new Promise((resolve, reject) => {
+  const __buildPathItem = (path) => new Promise((resolve, reject) => {
     fs.lstat(path, (error, stats) => {
       if (error) {
         reject(error);
@@ -65,7 +65,7 @@ const fileSystemServiceFactory = () => {
    * @param {*} b
    * @returns number
    */
-  const _sortByName = (a, b) => {
+  const __sortByName = (a, b) => {
     const nameA = a.baseName.toUpperCase(); // ignore upper and lowercase
     const nameB = b.baseName.toUpperCase(); // ignore upper and lowercase
     if (nameA < nameB) {
@@ -97,7 +97,7 @@ const fileSystemServiceFactory = () => {
 
         // read the contents and apply the file filter (if provided)
         const items = await Promise.all(content.map(
-          (contentItem) => _buildPathItem(`${path}/${contentItem}`),
+          (contentItem) => __buildPathItem(`${path}/${contentItem}`),
         ));
         items.forEach((item) => {
           if (!item.isFile) {
@@ -111,8 +111,8 @@ const fileSystemServiceFactory = () => {
         });
 
         // finally, sort the items alphabetically and resolve them
-        files.sort(_sortByName);
-        directories.sort(_sortByName);
+        files.sort(__sortByName);
+        directories.sort(__sortByName);
         resolve({ directories, files });
       }
     });

@@ -10,9 +10,13 @@ import Service from './file-system.service.js';
 const accessSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'access').mockImplementation(
   (path, callback) => callback(cbReturnVal),
 );
-const lstatSpyFactory = (...cbReturnVals) => jest.spyOn(fs, 'lstat').mockImplementation(
-  (path, callback) => callback(...cbReturnVals),
-);
+const lstatSpyFactory = (cbReturnVals) => {
+  const mock = jest.spyOn(fs, 'lstat');
+  cbReturnVals.forEach(
+    (cbVal) => mock.mockImplementationOnce((path, callback) => callback(null, cbVal)),
+  );
+  return mock;
+};
 const readdirSpyFactory = (
   cbReturnError,
   cbReturnVal = undefined,
@@ -62,5 +66,65 @@ describe('General Management', () => {
     });
     expect(readdirSpy).toHaveBeenCalledTimes(1);
     readdirSpy.mockClear();
+  });
+
+  test('can read a directory with files and directories in it', async () => {
+    const readdirSpy = readdirSpyFactory(null, [
+      'some-dir',
+      'b-file.png',
+      'c-file.jpg',
+      'a-file.json',
+    ]);
+    const lstatSpy = lstatSpyFactory([
+      { isFile: () => false, birthtimeMs: 1709482230979 },
+      { isFile: () => true, birthtimeMs: 1709482230980 },
+      { isFile: () => true, birthtimeMs: 1709482230981 },
+      { isFile: () => true, birthtimeMs: 1709482230982 },
+    ]);
+    await expect(Service.readPathContent('./realdir')).resolves.toStrictEqual({
+      directories: [
+        {
+          path: './realdir/some-dir', baseName: 'some-dir', ext: '', isFile: false, creation: 1709482230979,
+        },
+      ],
+      files: [
+        {
+          path: './realdir/a-file.json', baseName: 'a-file.json', ext: '.json', isFile: true, creation: 1709482230982,
+        },
+        {
+          path: './realdir/b-file.png', baseName: 'b-file.png', ext: '.png', isFile: true, creation: 1709482230980,
+        },
+        {
+          path: './realdir/c-file.jpg', baseName: 'c-file.jpg', ext: '.jpg', isFile: true, creation: 1709482230981,
+        },
+      ],
+    });
+    expect(readdirSpy).toHaveBeenCalledTimes(1);
+    expect(lstatSpy).toHaveBeenCalledTimes(4);
+    readdirSpy.mockClear();
+    lstatSpy.mockClear();
+  });
+
+  test('can read a directory and filter files by extension', async () => {
+    const readdirSpy = readdirSpyFactory(null, [
+      'b-file.png',
+      'c-file.jpg',
+      'a-file.json',
+    ]);
+    const lstatSpy = lstatSpyFactory([
+      { isFile: () => true, birthtimeMs: 1709482230980 },
+      { isFile: () => true, birthtimeMs: 1709482230981 },
+      { isFile: () => true, birthtimeMs: 1709482230982 },
+    ]);
+    await expect(Service.readPathContent('./realdir', ['.png'])).resolves.toStrictEqual({
+      directories: [],
+      files: [{
+        path: './realdir/b-file.png', baseName: 'b-file.png', ext: '.png', isFile: true, creation: 1709482230980,
+      }],
+    });
+    expect(readdirSpy).toHaveBeenCalledTimes(1);
+    expect(lstatSpy).toHaveBeenCalledTimes(3);
+    readdirSpy.mockClear();
+    lstatSpy.mockClear();
   });
 });
