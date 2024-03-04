@@ -1,8 +1,8 @@
-# LocalKit
+# localkit
 
-![LocalKit](./readme-assets/screenshot-01.png)
+![localkit](./readme-assets/screenshot-01.png)
 
-The LocalKit CLI provides a series of utilities that can be used by web developers to enhance their workflow. Note that this CLI can be used when connected to the Internet and in offline mode for more sensitive operations.
+The localkit CLI provides a series of utilities that can be used by web developers to enhance their workflow. Note that this CLI can be used when connected to the Internet and in offline mode for more sensitive operations.
 
 The key modules are:
 

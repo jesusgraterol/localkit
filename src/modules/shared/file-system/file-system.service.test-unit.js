@@ -1,4 +1,5 @@
 import fs from 'fs';
+import pathHelper from 'path';
 import Service from './file-system.service.js';
 
 
@@ -23,6 +24,19 @@ const readdirSpyFactory = (
 ) => jest.spyOn(fs, 'readdir').mockImplementation(
   (path, callback) => callback(cbReturnError, cbReturnVal),
 );
+
+
+
+/**
+ * Misc Test Helpers
+ */
+const buildFileSystemElement = (path, isFile, creation) => ({
+  path,
+  baseName: pathHelper.basename(path),
+  ext: pathHelper.extname(path),
+  isFile,
+  creation,
+});
 
 
 
@@ -69,35 +83,20 @@ describe('General Management', () => {
   });
 
   test('can read a directory with files and directories in it', async () => {
-    const readdirSpy = readdirSpyFactory(null, [
-      'some-dir',
-      'b-file.png',
-      'c-file.jpg',
-      'a-file.json',
-    ]);
-    const lstatSpy = lstatSpyFactory([
-      { isFile: () => false, birthtimeMs: 1709482230979 },
-      { isFile: () => true, birthtimeMs: 1709482230980 },
-      { isFile: () => true, birthtimeMs: 1709482230981 },
-      { isFile: () => true, birthtimeMs: 1709482230982 },
-    ]);
+    const els = [
+      buildFileSystemElement('./realdir/some-dir', false, 1709482230979),
+      buildFileSystemElement('./realdir/b-file.png', true, 1709482230980),
+      buildFileSystemElement('./realdir/c-file.jpg', true, 1709482230981),
+      buildFileSystemElement('./realdir/a-file.json', true, 1709482230982),
+    ];
+    const readdirSpy = readdirSpyFactory(null, els.map((el) => el.baseName));
+    const lstatSpy = lstatSpyFactory(els.map((el) => ({
+      isFile: () => el.isFile,
+      birthtimeMs: el.creation,
+    })));
     await expect(Service.readPathContent('./realdir')).resolves.toStrictEqual({
-      directories: [
-        {
-          path: './realdir/some-dir', baseName: 'some-dir', ext: '', isFile: false, creation: 1709482230979,
-        },
-      ],
-      files: [
-        {
-          path: './realdir/a-file.json', baseName: 'a-file.json', ext: '.json', isFile: true, creation: 1709482230982,
-        },
-        {
-          path: './realdir/b-file.png', baseName: 'b-file.png', ext: '.png', isFile: true, creation: 1709482230980,
-        },
-        {
-          path: './realdir/c-file.jpg', baseName: 'c-file.jpg', ext: '.jpg', isFile: true, creation: 1709482230981,
-        },
-      ],
+      directories: [els[0]],
+      files: [els[3], els[1], els[2]],
     });
     expect(readdirSpy).toHaveBeenCalledTimes(1);
     expect(lstatSpy).toHaveBeenCalledTimes(4);
@@ -106,21 +105,19 @@ describe('General Management', () => {
   });
 
   test('can read a directory and filter files by extension', async () => {
-    const readdirSpy = readdirSpyFactory(null, [
-      'b-file.png',
-      'c-file.jpg',
-      'a-file.json',
-    ]);
-    const lstatSpy = lstatSpyFactory([
-      { isFile: () => true, birthtimeMs: 1709482230980 },
-      { isFile: () => true, birthtimeMs: 1709482230981 },
-      { isFile: () => true, birthtimeMs: 1709482230982 },
-    ]);
+    const els = [
+      buildFileSystemElement('./realdir/b-file.png', true, 1709482230980),
+      buildFileSystemElement('./realdir/c-file.jpg', true, 1709482230981),
+      buildFileSystemElement('./realdir/a-file.json', true, 1709482230982),
+    ];
+    const readdirSpy = readdirSpyFactory(null, els.map((el) => el.baseName));
+    const lstatSpy = lstatSpyFactory(els.map((el) => ({
+      isFile: () => el.isFile,
+      birthtimeMs: el.creation,
+    })));
     await expect(Service.readPathContent('./realdir', ['.png'])).resolves.toStrictEqual({
       directories: [],
-      files: [{
-        path: './realdir/b-file.png', baseName: 'b-file.png', ext: '.png', isFile: true, creation: 1709482230980,
-      }],
+      files: [els[0]],
     });
     expect(readdirSpy).toHaveBeenCalledTimes(1);
     expect(lstatSpy).toHaveBeenCalledTimes(3);
