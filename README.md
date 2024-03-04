@@ -4,16 +4,16 @@
 
 The localkit CLI provides a series of utilities that can be used by web developers to enhance their workflow. Note that this CLI can be used when connected to the Internet and in offline mode for more sensitive operations.
 
-The key modules are:
+The modules are:
 
-- [Password: generate and analyze passwords](./readme-assets/modules/PASSWORD/README.md)
-- [UUID: generate and validate UUIDs (Universally Unique Identifiers)](./readme-assets/modules/UUID/README.md)
-- [OTP: generate OTP (One Time Password) secrets and tokens](./readme-assets/modules/OTP/README.md)
-- [YoutubeDownloader: download videos/audio files from YouTube](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md)
-- [Favicon Builder: build all the favicon files required by modern web apps](./readme-assets/modules/FAVICON_BUILDER/README.md)
-- [PWA Assets Builder: build all the images required for a PWA to be published](./readme-assets/modules/PWA_ASSETS_BUILDER/README.md)
-- [AES256: encrypt and decrypt messages with the AES256 algorithm](./readme-assets/modules/AES256/README.md)
-- [MD5: hash and validate messages with the MD5 Algorithm](./readme-assets/modules/MD5/README.md)
+- [Password:](./readme-assets/modules/PASSWORD/README.md) generate and analyze passwords
+- [UUID:](./readme-assets/modules/UUID/README.md) generate and validate UUIDs (Universally Unique Identifiers)
+- [OTP:](./readme-assets/modules/OTP/README.md) generate OTP (One Time Password) secrets and tokens
+- [YoutubeDownloader:](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md) download videos/audio files from YouTube
+- [Favicon Builder:](./readme-assets/modules/FAVICON_BUILDER/README.md) build all the favicon files required by modern web apps
+- [PWA Assets Builder:](./readme-assets/modules/PWA_ASSETS_BUILDER/README.md) build all the images required for a PWA to be published
+- [AES256:](./readme-assets/modules/AES256/README.md) encrypt and decrypt messages with the AES256 algorithm
+- [MD5:](./readme-assets/modules/MD5/README.md) hash and validate messages with the MD5 Algorithm
 
 
 
