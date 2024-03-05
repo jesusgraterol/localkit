@@ -24,6 +24,9 @@ const readdirSpyFactory = (
 ) => jest.spyOn(fs, 'readdir').mockImplementation(
   (path, callback) => callback(cbReturnError, cbReturnVal),
 );
+/* const rmSpyFactory = (cbReturnError) => jest.spyOn(fs, 'rm').mockImplementation(
+  (path, callback) => callback(cbReturnError),
+); */
 
 
 
@@ -62,6 +65,7 @@ describe('General Management', () => {
     const accessSpy = accessSpyFactory(null);
     expect(await Service.pathExists('./package.json')).toBe(true);
     expect(accessSpy).toHaveBeenCalledTimes(1);
+    expect(accessSpy.mock.calls[0][0]).toBe('./package.json');
     accessSpy.mockClear();
   });
 
@@ -69,6 +73,7 @@ describe('General Management', () => {
     const readdirSpy = readdirSpyFactory(new Error('Error: ENOTDIR: not a directory, scandir'));
     await expect(() => Service.readPathContent('./nonexistentdir')).rejects.toThrow('ENOTDIR');
     expect(readdirSpy).toHaveBeenCalledTimes(1);
+    expect(readdirSpy.mock.calls[0][0]).toBe('./nonexistentdir');
     readdirSpy.mockClear();
   });
 
@@ -79,6 +84,7 @@ describe('General Management', () => {
       files: [],
     });
     expect(readdirSpy).toHaveBeenCalledTimes(1);
+    expect(readdirSpy.mock.calls[0][0]).toBe('./realdir');
     readdirSpy.mockClear();
   });
 
@@ -99,7 +105,9 @@ describe('General Management', () => {
       files: [els[3], els[1], els[2]],
     });
     expect(readdirSpy).toHaveBeenCalledTimes(1);
+    expect(readdirSpy.mock.calls[0][0]).toBe('./realdir');
     expect(lstatSpy).toHaveBeenCalledTimes(4);
+    els.forEach((el, index) => expect(lstatSpy.mock.calls[index][0]).toBe(el.path));
     readdirSpy.mockClear();
     lstatSpy.mockClear();
   });
@@ -120,8 +128,32 @@ describe('General Management', () => {
       files: [els[0]],
     });
     expect(readdirSpy).toHaveBeenCalledTimes(1);
+    expect(readdirSpy.mock.calls[0][0]).toBe('./realdir');
     expect(lstatSpy).toHaveBeenCalledTimes(3);
+    els.forEach((el, index) => expect(lstatSpy.mock.calls[index][0]).toBe(el.path));
     readdirSpy.mockClear();
     lstatSpy.mockClear();
   });
 });
+
+
+
+
+
+/* describe('Directory Management', () => {
+  beforeAll(() => { });
+
+  afterAll(() => { });
+
+  beforeEach(() => { });
+
+  afterEach(() => { });
+
+  test('can identify when a path does not exist', async () => {
+    const accessSpy = accessSpyFactory(new Error('The path does not exist!'));
+    expect(await Service.pathExists('./package.json')).toBe(false);
+    expect(accessSpy).toHaveBeenCalledTimes(1);
+    expect(accessSpy.mock.calls[0][0]).toBe('./package.json');
+    accessSpy.mockClear();
+  });
+}); */
