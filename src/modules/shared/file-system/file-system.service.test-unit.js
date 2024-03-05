@@ -24,9 +24,9 @@ const readdirSpyFactory = (
 ) => jest.spyOn(fs, 'readdir').mockImplementation(
   (path, callback) => callback(cbReturnError, cbReturnVal),
 );
-/* const rmSpyFactory = (cbReturnError) => jest.spyOn(fs, 'rm').mockImplementation(
-  (path, callback) => callback(cbReturnError),
-); */
+const rmSpyFactory = (cbReturnError) => jest.spyOn(fs, 'rm').mockImplementation(
+  (path, options, callback) => callback(cbReturnError),
+);
 
 
 
@@ -140,7 +140,7 @@ describe('General Management', () => {
 
 
 
-/* describe('Directory Management', () => {
+describe('Directory Management', () => {
   beforeAll(() => { });
 
   afterAll(() => { });
@@ -149,11 +149,21 @@ describe('General Management', () => {
 
   afterEach(() => { });
 
-  test('can identify when a path does not exist', async () => {
-    const accessSpy = accessSpyFactory(new Error('The path does not exist!'));
-    expect(await Service.pathExists('./package.json')).toBe(false);
-    expect(accessSpy).toHaveBeenCalledTimes(1);
-    expect(accessSpy.mock.calls[0][0]).toBe('./package.json');
-    accessSpy.mockClear();
+  test('can handle an error when deleting a directory', async () => {
+    const rmSpy = rmSpyFactory(new Error('Some weird error!'));
+    await expect(Service.deleteDirectory('./non-existent')).rejects.toThrow('Some weird error!');
+    expect(rmSpy).toHaveBeenCalledTimes(1);
+    expect(rmSpy.mock.calls[0][0]).toBe('./non-existent');
+    expect(rmSpy.mock.calls[0][1]).toStrictEqual({ force: true, recursive: true });
+    rmSpy.mockClear();
   });
-}); */
+
+  test('can delete a directory', async () => {
+    const rmSpy = rmSpyFactory(null);
+    await expect(Service.deleteDirectory('./existent')).resolves.toBe(undefined);
+    expect(rmSpy).toHaveBeenCalledTimes(1);
+    expect(rmSpy.mock.calls[0][0]).toBe('./existent');
+    expect(rmSpy.mock.calls[0][1]).toStrictEqual({ force: true, recursive: true });
+    rmSpy.mockClear();
+  });
+});
