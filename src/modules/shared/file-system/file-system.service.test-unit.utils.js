@@ -1,0 +1,87 @@
+/* eslint-disable no-undef */
+import fs from 'fs';
+import pathHelper from 'path';
+
+
+
+/**
+ * Spy Factories
+ */
+const accessSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'access').mockImplementation(
+  (path, callback) => callback(cbReturnVal),
+);
+
+const lstatSpyFactory = (cbReturnVals) => {
+  const mock = jest.spyOn(fs, 'lstat');
+  cbReturnVals.forEach(
+    (cbVal) => mock.mockImplementationOnce((path, callback) => callback(null, cbVal)),
+  );
+  return mock;
+};
+
+const readdirSpyFactory = (
+  cbReturnError,
+  cbReturnVal = undefined,
+) => jest.spyOn(fs, 'readdir').mockImplementation(
+  (path, callback) => callback(cbReturnError, cbReturnVal),
+);
+
+const rmSpyFactory = (cbReturnError) => jest.spyOn(fs, 'rm').mockImplementation(
+  (path, options, callback) => callback(cbReturnError),
+);
+
+
+
+/**
+ * Misc Test Helpers
+ */
+const buildFileSystemElement = (path, isFile, creation) => ({
+  path,
+  baseName: pathHelper.basename(path),
+  ext: pathHelper.extname(path),
+  isFile,
+  creation,
+});
+
+const validateSpyInteractions = (
+  expectFunc,
+  spyFunc,
+  calledTimes,
+  callArgs = [],
+  clearMock = true,
+) => {
+  expectFunc(spyFunc).toHaveBeenCalledTimes(calledTimes);
+
+  // if the spy was invoked with arguments, ensure the correct ones were used.
+  // additionally, if a single func was invoked with multiple arguments, iterate over the inner args
+  // and evaluate them independently
+  if (Array.isArray(callArgs) && callArgs.length) {
+    callArgs.forEach((arg, index) => {
+      if (Array.isArray(arg)) {
+        arg.forEach((innerArg, innerIndex) => {
+          expectFunc(spyFunc.mock.calls[index][innerIndex]).toStrictEqual(innerArg);
+        });
+      } else {
+        expectFunc(spyFunc.mock.calls[index][0]).toStrictEqual(arg);
+      }
+    });
+  }
+  if (clearMock) spyFunc.mockClear();
+};
+
+
+
+/**
+ * Module Exports
+ */
+export {
+  // spy factories
+  accessSpyFactory,
+  lstatSpyFactory,
+  readdirSpyFactory,
+  rmSpyFactory,
+
+  // misc test helpers
+  buildFileSystemElement,
+  validateSpyInteractions,
+};

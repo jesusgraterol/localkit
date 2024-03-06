@@ -1,45 +1,15 @@
-import fs from 'fs';
-import pathHelper from 'path';
 import Service from './file-system.service.js';
+import {
+  // spy factories
+  accessSpyFactory,
+  lstatSpyFactory,
+  readdirSpyFactory,
+  rmSpyFactory,
 
-
-
-
-/**
- * Spy Factories
- */
-const accessSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'access').mockImplementation(
-  (path, callback) => callback(cbReturnVal),
-);
-const lstatSpyFactory = (cbReturnVals) => {
-  const mock = jest.spyOn(fs, 'lstat');
-  cbReturnVals.forEach(
-    (cbVal) => mock.mockImplementationOnce((path, callback) => callback(null, cbVal)),
-  );
-  return mock;
-};
-const readdirSpyFactory = (
-  cbReturnError,
-  cbReturnVal = undefined,
-) => jest.spyOn(fs, 'readdir').mockImplementation(
-  (path, callback) => callback(cbReturnError, cbReturnVal),
-);
-const rmSpyFactory = (cbReturnError) => jest.spyOn(fs, 'rm').mockImplementation(
-  (path, options, callback) => callback(cbReturnError),
-);
-
-
-
-/**
- * Misc Test Helpers
- */
-const buildFileSystemElement = (path, isFile, creation) => ({
-  path,
-  baseName: pathHelper.basename(path),
-  ext: pathHelper.extname(path),
-  isFile,
-  creation,
-});
+  // misc test helpers
+  buildFileSystemElement,
+  validateSpyInteractions,
+} from './file-system.service.test-unit.utils.js';
 
 
 
@@ -56,25 +26,19 @@ describe('General Management', () => {
   test('can identify when a path does not exist', async () => {
     const accessSpy = accessSpyFactory(new Error('The path does not exist!'));
     expect(await Service.pathExists('./package.json')).toBe(false);
-    expect(accessSpy).toHaveBeenCalledTimes(1);
-    expect(accessSpy.mock.calls[0][0]).toBe('./package.json');
-    accessSpy.mockClear();
+    validateSpyInteractions(expect, accessSpy, 1, ['./package.json']);
   });
 
   test('can identify when a path exists', async () => {
     const accessSpy = accessSpyFactory(null);
     expect(await Service.pathExists('./package.json')).toBe(true);
-    expect(accessSpy).toHaveBeenCalledTimes(1);
-    expect(accessSpy.mock.calls[0][0]).toBe('./package.json');
-    accessSpy.mockClear();
+    validateSpyInteractions(expect, accessSpy, 1, ['./package.json']);
   });
 
   test('throws an error if the path is not a directory', async () => {
     const readdirSpy = readdirSpyFactory(new Error('Error: ENOTDIR: not a directory, scandir'));
     await expect(() => Service.readPathContent('./nonexistentdir')).rejects.toThrow('ENOTDIR');
-    expect(readdirSpy).toHaveBeenCalledTimes(1);
-    expect(readdirSpy.mock.calls[0][0]).toBe('./nonexistentdir');
-    readdirSpy.mockClear();
+    validateSpyInteractions(expect, readdirSpy, 1, ['./nonexistentdir']);
   });
 
   test('can read an empty directory', async () => {
@@ -83,9 +47,7 @@ describe('General Management', () => {
       directories: [],
       files: [],
     });
-    expect(readdirSpy).toHaveBeenCalledTimes(1);
-    expect(readdirSpy.mock.calls[0][0]).toBe('./realdir');
-    readdirSpy.mockClear();
+    validateSpyInteractions(expect, readdirSpy, 1, ['./realdir']);
   });
 
   test('can read a directory with files and directories in it', async () => {
@@ -104,12 +66,8 @@ describe('General Management', () => {
       directories: [els[0]],
       files: [els[3], els[1], els[2]],
     });
-    expect(readdirSpy).toHaveBeenCalledTimes(1);
-    expect(readdirSpy.mock.calls[0][0]).toBe('./realdir');
-    expect(lstatSpy).toHaveBeenCalledTimes(4);
-    els.forEach((el, index) => expect(lstatSpy.mock.calls[index][0]).toBe(el.path));
-    readdirSpy.mockClear();
-    lstatSpy.mockClear();
+    validateSpyInteractions(expect, readdirSpy, 1, ['./realdir']);
+    validateSpyInteractions(expect, lstatSpy, 4, els.map((el) => el.path));
   });
 
   test('can read a directory and filter files by extension', async () => {
@@ -127,12 +85,8 @@ describe('General Management', () => {
       directories: [],
       files: [els[0]],
     });
-    expect(readdirSpy).toHaveBeenCalledTimes(1);
-    expect(readdirSpy.mock.calls[0][0]).toBe('./realdir');
-    expect(lstatSpy).toHaveBeenCalledTimes(3);
-    els.forEach((el, index) => expect(lstatSpy.mock.calls[index][0]).toBe(el.path));
-    readdirSpy.mockClear();
-    lstatSpy.mockClear();
+    validateSpyInteractions(expect, readdirSpy, 1, ['./realdir']);
+    validateSpyInteractions(expect, lstatSpy, 3, els.map((el) => el.path));
   });
 });
 
@@ -152,18 +106,12 @@ describe('Directory Management', () => {
   test('can handle an error when deleting a directory', async () => {
     const rmSpy = rmSpyFactory(new Error('Some weird error!'));
     await expect(Service.deleteDirectory('./non-existent')).rejects.toThrow('Some weird error!');
-    expect(rmSpy).toHaveBeenCalledTimes(1);
-    expect(rmSpy.mock.calls[0][0]).toBe('./non-existent');
-    expect(rmSpy.mock.calls[0][1]).toStrictEqual({ force: true, recursive: true });
-    rmSpy.mockClear();
+    validateSpyInteractions(expect, rmSpy, 1, [['./non-existent', { force: true, recursive: true }]]);
   });
 
   test('can delete a directory', async () => {
     const rmSpy = rmSpyFactory(null);
     await expect(Service.deleteDirectory('./existent')).resolves.toBe(undefined);
-    expect(rmSpy).toHaveBeenCalledTimes(1);
-    expect(rmSpy.mock.calls[0][0]).toBe('./existent');
-    expect(rmSpy.mock.calls[0][1]).toStrictEqual({ force: true, recursive: true });
-    rmSpy.mockClear();
+    validateSpyInteractions(expect, rmSpy, 1, [['./existent', { force: true, recursive: true }]]);
   });
 });
