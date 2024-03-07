@@ -51,7 +51,7 @@ const utilitiesFactory = () => {
    * @returns string
    */
   const buildCLIHeader = (version) => {
-    let header = 'LOCALKIT';
+    let header = 'localkit';
     if (typeof version === 'string') {
       header += ` v${version}`;
     }
