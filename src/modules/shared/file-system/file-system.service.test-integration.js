@@ -117,6 +117,20 @@ describe('Directory Management', () => {
     expect(await FileSystemService.pathExists(path)).toBe(false);
   });
 
+
+  test('can override an existing dir:', async () => {
+    const path = `${basePath}/to-be-deleted-dir`;
+    await FileSystemService.makeDirectory(path);
+    await FileSystemService.makeDirectory(`${path}/temp-dir`);
+    expect(await FileSystemService.pathExists(path)).toBe(true);
+    expect(await FileSystemService.pathExists(`${path}/temp-dir`)).toBe(true);
+
+    await FileSystemService.makeDirectory(path);
+    expect(await FileSystemService.pathExists(path)).toBe(true);
+    expect(await FileSystemService.pathExists(`${path}/temp-dir`)).toBe(false);
+  });
+
+
   test('can create a tree of nested directories and files. Then delete the parent node:', async () => {
     const path = `${basePath}/dir-tree`;
     await FileSystemService.makeDirectory(path);
@@ -191,6 +205,13 @@ describe('File Management', () => {
     await FileSystemService.writeFile(path, content);
     expect(await FileSystemService.pathExists(path)).toBe(true);
     expect(await FileSystemService.readFile(path)).toEqual(content);
+  });
+
+  test('throws an error if tries to read a file that does not exist', async () => {
+    const path = `${basePath}/non-existent.txt`;
+    await expect(
+      () => FileSystemService.readFile(path),
+    ).rejects.toThrow(`The file ${path} does not exist.`);
   });
 
   test('can write a file and delete it afterwards', async () => {

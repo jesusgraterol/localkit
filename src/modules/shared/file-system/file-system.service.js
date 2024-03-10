@@ -149,8 +149,7 @@ const fileSystemServiceFactory = () => {
    */
   const makeDirectory = async (path) => {
     // if the directory exists, delete it first
-    const exists = await pathExists(path);
-    if (exists) await deleteDirectory(path);
+    if (await pathExists(path)) await deleteDirectory(path);
 
     // create the directory
     return new Promise((resolve, reject) => {
@@ -211,10 +210,7 @@ const fileSystemServiceFactory = () => {
    */
   const readFile = async (filePath) => {
     // ensure the file exists
-    const exists = await pathExists(filePath);
-    if (!exists) {
-      throw new Error(`The file ${filePath} does not exist.`);
-    }
+    if (!await pathExists(filePath)) throw new Error(`The file ${filePath} does not exist.`);
 
     // init the file extension
     const ext = pathHelper.extname(filePath);
