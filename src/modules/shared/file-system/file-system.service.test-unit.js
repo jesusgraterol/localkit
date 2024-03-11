@@ -5,6 +5,10 @@ import {
   lstatSpyFactory,
   readdirSpyFactory,
   rmSpyFactory,
+  mkdirSpyFactory,
+
+  // mocked module factory
+  mockedModuleFactory,
 
   // misc test helpers
   buildFileSystemElement,
@@ -97,9 +101,13 @@ describe('General Management', () => {
 describe('Directory Management', () => {
   beforeAll(() => { });
 
-  afterAll(() => { });
+  afterAll(() => {
+    jest.resetModules();
+  });
 
-  beforeEach(() => { });
+  beforeEach(() => {
+    jest.resetModules();
+  });
 
   afterEach(() => { });
 
@@ -113,5 +121,28 @@ describe('Directory Management', () => {
     const rmSpy = rmSpyFactory(null);
     await expect(Service.deleteDirectory('./existent')).resolves.toBe(undefined);
     validateSpyInteractions(expect, rmSpy, 1, [['./existent', { force: true, recursive: true }]]);
+  });
+
+  test('if a directory will be created at an empty path, it does not attempt to delete it', async () => {
+    const MockedService = await mockedModuleFactory({
+      pathExists: jest.fn(() => Promise.resolve(false)),
+      deleteDirectory: jest.fn(() => Promise.resolve()),
+    });
+    console.log(MockedService);
+    const pathExistsSpy = jest.spyOn(MockedService, 'pathExists').mockImplementation(
+      (path) => {
+        console.log('Inside pathExistsSpy!!!!');
+        Promise.resolve(false);
+      },
+    );
+    const deleteDirectorySpy = jest.spyOn(MockedService, 'deleteDirectory').mockImplementation(
+      (path) => Promise.resolve(),
+    );
+    const mkdirSpy = mkdirSpyFactory(null);
+
+    await expect(MockedService.makeDirectory('./non-existent')).resolves.toBe(undefined);
+    expect(pathExistsSpy).toHaveBeenNthCalledWith(1, './non-existent');
+    expect(deleteDirectorySpy).not.toHaveBeenCalled();
+    validateSpyInteractions(expect, mkdirSpy, 1, [['./non-existent']]);
   });
 });
