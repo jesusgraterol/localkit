@@ -122,9 +122,8 @@ describe('Directory Management', () => {
     const mkdirSpy = mkdirSpyFactory(null);
     await expect(Service.makeDirectory('./non-existent')).resolves.toBe(undefined);
     validateSpyInteractions(expect, accessSpy, 1, [['./non-existent']]);
-    expect(rmSpy).not.toHaveBeenCalled();
+    validateSpyInteractions(expect, rmSpy, 0, []);
     validateSpyInteractions(expect, mkdirSpy, 1, [['./non-existent']]);
-    rmSpy.mockClear();
   });
 
   test('if a directory will be created at a non-empty path, it deletes the directory prior to creating the new one', async () => {

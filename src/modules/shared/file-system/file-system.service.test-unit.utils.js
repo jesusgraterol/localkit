@@ -59,7 +59,7 @@ const validateSpyInteractions = (
   // if the spy was invoked with arguments, ensure the correct ones were used.
   // additionally, if a single func was invoked with multiple arguments, iterate over the inner args
   // and evaluate them independently
-  if (Array.isArray(callArgs) && callArgs.length) {
+  if (calledTimes > 0 && Array.isArray(callArgs) && callArgs.length) {
     callArgs.forEach((arg, index) => {
       if (Array.isArray(arg)) {
         arg.forEach((innerArg, innerIndex) => {
