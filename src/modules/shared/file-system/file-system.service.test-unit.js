@@ -7,9 +7,6 @@ import {
   rmSpyFactory,
   mkdirSpyFactory,
 
-  // mocked module factory
-  mockedModuleFactory,
-
   // misc test helpers
   buildFileSystemElement,
   validateSpyInteractions,
@@ -101,13 +98,9 @@ describe('General Management', () => {
 describe('Directory Management', () => {
   beforeAll(() => { });
 
-  afterAll(() => {
-    jest.resetModules();
-  });
+  afterAll(() => { });
 
-  beforeEach(() => {
-    jest.resetModules();
-  });
+  beforeEach(() => { });
 
   afterEach(() => { });
 
@@ -124,25 +117,23 @@ describe('Directory Management', () => {
   });
 
   test('if a directory will be created at an empty path, it does not attempt to delete it', async () => {
-    const MockedService = await mockedModuleFactory({
-      pathExists: jest.fn(() => Promise.resolve(false)),
-      deleteDirectory: jest.fn(() => Promise.resolve()),
-    });
-    console.log(MockedService);
-    const pathExistsSpy = jest.spyOn(MockedService, 'pathExists').mockImplementation(
-      (path) => {
-        console.log('Inside pathExistsSpy!!!!');
-        Promise.resolve(false);
-      },
-    );
-    const deleteDirectorySpy = jest.spyOn(MockedService, 'deleteDirectory').mockImplementation(
-      (path) => Promise.resolve(),
-    );
+    const accessSpy = accessSpyFactory(new Error('Non existent path!'));
+    const rmSpy = rmSpyFactory(null);
     const mkdirSpy = mkdirSpyFactory(null);
-
-    await expect(MockedService.makeDirectory('./non-existent')).resolves.toBe(undefined);
-    expect(pathExistsSpy).toHaveBeenNthCalledWith(1, './non-existent');
-    expect(deleteDirectorySpy).not.toHaveBeenCalled();
+    await expect(Service.makeDirectory('./non-existent')).resolves.toBe(undefined);
+    validateSpyInteractions(expect, accessSpy, 1, [['./non-existent']]);
+    expect(rmSpy).not.toHaveBeenCalled();
     validateSpyInteractions(expect, mkdirSpy, 1, [['./non-existent']]);
+    rmSpy.mockClear();
+  });
+
+  test('if a directory will be created at a non-empty path, it deletes the directory prior to creating the new one', async () => {
+    const accessSpy = accessSpyFactory(null);
+    const rmSpy = rmSpyFactory(null);
+    const mkdirSpy = mkdirSpyFactory(null);
+    await expect(Service.makeDirectory('./existent')).resolves.toBe(undefined);
+    validateSpyInteractions(expect, accessSpy, 1, [['./existent']]);
+    validateSpyInteractions(expect, rmSpy, 1, [['./existent']]);
+    validateSpyInteractions(expect, mkdirSpy, 1, [['./existent']]);
   });
 });

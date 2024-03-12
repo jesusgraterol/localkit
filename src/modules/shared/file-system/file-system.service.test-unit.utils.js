@@ -35,22 +35,6 @@ const mkdirSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'mkdir').mockImplementat
 );
 
 
-/**
- * Mocked Module Factory
- */
-const mockedModuleFactory = (mockedMethods) => {
-  jest.mock('./file-system.service.js', () => {
-    const originalModule = jest.requireActual('./file-system.service.js');
-    return {
-      __esModule: true,
-      ...originalModule.default,
-      //...mockedMethods,
-    };
-  });
-  return import('./file-system.service.js');
-};
-
-
 
 /**
  * Misc Test Helpers
@@ -102,9 +86,6 @@ export {
   readdirSpyFactory,
   rmSpyFactory,
   mkdirSpyFactory,
-
-  // mocked module factory
-  mockedModuleFactory,
 
   // misc test helpers
   buildFileSystemElement,
