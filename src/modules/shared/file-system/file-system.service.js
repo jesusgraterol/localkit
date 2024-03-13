@@ -175,19 +175,21 @@ const fileSystemServiceFactory = () => {
    * it will be stringified prior to saving it.
    * @param {*} filePath
    * @param {*} data
+   * @param {?} options
    * @returns Promise<void>
    */
-  const writeFile = (filePath, data) => {
-    // init the file extension
-    const ext = pathHelper.extname(filePath);
-
+  const writeFile = (filePath, data, options = {}) => {
     // if it is a json file and the provided data is an object, stringify it. Otherwise, leave it
-    const content = ext === '.json' && typeof data === 'object' ? JSON.stringify(data) : data;
+    const content = pathHelper.extname(filePath) === '.json' && typeof data === 'object'
+      ? JSON.stringify(data)
+      : data;
+
+    // create a local copy of the options
+    const opts = { ...options };
 
     // if the data is not a Buffer, set the encoding standard to be used
-    let opts;
     if (!Buffer.isBuffer(content)) {
-      opts = { encoding: 'utf-8' };
+      opts.encoding = 'utf-8';
     }
 
     // write the file to disk

@@ -34,6 +34,10 @@ const mkdirSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'mkdir').mockImplementat
   (path, callback) => callback(cbReturnVal),
 );
 
+const writeFileSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'writeFile').mockImplementation(
+  (path, content, options, callback) => callback(cbReturnVal),
+);
+
 
 
 /**
@@ -86,6 +90,7 @@ export {
   readdirSpyFactory,
   rmSpyFactory,
   mkdirSpyFactory,
+  writeFileSpyFactory,
 
   // misc test helpers
   buildFileSystemElement,
