@@ -17,9 +17,10 @@ module.exports = {
       },
     },
     {
-      files: ['*.test-unit.js', '*.test-integration.js'],
+      files: ['*.test-*.js'],
       rules: {
-        'no-undef': 'off',
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+        'object-curly-newline': 'off',
       },
     },
   ],

@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+import { jest } from '@jest/globals';
 import fs from 'fs';
 import pathHelper from 'path';
 

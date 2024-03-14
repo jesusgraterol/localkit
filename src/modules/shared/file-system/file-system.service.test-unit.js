@@ -1,3 +1,4 @@
+import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect } from '@jest/globals';
 import { Buffer } from 'node:buffer';
 import Service from './file-system.service.js';
 import {
@@ -142,8 +143,7 @@ describe('Directory Management', () => {
 
 
 
-
-describe('File Management / writeFile', () => {
+describe('File Management', () => {
   beforeAll(() => { });
 
   afterAll(() => { });
@@ -152,27 +152,37 @@ describe('File Management / writeFile', () => {
 
   afterEach(() => { });
 
-  test('can write a file with standard text', async () => {
-    const writeFileSpy = writeFileSpyFactory();
-    await expect(Service.writeFile('./existent.txt', 'Hello!')).resolves.toBe(undefined);
-    validateSpyInteractions(expect, writeFileSpy, 1, [['./existent.txt', 'Hello!', { encoding: 'utf-8' }]]);
-  });
+  describe('writeFile', () => {
+    beforeAll(() => { });
 
-  test('can write a file with JSON data (the content is automatically stringified)', async () => {
-    const writeFileSpy = writeFileSpyFactory();
-    await expect(Service.writeFile('./existent.json', { x: 'Hi!' })).resolves.toBe(undefined);
-    validateSpyInteractions(expect, writeFileSpy, 1, [['./existent.json', JSON.stringify({ x: 'Hi!' }), { encoding: 'utf-8' }]]);
-  });
+    afterAll(() => { });
 
-  test('can write a file with Buffer data', async () => {
-    const writeFileSpy = writeFileSpyFactory();
-    await expect(Service.writeFile('./existent', Buffer.from('Hi!'))).resolves.toBe(undefined);
-    validateSpyInteractions(expect, writeFileSpy, 1, [['./existent', Buffer.from('Hi!'), {}]]);
-  });
+    beforeEach(() => { });
 
-  test('can handle an error when writing a file', async () => {
-    const writeFileSpy = writeFileSpyFactory(new Error('Ops! There was an error!'));
-    await expect(Service.writeFile('./wrong-file', '')).rejects.toThrow('Ops! There was an error!');
-    validateSpyInteractions(expect, writeFileSpy, 1, [['./wrong-file', '', { encoding: 'utf-8' }]]);
+    afterEach(() => { });
+
+    test('can write a file with standard text', async () => {
+      const writeFileSpy = writeFileSpyFactory();
+      await expect(Service.writeFile('./existent.txt', 'Hello!')).resolves.toBe(undefined);
+      validateSpyInteractions(expect, writeFileSpy, 1, [['./existent.txt', 'Hello!', { encoding: 'utf-8' }]]);
+    });
+
+    test('can write a file with JSON data (the content is automatically stringified)', async () => {
+      const writeFileSpy = writeFileSpyFactory();
+      await expect(Service.writeFile('./existent.json', { x: 'Hi!' })).resolves.toBe(undefined);
+      validateSpyInteractions(expect, writeFileSpy, 1, [['./existent.json', JSON.stringify({ x: 'Hi!' }), { encoding: 'utf-8' }]]);
+    });
+
+    test('can write a file with Buffer data', async () => {
+      const writeFileSpy = writeFileSpyFactory();
+      await expect(Service.writeFile('./existent', Buffer.from('Hi!'))).resolves.toBe(undefined);
+      validateSpyInteractions(expect, writeFileSpy, 1, [['./existent', Buffer.from('Hi!'), {}]]);
+    });
+
+    test('can handle an error when writing a file', async () => {
+      const writeFileSpy = writeFileSpyFactory(new Error('Ops! There was an error!'));
+      await expect(Service.writeFile('./wrong-file', '')).rejects.toThrow('Ops! There was an error!');
+      validateSpyInteractions(expect, writeFileSpy, 1, [['./wrong-file', '', { encoding: 'utf-8' }]]);
+    });
   });
 });
