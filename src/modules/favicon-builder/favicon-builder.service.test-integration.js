@@ -1,7 +1,26 @@
+import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
 import Utilities from '../shared/utilities/utilities.js';
 import FileSystemService from '../shared/file-system/file-system.service.js';
 import FaviconBuilderService from './favicon-builder.service.js';
 import CONFIG from './favicon-builder.config.js';
+
+/**
+ * Favicon Builder Config Mock
+ * Since the number of assets that are generated is significant, it will be reduced to only
+ * generating the first and last images.
+ */
+jest.mock('./favicon-builder.config.js', () => {
+  const originalModule = jest.requireActual('./favicon-builder.config.js');
+  return {
+    __esModule: true,
+    default: {
+      outputDimensions: [
+        originalModule.default.outputDimensions[0],
+        originalModule.default.outputDimensions.at(-1),
+      ],
+    },
+  };
+});
 
 
 describe('Build Process', () => {

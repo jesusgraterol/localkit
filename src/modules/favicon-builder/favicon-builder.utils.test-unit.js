@@ -1,3 +1,4 @@
+import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
 import sharp from 'sharp';
 import Utilities from '../shared/utilities/utilities.js';
 import FaviconBuilderUtils from './favicon-builder.utils.js';
