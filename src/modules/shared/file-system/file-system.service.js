@@ -214,9 +214,6 @@ const fileSystemServiceFactory = () => {
     // ensure the file exists
     if (!await pathExists(filePath)) throw new Error(`The file ${filePath} does not exist.`);
 
-    // init the file extension
-    const ext = pathHelper.extname(filePath);
-
     // read it and return its contents
     return new Promise((resolve, reject) => {
       fs.readFile(filePath, (err, data) => {
@@ -225,7 +222,7 @@ const fileSystemServiceFactory = () => {
         } else {
           // init the file's content and parse it if it is JSON. Otherwise, return it as is
           const content = data.toString();
-          resolve(ext === '.json' ? JSON.parse(content) : content);
+          resolve(pathHelper.extname(filePath) === '.json' ? JSON.parse(content) : content);
         }
       });
     });

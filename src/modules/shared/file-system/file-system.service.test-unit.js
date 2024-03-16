@@ -9,6 +9,7 @@ import {
   rmSpyFactory,
   mkdirSpyFactory,
   writeFileSpyFactory,
+  readFileSpyFactory,
 
   // misc test helpers
   buildFileSystemElement,
@@ -183,6 +184,50 @@ describe('File Management', () => {
       const writeFileSpy = writeFileSpyFactory(new Error('Ops! There was an error!'));
       await expect(Service.writeFile('./wrong-file', '')).rejects.toThrow('Ops! There was an error!');
       validateSpyInteractions(expect, writeFileSpy, 1, [['./wrong-file', '', { encoding: 'utf-8' }]]);
+    });
+  });
+
+  describe('readFile', () => {
+    beforeAll(() => { });
+
+    afterAll(() => { });
+
+    beforeEach(() => { });
+
+    afterEach(() => { });
+
+    test('cannot read a file that does not exist', async () => {
+      const accessSpy = accessSpyFactory(new Error('Does not exist!'));
+      await expect(
+        Service.readFile('./non-existent.txt'),
+      ).rejects.toThrow('The file ./non-existent.txt does not exist.');
+      validateSpyInteractions(expect, accessSpy, 1, [['./non-existent.txt']]);
+    });
+
+    test('if an error is thrown when handling a file, it is properly handled', async () => {
+      const accessSpy = accessSpyFactory(null);
+      const readFileSpy = readFileSpyFactory(new Error('Disk Failure!'));
+      await expect(Service.readFile('./existent.txt')).rejects.toThrow('Disk Failure!');
+      validateSpyInteractions(expect, accessSpy, 1, [['./existent.txt']]);
+      validateSpyInteractions(expect, readFileSpy, 1, [['./existent.txt']]);
+    });
+
+    test('can successfully read a file and return its contents as a String', async () => {
+      const accessSpy = accessSpyFactory(null);
+      const content = { toString: () => 'File Content!' };
+      const readFileSpy = readFileSpyFactory(null, content);
+      await expect(Service.readFile('./existent.txt')).resolves.toBe(content.toString());
+      validateSpyInteractions(expect, accessSpy, 1, [['./existent.txt']]);
+      validateSpyInteractions(expect, readFileSpy, 1, [['./existent.txt']]);
+    });
+
+    test('if reading a json file, it resolves the parsed contents', async () => {
+      const accessSpy = accessSpyFactory(null);
+      const content = { foo: 'abc', bar: 123 };
+      const readFileSpy = readFileSpyFactory(null, JSON.stringify(content));
+      await expect(Service.readFile('./existent.json')).resolves.toEqual(content);
+      validateSpyInteractions(expect, accessSpy, 1, [['./existent.json']]);
+      validateSpyInteractions(expect, readFileSpy, 1, [['./existent.json']]);
     });
   });
 });
