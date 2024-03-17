@@ -10,6 +10,7 @@ import {
   mkdirSpyFactory,
   writeFileSpyFactory,
   readFileSpyFactory,
+  unlinkSpyFactory,
 
   // misc test helpers
   buildFileSystemElement,
@@ -228,6 +229,29 @@ describe('File Management', () => {
       await expect(Service.readFile('./existent.json')).resolves.toEqual(content);
       validateSpyInteractions(expect, accessSpy, 1, [['./existent.json']]);
       validateSpyInteractions(expect, readFileSpy, 1, [['./existent.json']]);
+    });
+  });
+
+
+  describe('deleteFile', () => {
+    beforeAll(() => { });
+
+    afterAll(() => { });
+
+    beforeEach(() => { });
+
+    afterEach(() => { });
+
+    test('can handle an error when attempting to delete a file', async () => {
+      const unlinkSpy = unlinkSpyFactory(new Error('Some nasty error!'));
+      await expect(Service.deleteFile('./some-file.txt')).rejects.toThrow('Some nasty error!');
+      validateSpyInteractions(expect, unlinkSpy, 1, [['./some-file.txt']]);
+    });
+
+    test('can delete a file', async () => {
+      const unlinkSpy = unlinkSpyFactory(null);
+      await expect(Service.deleteFile('./some-file.txt')).resolves.toBeUndefined();
+      validateSpyInteractions(expect, unlinkSpy, 1, [['./some-file.txt']]);
     });
   });
 });
