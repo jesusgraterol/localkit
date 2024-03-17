@@ -11,6 +11,7 @@ import {
   writeFileSpyFactory,
   readFileSpyFactory,
   unlinkSpyFactory,
+  copyFileSpyFactory,
 
   // misc test helpers
   buildFileSystemElement,
@@ -232,7 +233,6 @@ describe('File Management', () => {
     });
   });
 
-
   describe('deleteFile', () => {
     beforeAll(() => { });
 
@@ -252,6 +252,28 @@ describe('File Management', () => {
       const unlinkSpy = unlinkSpyFactory(null);
       await expect(Service.deleteFile('./some-file.txt')).resolves.toBeUndefined();
       validateSpyInteractions(expect, unlinkSpy, 1, [['./some-file.txt']]);
+    });
+  });
+
+  describe('copyFile', () => {
+    beforeAll(() => { });
+
+    afterAll(() => { });
+
+    beforeEach(() => { });
+
+    afterEach(() => { });
+
+    test('can handle an error when attempting to copy a file', async () => {
+      const copySpy = copyFileSpyFactory(new Error('Some nasty error!'));
+      await expect(Service.copyFile('./some-file.txt', './other-file.txt')).rejects.toThrow('Some nasty error!');
+      validateSpyInteractions(expect, copySpy, 1, [['./some-file.txt', './other-file.txt']]);
+    });
+
+    test('can copy a file', async () => {
+      const copySpy = copyFileSpyFactory(null);
+      await expect(Service.copyFile('./some-file.txt', './other-file.txt')).resolves.toBeUndefined();
+      validateSpyInteractions(expect, copySpy, 1, [['./some-file.txt', './other-file.txt']]);
     });
   });
 });

@@ -49,6 +49,11 @@ const unlinkSpyFactory = (cbReturnError) => jest.spyOn(fs, 'unlink').mockImpleme
   (path, callback) => callback(cbReturnError),
 );
 
+const copyFileSpyFactory = (cbReturnError) => jest.spyOn(fs, 'copyFile').mockImplementation(
+  (originPath, destinationPath, callback) => callback(cbReturnError),
+);
+
+
 
 
 /**
@@ -104,6 +109,7 @@ export {
   writeFileSpyFactory,
   readFileSpyFactory,
   unlinkSpyFactory,
+  copyFileSpyFactory,
 
   // misc test helpers
   buildFileSystemElement,
