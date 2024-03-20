@@ -24,6 +24,10 @@ const CONFIG = {
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
+    'apple-touch-icons': [
+      { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
+    ],
   },
 };
 

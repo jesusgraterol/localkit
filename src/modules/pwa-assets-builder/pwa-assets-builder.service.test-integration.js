@@ -1,4 +1,5 @@
 import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
+import Utilities from '../shared/utilities/utilities.js';
 import FileSystemService from '../shared/file-system/file-system.service.js';
 import CONFIG from './pwa-assets-builder.config.js';
 import Service from './pwa-assets-builder.service.js';
@@ -19,6 +20,10 @@ jest.mock('./pwa-assets-builder.config.js', () => {
         icons: [
           originalModule.default.output.icons[0],
           originalModule.default.output.icons.at(-1),
+        ],
+        'apple-touch-icons': [
+          originalModule.default.output['apple-touch-icons'][0],
+          originalModule.default.output['apple-touch-icons'].at(-1),
         ],
       },
     },
@@ -42,6 +47,18 @@ describe('Build Process', () => {
     await expect(FileSystemService.pathExists(id)).resolves.toBeTruthy();
     await expect(FileSystemService.pathExists(`${id}/source.png`)).resolves.toBeTruthy();
     await expect(FileSystemService.pathExists(outputPath)).resolves.toBeTruthy();
+
+    const assetsExistence = await Promise.all(Object.keys(CONFIG.output).reduce(
+      (prev, currentCat) => [
+        ...prev,
+        FileSystemService.pathExists(`${outputPath}/${currentCat}`),
+        ...CONFIG.output[currentCat].map((img) => FileSystemService.pathExists(
+          `${outputPath}/${currentCat}/${Utilities.prettifyImageDimensions(img.dimensions)}.png`,
+        )),
+      ],
+      [],
+    ));
+    expect(assetsExistence.every((exists) => exists === true)).toBeTruthy();
 
     await FileSystemService.deleteDirectory(id);
   });
