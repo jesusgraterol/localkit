@@ -28,6 +28,9 @@ const CONFIG = {
       { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
+    telegram: [
+      { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
+    ],
   },
 };
 
