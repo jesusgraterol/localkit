@@ -31,6 +31,9 @@ const CONFIG = {
     telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
     ],
+    facebook: [
+      { dimensions: { width: 720, height: 720 }, logoScale: 0.42 },
+    ],
   },
 };
 
