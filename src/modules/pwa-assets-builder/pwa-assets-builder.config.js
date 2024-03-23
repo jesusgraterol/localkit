@@ -34,6 +34,9 @@ const CONFIG = {
     facebook: [
       { dimensions: { width: 720, height: 720 }, logoScale: 0.42 },
     ],
+    instagram: [
+      { dimensions: { width: 1000, height: 1000 }, logoScale: 0.65 },
+    ],
   },
 };
 

@@ -17,6 +17,7 @@ jest.mock('./pwa-assets-builder.config.js', () => {
     default: {
       ...originalModule.default,
       output: {
+        ...originalModule.default.output,
         icons: [
           originalModule.default.output.icons[0],
           originalModule.default.output.icons.at(-1),
@@ -24,9 +25,6 @@ jest.mock('./pwa-assets-builder.config.js', () => {
         'apple-touch-icons': [
           originalModule.default.output['apple-touch-icons'][0],
           originalModule.default.output['apple-touch-icons'].at(-1),
-        ],
-        telegram: [
-          originalModule.default.output.telegram[0],
         ],
       },
     },
