@@ -40,6 +40,9 @@ const CONFIG = {
     instagram: [
       { dimensions: { width: 1000, height: 1000 }, logoScale: 0.65 },
     ],
+    linkedin: [
+      { dimensions: { width: 400, height: 400 }, logoScale: 0.24 },
+    ],
   },
 };
 
