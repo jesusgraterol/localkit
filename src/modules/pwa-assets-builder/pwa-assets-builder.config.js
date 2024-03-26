@@ -43,6 +43,9 @@ const CONFIG = {
     linkedin: [
       { dimensions: { width: 400, height: 400 }, logoScale: 0.24 },
     ],
+    twitter: [
+      { dimensions: { width: 400, height: 400 }, logoScale: 0.24 },
+    ],
   },
 };
 
