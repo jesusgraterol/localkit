@@ -46,6 +46,9 @@ const CONFIG = {
     twitter: [
       { dimensions: { width: 400, height: 400 }, logoScale: 0.24 },
     ],
+    whatsapp: [
+      { dimensions: { width: 500, height: 500 }, logoScale: 0.32 },
+    ],
   },
 };
 
