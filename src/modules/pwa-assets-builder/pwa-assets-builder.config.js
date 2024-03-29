@@ -43,6 +43,9 @@ const CONFIG = {
     linkedin: [
       { dimensions: { width: 400, height: 400 }, logoScale: 0.24 },
     ],
+    notification: [
+      { dimensions: { width: 256, height: 256 }, logoScale: 0.18 },
+    ],
     tiktok: [
       { dimensions: { width: 200, height: 200 }, logoScale: 0.12 },
     ],
