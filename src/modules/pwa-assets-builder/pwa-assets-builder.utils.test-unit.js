@@ -1,6 +1,7 @@
 import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
 import { Buffer } from 'node:buffer';
 import sharp from 'sharp';
+import MANIFEST_FILE from './manifest-template.js';
 import PWAAssetsBuilderUtils from './pwa-assets-builder.utils.js';
 
 
@@ -66,5 +67,43 @@ describe('Assets Build Utilities', () => {
     );
     expect(sharp).toHaveBeenCalledWith('fakePath.png');
     expect(MOCK_LOGO_IMAGE.equals(logoImage)).toBe(true);
+  });
+});
+
+
+
+
+
+describe('Manifest Build Utilities', () => {
+  beforeAll(() => { });
+
+  afterAll(() => {});
+
+  beforeEach(() => {});
+
+  afterEach(() => { });
+
+  test('can build the manifest file based on a list of icons', () => {
+    const manifest = PWAAssetsBuilderUtils.buildManifestFile([
+      { dimensions: { width: 48, height: 48 }, logoScale: 0.037 },
+      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
+    ]);
+    expect(manifest).toStrictEqual({
+      ...MANIFEST_FILE,
+      icons: [
+        {
+          src: 'pwa-assets/icons/48x48.png',
+          sizes: '48x48',
+          type: 'image/png',
+          purpose: 'any',
+        },
+        {
+          src: 'pwa-assets/icons/1024x1024.png',
+          sizes: '1024x1024',
+          type: 'image/png',
+          purpose: 'any',
+        },
+      ],
+    });
   });
 });

@@ -1,5 +1,6 @@
 import sharp from 'sharp';
 import Utilities from '../shared/utilities/utilities.js';
+import MANIFEST_FILE from './manifest-template.js';
 
 /**
  * PWA Assets Builder Utils Factory
@@ -86,6 +87,37 @@ const pwaAssetsBuilderUtilsFactory = () => {
 
 
 
+  /* **************************
+   * MANIFEST BUILD UTILITIES *
+   ************************** */
+
+  /**
+   * Builds the object for an icon that will be included in the manifest file.
+   * @param {*} icon
+   * @returns object
+   */
+  const __buildManifestIcon = (icon) => {
+    const dimStr = Utilities.prettifyImageDimensions(icon.dimensions);
+    return {
+      src: `pwa-assets/icons/${dimStr}.png`,
+      sizes: dimStr,
+      type: 'image/png',
+      purpose: 'any',
+    };
+  };
+
+  /**
+   * Builds the manifest file based on the template.
+   * @param {*} icons
+   * @returns object
+   */
+  const buildManifestFile = (icons) => ({
+    ...MANIFEST_FILE,
+    icons: icons.map(__buildManifestIcon),
+  });
+
+
+
 
   /* **************
    * MODULE BUILD *
@@ -95,6 +127,9 @@ const pwaAssetsBuilderUtilsFactory = () => {
     generateAssetName,
     generateBackgroundImage,
     generateLogoImage,
+
+    // manifest build utilities
+    buildManifestFile,
   });
 };
 
