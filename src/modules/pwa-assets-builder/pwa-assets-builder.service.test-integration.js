@@ -61,6 +61,8 @@ describe('Build Process', () => {
     ));
     expect(assetsExistence.every((exists) => exists === true)).toBeTruthy();
 
+    await expect(FileSystemService.pathExists(`${id}/manifest.webmanifest`)).resolves.toBeTruthy();
+
     await FileSystemService.deleteDirectory(id);
   });
 });
