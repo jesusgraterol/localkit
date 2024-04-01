@@ -87,9 +87,11 @@ describe('Manifest Build Utilities', () => {
     const manifest = PWAAssetsBuilderUtils.buildManifestFile([
       { dimensions: { width: 48, height: 48 }, logoScale: 0.037 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
-    ]);
+    ], '#0C0C0C');
     expect(manifest).toStrictEqual({
       ...MANIFEST_FILE,
+      theme_color: '#0C0C0C',
+      background_color: '#0C0C0C',
       icons: [
         {
           src: 'pwa-assets/icons/48x48.png',

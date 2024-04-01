@@ -109,10 +109,13 @@ const pwaAssetsBuilderUtilsFactory = () => {
   /**
    * Builds the manifest file based on the template.
    * @param {*} icons
+   * @param {*} backgroundColor
    * @returns object
    */
-  const buildManifestFile = (icons) => ({
+  const buildManifestFile = (icons, backgroundColor) => ({
     ...MANIFEST_FILE,
+    theme_color: backgroundColor,
+    background_color: backgroundColor,
     icons: icons.map(__buildManifestIcon),
   });
 
