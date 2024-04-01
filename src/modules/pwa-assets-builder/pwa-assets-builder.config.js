@@ -26,6 +26,10 @@ const CONFIG = {
     ],
     'apple-touch-icons': [
       { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+      { dimensions: { width: 20, height: 20 }, logoScale: 0.014 },
+      { dimensions: { width: 29, height: 29 }, logoScale: 0.022 },
+      { dimensions: { width: 32, height: 32 }, logoScale: 0.024 },
+      { dimensions: { width: 40, height: 40 }, logoScale: 0.030 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
     telegram: [

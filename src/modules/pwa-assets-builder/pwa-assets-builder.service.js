@@ -69,7 +69,7 @@ const pwaAssetsBuilderServiceFactory = () => {
    * @param {*} buildID
    * @returns Promise<void>
    */
-  const __buildManifestFile = (buildID, backgroundColor) => FileSystemService.writeFile(
+  const __buildAndSaveManifestFile = (buildID, backgroundColor) => FileSystemService.writeFile(
     `${buildID}/manifest.webmanifest`,
     JSON.stringify(
       PWAAssetsBuilderUtils.buildManifestFile(
@@ -117,7 +117,7 @@ const pwaAssetsBuilderServiceFactory = () => {
       )));
 
       // generate the manifest file
-      await __buildManifestFile(id, backgroundColor);
+      await __buildAndSaveManifestFile(id, backgroundColor);
 
       // generate the receipt
       // @TODO
