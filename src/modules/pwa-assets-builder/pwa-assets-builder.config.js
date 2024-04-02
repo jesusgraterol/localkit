@@ -30,9 +30,19 @@ const CONFIG = {
       { dimensions: { width: 29, height: 29 }, logoScale: 0.022 },
       { dimensions: { width: 32, height: 32 }, logoScale: 0.024 },
       { dimensions: { width: 40, height: 40 }, logoScale: 0.030 },
+      { dimensions: { width: 50, height: 50 }, logoScale: 0.037 },
+      { dimensions: { width: 57, height: 57 }, logoScale: 0.043 },
+      { dimensions: { width: 58, height: 58 }, logoScale: 0.043 },
+      { dimensions: { width: 60, height: 60 }, logoScale: 0.043 },
+      { dimensions: { width: 64, height: 64 }, logoScale: 0.043 },
+      { dimensions: { width: 72, height: 72 }, logoScale: 0.047 },
+      { dimensions: { width: 76, height: 76 }, logoScale: 0.049 },
+      { dimensions: { width: 80, height: 80 }, logoScale: 0.051 },
+      { dimensions: { width: 87, height: 87 }, logoScale: 0.053 },
+      { dimensions: { width: 100, height: 100 }, logoScale: 0.06 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
-    telegram: [
+    /*telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
     ],
     facebook: [
@@ -58,7 +68,7 @@ const CONFIG = {
     ],
     whatsapp: [
       { dimensions: { width: 500, height: 500 }, logoScale: 0.32 },
-    ],
+    ],*/
   },
 };
 
