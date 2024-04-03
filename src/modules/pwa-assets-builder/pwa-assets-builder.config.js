@@ -40,6 +40,13 @@ const CONFIG = {
       { dimensions: { width: 80, height: 80 }, logoScale: 0.051 },
       { dimensions: { width: 87, height: 87 }, logoScale: 0.053 },
       { dimensions: { width: 100, height: 100 }, logoScale: 0.06 },
+      { dimensions: { width: 114, height: 114 }, logoScale: 0.07 },
+      { dimensions: { width: 120, height: 120 }, logoScale: 0.072 },
+      { dimensions: { width: 128, height: 128 }, logoScale: 0.076 },
+      { dimensions: { width: 144, height: 144 }, logoScale: 0.087 },
+      { dimensions: { width: 152, height: 152 }, logoScale: 0.092 },
+      { dimensions: { width: 167, height: 167 }, logoScale: 0.105 },
+      { dimensions: { width: 180, height: 180 }, logoScale: 0.112 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
     /*telegram: [
