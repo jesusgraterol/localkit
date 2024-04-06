@@ -10,6 +10,14 @@ const CONFIG = {
   // The logo scale is a float and can range from 0 - 1
   output: {
     icons: [
+      { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+      { dimensions: { width: 20, height: 20 }, logoScale: 0.014 },
+      { dimensions: { width: 24, height: 24 }, logoScale: 0.016 },
+      { dimensions: { width: 30, height: 30 }, logoScale: 0.022 },
+      { dimensions: { width: 32, height: 32 }, logoScale: 0.024 },
+      { dimensions: { width: 36, height: 36 }, logoScale: 0.027 },
+      { dimensions: { width: 40, height: 40 }, logoScale: 0.030 },
+      { dimensions: { width: 44, height: 44 }, logoScale: 0.033 },
       { dimensions: { width: 48, height: 48 }, logoScale: 0.037 },
       { dimensions: { width: 72, height: 72 }, logoScale: 0.047 },
       { dimensions: { width: 96, height: 96 }, logoScale: 0.06 },
@@ -24,7 +32,7 @@ const CONFIG = {
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
-    'apple-touch-icons': [
+    /*'apple-touch-icons': [
       { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
       { dimensions: { width: 20, height: 20 }, logoScale: 0.014 },
       { dimensions: { width: 29, height: 29 }, logoScale: 0.022 },
@@ -51,7 +59,7 @@ const CONFIG = {
       { dimensions: { width: 256, height: 256 }, logoScale: 0.165 },
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
-    ],
+    ],*/
     /*telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
     ],
