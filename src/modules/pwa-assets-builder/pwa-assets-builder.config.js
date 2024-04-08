@@ -10,7 +10,7 @@ const CONFIG = {
   // The logo scale is a float and can range from 0 - 1
   output: {
     icons: [
-      { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+      /*{ dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
       { dimensions: { width: 20, height: 20 }, logoScale: 0.014 },
       { dimensions: { width: 24, height: 24 }, logoScale: 0.016 },
       { dimensions: { width: 30, height: 30 }, logoScale: 0.022 },
@@ -36,11 +36,21 @@ const CONFIG = {
       { dimensions: { width: 107, height: 107 }, logoScale: 0.066 },
       { dimensions: { width: 120, height: 120 }, logoScale: 0.072 },
       { dimensions: { width: 128, height: 128 }, logoScale: 0.076 },
+      { dimensions: { width: 142, height: 142 }, logoScale: 0.085 },
       { dimensions: { width: 144, height: 144 }, logoScale: 0.087 },
+      { dimensions: { width: 150, height: 150 }, logoScale: 0.090 },*/
       { dimensions: { width: 152, height: 152 }, logoScale: 0.092 },
       { dimensions: { width: 168, height: 168 }, logoScale: 0.105 },
+      { dimensions: { width: 176, height: 176 }, logoScale: 0.109 },
       { dimensions: { width: 180, height: 180 }, logoScale: 0.112 },
+      { dimensions: { width: 188, height: 188 }, logoScale: 0.118 },
       { dimensions: { width: 192, height: 192 }, logoScale: 0.12 },
+      { dimensions: { width: 200, height: 200 }, logoScale: 0.131 },
+      { dimensions: { width: 225, height: 225 }, logoScale: 0.142 },
+      { dimensions: { width: 256, height: 256 }, logoScale: 0.165 },
+      { dimensions: { width: 284, height: 284 }, logoScale: 0.187 },
+      { dimensions: { width: 300, height: 300 }, logoScale: 0.20 },
+      { dimensions: { width: 310, height: 150 }, logoScale: 0.09 },
       { dimensions: { width: 384, height: 384 }, logoScale: 0.24 },
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
