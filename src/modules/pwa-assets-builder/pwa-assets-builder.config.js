@@ -38,7 +38,7 @@ const CONFIG = {
       { dimensions: { width: 128, height: 128 }, logoScale: 0.076 },
       { dimensions: { width: 142, height: 142 }, logoScale: 0.085 },
       { dimensions: { width: 144, height: 144 }, logoScale: 0.087 },
-      { dimensions: { width: 150, height: 150 }, logoScale: 0.090 },*/
+      { dimensions: { width: 150, height: 150 }, logoScale: 0.090 },
       { dimensions: { width: 152, height: 152 }, logoScale: 0.092 },
       { dimensions: { width: 168, height: 168 }, logoScale: 0.105 },
       { dimensions: { width: 176, height: 176 }, logoScale: 0.109 },
@@ -50,9 +50,18 @@ const CONFIG = {
       { dimensions: { width: 256, height: 256 }, logoScale: 0.165 },
       { dimensions: { width: 284, height: 284 }, logoScale: 0.187 },
       { dimensions: { width: 300, height: 300 }, logoScale: 0.20 },
-      { dimensions: { width: 310, height: 150 }, logoScale: 0.09 },
+      { dimensions: { width: 310, height: 150 }, logoScale: 0.102 },
+      { dimensions: { width: 310, height: 310 }, logoScale: 0.208 },
       { dimensions: { width: 384, height: 384 }, logoScale: 0.24 },
+      { dimensions: { width: 388, height: 188 }, logoScale: 0.122 },
+      { dimensions: { width: 388, height: 388 }, logoScale: 0.26 },*/
+      { dimensions: { width: 465, height: 225 }, logoScale: 0.145 },
+      { dimensions: { width: 465, height: 465 }, logoScale: 0.29 },
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
+      { dimensions: { width: 600, height: 600 }, logoScale: 0.370 },
+      { dimensions: { width: 620, height: 300 }, logoScale: 0.20 },
+      { dimensions: { width: 620, height: 620 }, logoScale: 0.38 },
+
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
     /*'apple-touch-icons': [
