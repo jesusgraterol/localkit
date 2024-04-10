@@ -54,18 +54,22 @@ const CONFIG = {
       { dimensions: { width: 310, height: 310 }, logoScale: 0.208 },
       { dimensions: { width: 384, height: 384 }, logoScale: 0.24 },
       { dimensions: { width: 388, height: 188 }, logoScale: 0.122 },
-      { dimensions: { width: 388, height: 388 }, logoScale: 0.26 },*/
+      { dimensions: { width: 388, height: 388 }, logoScale: 0.26 },
       { dimensions: { width: 465, height: 225 }, logoScale: 0.145 },
       { dimensions: { width: 465, height: 465 }, logoScale: 0.29 },
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
       { dimensions: { width: 600, height: 600 }, logoScale: 0.370 },
       { dimensions: { width: 620, height: 300 }, logoScale: 0.20 },
       { dimensions: { width: 620, height: 620 }, logoScale: 0.38 },
-
+      { dimensions: { width: 775, height: 375 }, logoScale: 0.26 },
+      { dimensions: { width: 930, height: 450 }, logoScale: 0.31 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
+      { dimensions: { width: 1240, height: 600 }, logoScale: 0.40 },
+      { dimensions: { width: 1240, height: 1240 }, logoScale: 0.80 },
+      { dimensions: { width: 2480, height: 1200 }, logoScale: 0.83 },*/
     ],
-    /*'apple-touch-icons': [
-      { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+    'apple-touch-icons': [
+      /*{ dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
       { dimensions: { width: 20, height: 20 }, logoScale: 0.014 },
       { dimensions: { width: 29, height: 29 }, logoScale: 0.022 },
       { dimensions: { width: 32, height: 32 }, logoScale: 0.024 },
@@ -90,8 +94,8 @@ const CONFIG = {
       { dimensions: { width: 192, height: 192 }, logoScale: 0.12 },
       { dimensions: { width: 256, height: 256 }, logoScale: 0.165 },
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
-      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
-    ],*/
+      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },*/
+    ],
     /*telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
     ],
