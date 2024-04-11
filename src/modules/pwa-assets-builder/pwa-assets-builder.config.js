@@ -96,6 +96,9 @@ const CONFIG = {
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },*/
     ],
+    'apple-splash-screens': [
+      { dimensions: { width: 1136, height: 640 }, logoScale: 0.175 },
+    ],
     /*telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
     ],
