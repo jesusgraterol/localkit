@@ -99,7 +99,10 @@ const CONFIG = {
     'apple-splash-screens': [
       { dimensions: { width: 640, height: 1136 }, logoScale: 0.175 },
       { dimensions: { width: 750, height: 1334 }, logoScale: 0.195 },
+      { dimensions: { width: 828, height: 1792 }, logoScale: 0.265 },
+      { dimensions: { width: 1125, height: 2436 }, logoScale: 0.341 },
       { dimensions: { width: 1136, height: 640 }, logoScale: 0.175 },
+      { dimensions: { width: 1242, height: 2208 }, logoScale: 0.347 },
     ],
     /*telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
