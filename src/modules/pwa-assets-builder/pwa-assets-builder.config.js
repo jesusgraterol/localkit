@@ -103,6 +103,9 @@ const CONFIG = {
       { dimensions: { width: 1125, height: 2436 }, logoScale: 0.341 },
       { dimensions: { width: 1136, height: 640 }, logoScale: 0.175 },
       { dimensions: { width: 1242, height: 2208 }, logoScale: 0.347 },
+      { dimensions: { width: 1242, height: 2688 }, logoScale: 0.375 },
+      { dimensions: { width: 1334, height: 750 }, logoScale: 0.210 },
+      { dimensions: { width: 1536, height: 2048 }, logoScale: 0.335 },
     ],
     /*telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
