@@ -104,8 +104,11 @@ const CONFIG = {
       { dimensions: { width: 1136, height: 640 }, logoScale: 0.175 },
       { dimensions: { width: 1242, height: 2208 }, logoScale: 0.347 },
       { dimensions: { width: 1242, height: 2688 }, logoScale: 0.375 },
-      { dimensions: { width: 1334, height: 750 }, logoScale: 0.210 },
+      { dimensions: { width: 1334, height: 750 }, logoScale: 0.195 },
       { dimensions: { width: 1536, height: 2048 }, logoScale: 0.335 },
+      { dimensions: { width: 1668, height: 2224 }, logoScale: 0.377 },
+      { dimensions: { width: 1668, height: 2388 }, logoScale: 0.385 },
+      { dimensions: { width: 1792, height: 828 }, logoScale: 0.215 },
     ],
     /*telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
