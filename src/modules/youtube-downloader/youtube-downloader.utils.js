@@ -23,7 +23,7 @@ const youtubeDownloaderUtilsFactory = () => {
    * @param {*} format
    * @returns string
    */
-  const getFileName = (url, format) => `${getVideoID(url)}.${format}`;
+  const getFileName = (url, format) => `youtube-${getVideoID(url)}.${format}`;
 
 
 

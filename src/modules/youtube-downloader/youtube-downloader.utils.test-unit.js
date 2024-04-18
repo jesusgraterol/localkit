@@ -27,7 +27,13 @@ describe('Misc Helpers', () => {
   });
 
   test('can build a proper name for the downloaded file with any extension', () => {
-    expect(YouTubeDownloaderUtils.getFileName('https://www.youtube.com/watch?v=nVl0LU3DiHg', 'mp4')).toBe('nVl0LU3DiHg.mp4');
-    expect(YouTubeDownloaderUtils.getFileName('https://www.youtube.com/watch?v=nVl0LU3DiHg', 'mp3')).toBe('nVl0LU3DiHg.mp3');
+    expect(YouTubeDownloaderUtils.getFileName(
+      'https://www.youtube.com/watch?v=nVl0LU3DiHg',
+      'mp4',
+    )).toBe('youtube-nVl0LU3DiHg.mp4');
+    expect(YouTubeDownloaderUtils.getFileName(
+      'https://www.youtube.com/watch?v=nVl0LU3DiHg',
+      'mp3',
+    )).toBe('youtube-nVl0LU3DiHg.mp3');
   });
 });
