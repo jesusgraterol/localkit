@@ -2,7 +2,7 @@
  * PWA Assets Builder Configuration
  * The configuration that will be used in order to generate the PWA Assets.
  */
-const CONFIG = {
+const CONFIG = Object.freeze({
   // the exact width and height the logo image needs to be in order for the assets to be generated
   logoDimensionsRequirement: { width: 1024, height: 1024 },
 
@@ -10,7 +10,7 @@ const CONFIG = {
   // The logo scale is a float and can range from 0 - 1
   output: {
     icons: [
-      /*{ dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+      { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
       { dimensions: { width: 20, height: 20 }, logoScale: 0.014 },
       { dimensions: { width: 24, height: 24 }, logoScale: 0.016 },
       { dimensions: { width: 30, height: 30 }, logoScale: 0.022 },
@@ -66,10 +66,10 @@ const CONFIG = {
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
       { dimensions: { width: 1240, height: 600 }, logoScale: 0.40 },
       { dimensions: { width: 1240, height: 1240 }, logoScale: 0.80 },
-      { dimensions: { width: 2480, height: 1200 }, logoScale: 0.83 },*/
+      { dimensions: { width: 2480, height: 1200 }, logoScale: 0.83 },
     ],
     'apple-touch-icons': [
-      /*{ dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+      { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
       { dimensions: { width: 20, height: 20 }, logoScale: 0.014 },
       { dimensions: { width: 29, height: 29 }, logoScale: 0.022 },
       { dimensions: { width: 32, height: 32 }, logoScale: 0.024 },
@@ -94,7 +94,7 @@ const CONFIG = {
       { dimensions: { width: 192, height: 192 }, logoScale: 0.12 },
       { dimensions: { width: 256, height: 256 }, logoScale: 0.165 },
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
-      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },*/
+      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ],
     'apple-splash-screens': [
       { dimensions: { width: 640, height: 1136 }, logoScale: 0.175 },
@@ -115,8 +115,10 @@ const CONFIG = {
       { dimensions: { width: 2224, height: 1668 }, logoScale: 0.345 },
       { dimensions: { width: 2388, height: 1668 }, logoScale: 0.367 },
       { dimensions: { width: 2436, height: 1125 }, logoScale: 0.295 },
+      { dimensions: { width: 2688, height: 1242 }, logoScale: 0.328 },
+      { dimensions: { width: 2732, height: 2048 }, logoScale: 0.415 },
     ],
-    /*telegram: [
+    telegram: [
       { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
     ],
     facebook: [
@@ -142,9 +144,11 @@ const CONFIG = {
     ],
     whatsapp: [
       { dimensions: { width: 500, height: 500 }, logoScale: 0.32 },
-    ],*/
+    ],
   },
-};
+});
+
+
 
 /**
  * Module Exports

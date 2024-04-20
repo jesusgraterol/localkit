@@ -2,7 +2,7 @@
  * Favicon Builder Configuration
  * The configuration that will be used in order to generate the Favicon Build.
  */
-const CONFIG = {
+const CONFIG = Object.freeze({
   // the list of dimensions (in pixels) that will be generated and included in the build.
   // important: this list should be kept in ascending order.
   outputDimensions: [
@@ -24,7 +24,7 @@ const CONFIG = {
     { width: 384, height: 384 },
     { width: 512, height: 512 },
   ],
-};
+});
 
 /**
  * Module Exports
