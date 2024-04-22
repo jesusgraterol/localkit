@@ -109,3 +109,19 @@ describe('Manifest Build Utilities', () => {
     });
   });
 });
+
+
+
+
+
+describe('Receipt Build Utilities', () => {
+  beforeAll(() => { });
+
+  afterAll(() => {});
+
+  beforeEach(() => {});
+
+  afterEach(() => { });
+
+  test.todo('can build the receipt file');
+});

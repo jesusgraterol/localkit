@@ -83,6 +83,35 @@ const pwaAssetsBuilderServiceFactory = () => {
 
 
 
+  /**
+   * Builds and saves the receipt file.
+   * @param {*} sourcePath
+   * @param {*} backgroundColor
+   * @param {*} buildID
+   * @param {*} assetsRootPath
+   * @param {*} outputConfig
+   * @returns Promise<void>
+   */
+  const __buildAndSaveReceiptFile = (
+    sourcePath,
+    backgroundColor,
+    buildID,
+    assetsRootPath,
+    outputConfig,
+  ) => FileSystemService.writeFile(
+    `${buildID}/receipt.txt`,
+    PWAAssetsBuilderUtils.buildReceiptFile(
+      sourcePath,
+      backgroundColor,
+      buildID,
+      assetsRootPath,
+      outputConfig,
+    ),
+  );
+
+
+
+
 
   /* ***************
    * BUILD PROCESS *
@@ -119,11 +148,17 @@ const pwaAssetsBuilderServiceFactory = () => {
       // generate the manifest file
       await __buildAndSaveManifestFile(id, backgroundColor);
 
-      // generate the receipt
-      // @TODO
-
       // create a copy of the source file
       await FileSystemService.copyFile(logoSourcePath, `${id}/source.png`);
+
+      // generate the receipt file
+      await __buildAndSaveReceiptFile(
+        logoSourcePath,
+        backgroundColor,
+        id,
+        assetsRootPath,
+        CONFIG.output,
+      );
 
       // finally, return the id
       return id;

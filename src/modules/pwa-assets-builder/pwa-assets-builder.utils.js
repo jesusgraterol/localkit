@@ -122,6 +122,18 @@ const pwaAssetsBuilderUtilsFactory = () => {
 
 
 
+  /* *************************
+   * RECEIPT BUILD UTILITIES *
+   ************************* */
+
+
+  const buildReceiptFile = (sourcePath, backgroundColor, buildID, assetsRootPath, outputConfig) => {
+    return '';
+  };
+
+
+
+
   /* **************
    * MODULE BUILD *
    ************** */
@@ -133,6 +145,9 @@ const pwaAssetsBuilderUtilsFactory = () => {
 
     // manifest build utilities
     buildManifestFile,
+
+    // receipt build utilities
+    buildReceiptFile,
   });
 };
 
