@@ -152,13 +152,7 @@ const pwaAssetsBuilderServiceFactory = () => {
       await FileSystemService.copyFile(logoSourcePath, `${id}/source.png`);
 
       // generate the receipt file
-      await __buildAndSaveReceiptFile(
-        logoSourcePath,
-        backgroundColor,
-        id,
-        assetsRootPath,
-        CONFIG.output,
-      );
+      await __buildAndSaveReceiptFile(logoSourcePath, backgroundColor, id, CONFIG.output);
 
       // finally, return the id
       return id;

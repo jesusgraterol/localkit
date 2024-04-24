@@ -2,6 +2,7 @@ import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jes
 import { Buffer } from 'node:buffer';
 import sharp from 'sharp';
 import MANIFEST_FILE from './manifest-template.js';
+import Utilities from '../shared/utilities/utilities.js';
 import PWAAssetsBuilderUtils from './pwa-assets-builder.utils.js';
 
 
@@ -123,5 +124,35 @@ describe('Receipt Build Utilities', () => {
 
   afterEach(() => { });
 
-  test.todo('can build the receipt file');
+  test('can build the receipt file', () => {
+    // init a fake id as well as the root path for the asets
+    const sourcePath = './/pwa-assetsample.png';
+    const bgColor = '#000000';
+    const id = 'ID_MOCK';
+
+    // build the receipt content
+    const outputConfig = {
+      icons: [
+        { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+        { dimensions: { width: 2480, height: 1200 }, logoScale: 0.83 },
+      ],
+      'apple-touch-icons': [
+        { dimensions: { width: 16, height: 16 }, logoScale: 0.012 },
+        { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
+      ],
+    };
+    const receipt = PWAAssetsBuilderUtils.buildReceiptFile(sourcePath, bgColor, id, outputConfig);
+
+    // ensure it contains the core info
+    expect(receipt).toContain(sourcePath);
+    expect(receipt).toContain(bgColor);
+    expect(receipt).toContain(id);
+    expect(receipt).toContain(bgColor);
+    Object.keys(outputConfig).forEach((category) => {
+      expect(receipt).toContain(category);
+      outputConfig[category].forEach((asset) => (
+        expect(receipt).toContain(`${Utilities.prettifyImageDimensions(asset.dimensions)}.png`)
+      ));
+    });
+  });
 });

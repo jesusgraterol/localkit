@@ -126,9 +126,59 @@ const pwaAssetsBuilderUtilsFactory = () => {
    * RECEIPT BUILD UTILITIES *
    ************************* */
 
+  /**
+   * Retrieves the name of the asset based on its dimensions. e.g: 256x256.png.
+   * @param {*} dimensions
+   * @returns string
+   */
+  const __getAssetNameByDimensions = (dimensions) => `${Utilities.prettifyImageDimensions(dimensions)}.png`;
 
-  const buildReceiptFile = (sourcePath, backgroundColor, buildID, assetsRootPath, outputConfig) => {
-    return '';
+  /**
+   * Generates the whole list of assets for a category.
+   * @param {*} prefix
+   * @param {*} outputDimensions
+   * @returns string
+   */
+  const __generateAssetVariationsReceipt = (prefix, outputDimensions) => outputDimensions.reduce(
+    (prev, current, index) => `${prev}${index !== 0 ? '\n' : ''}${prefix}${__getAssetNameByDimensions(current.dimensions)}`,
+    '',
+  );
+
+  /**
+   * Builds the contents that will be stored in the receipt file.
+   * @param {*} sourcePath
+   * @param {*} backgroundColor
+   * @param {*} buildID
+   * @param {*} outputConfig
+   * @returns string
+   */
+  const buildReceiptFile = (sourcePath, backgroundColor, buildID, outputConfig) => {
+    // init the receipt
+    let receipt = buildID.toUpperCase();
+    receipt += `\n${Utilities.formatDate()}`;
+
+    // input
+    receipt += '\n\nINPUT:';
+    receipt += `\nSource Path: ${sourcePath}`;
+    receipt += `\nBackground Color: ${backgroundColor}`;
+
+    // output
+    receipt += '\n\nOUTPUT:';
+    receipt += `\n${buildID}`;
+    receipt += '\n    manifest.webmanifest';
+    receipt += '\n    source.png';
+    receipt += '\n    pwa-assets/';
+    Object.keys(outputConfig).forEach((category) => {
+      receipt += `\n        ${category}/`;
+      receipt += `\n${__generateAssetVariationsReceipt('            ', outputConfig[category])}`;
+    });
+
+    // footer
+    receipt += '\n\nFor more information on how to include these assets in your project, visit:';
+    receipt += '\nhttps://github.com/jesusgraterol/localkit/blob/main/readme-assets/modules/PWA_ASSETS_BUILDER/README.md';
+
+    // finally, return the receipt
+    return receipt;
   };
 
 

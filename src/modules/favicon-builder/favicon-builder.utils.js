@@ -104,6 +104,8 @@ const faviconBuilderUtilsFactory = () => {
     receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(smallestReq)}" href="favicons/${__getFaviconNameByDimensions(smallestReq)}">`;
     receipt += '\n...';
     receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(largestReq)}" href="favicons/${__getFaviconNameByDimensions(largestReq)}">`;
+
+    // footer
     receipt += '\n\nFor more information on how to include these assets in your project, visit:';
     receipt += '\nhttps://github.com/jesusgraterol/localkit/blob/main/readme-assets/modules/FAVICON_BUILDER/README.md';
 
