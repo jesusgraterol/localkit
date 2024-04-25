@@ -92,19 +92,6 @@ const faviconBuilderUtilsFactory = () => {
     receipt += '\n    favicons/';
     receipt += `\n${__generateFaviconVariationsReceipt('        ', outputDimensions)}`;
 
-    // usage
-    const smallestReq = outputDimensions[0];
-    const largestReq = outputDimensions.at(-1);
-    receipt += '\n\nUSAGE:';
-    receipt += '\n1) Include the favicon.ico into the project\'s root';
-    // eslint-disable-next-line no-template-curly-in-string
-    receipt += '\n2) Place the favicons directory inside of the project\'s root. Resulting in /${PROJECT_ROOT}/favicons';
-    receipt += '\n3) Include the following tags inside of the app\'s <head>...</head>:';
-    receipt += '\n<!-- Favicon -->';
-    receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(smallestReq)}" href="favicons/${__getFaviconNameByDimensions(smallestReq)}">`;
-    receipt += '\n...';
-    receipt += `\n<link rel="icon" type="image/png" sizes="${Utilities.prettifyImageDimensions(largestReq)}" href="favicons/${__getFaviconNameByDimensions(largestReq)}">`;
-
     // footer
     receipt += '\n\nFor more information on how to include these assets in your project, visit:';
     receipt += '\nhttps://github.com/jesusgraterol/localkit/blob/main/readme-assets/modules/FAVICON_BUILDER/README.md';
