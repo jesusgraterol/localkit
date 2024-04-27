@@ -4,7 +4,7 @@
 
 The Favicon Builder Module generates all the images used by all browsers to provide the user a clear identification of the web application.
 
-In the past, using favicons was as simple as providing a 32x32 pixels image. However, the browsing experience has evolved significantly and now the favicon can be used in many places, such as:
+In the past, using favicons was as simple as providing a `32x32` pixels image. However, the browsing experience has evolved significantly and now the favicon can be used in many places, such as:
 
 * next to the site name in a browser tab
 
@@ -16,9 +16,11 @@ In the past, using favicons was as simple as providing a 32x32 pixels image. How
 
 * ...
 
+
+
 ## Getting Started
 
-In order to generate a build, you need a 512x512 pixels image that represents the brand in `.png` format. For Example:
+In order to generate a build, you need a `512x512` pixels image that represents the brand in `.png` format. For Example:
 
 ![Favicon Example](./source.png)
 
@@ -31,6 +33,7 @@ $ localkit
 ![Favicon Build](./favicon-build.png)
 
 
+
 ### Build Output
 
 Once the build has completed, it will output the following contents in the directory from which you invoked the CLI:
@@ -39,6 +42,7 @@ Once the build has completed, it will output the following contents in the direc
 favicon-build-${TIMESTAMP}
     │
     favicon.ico
+    receipt.txt
     source.png
     favicons/
         ├───16x16.png
@@ -59,6 +63,8 @@ favicon-build-${TIMESTAMP}
         ├───384x384.png
         └───512x512.png
 ```
+
+
 
 ### Usage
 
@@ -87,6 +93,7 @@ favicon-build-${TIMESTAMP}
 ```
 
 
-## Source
+
+## Sources
 
 [Adding favicons in a multi-browser multi-platform world](https://mobiforge.com/design-development/adding-favicons-in-a-multi-browser-multi-platform-world)
