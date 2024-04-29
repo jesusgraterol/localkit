@@ -105,7 +105,7 @@ $ npm run test:integration
 
 ## @TODO
 
-- Implement the JavaScript/Typescript/CSS file template generators
+[ ] Implement the JavaScript/Typescript/CSS file template generators
 
 
 
