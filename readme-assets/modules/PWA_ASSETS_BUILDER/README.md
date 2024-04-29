@@ -166,7 +166,155 @@ pwa-assets-build-${TIMESTAMP}
 
 ## Usage
 
-@TODO
+1. Include the `manifest.webmanifest` file in the `index.html` file:
+
+```html
+...
+<link rel="manifest" href="manifest.webmanifest">
+...
+```
+
+2. Include Apple's Shortcut Icon in the `index.html` file:
+
+```html
+<link rel="shortcut icon" href="pwa-assets/apple-touch-icons/180x180.png">
+```
+
+3. Include Apple's Touch Icons in the `index.html` file:
+
+```html
+<link rel="apple-touch-icon" sizes="16x16" href="pwa-assets/apple-touch-icons/16x16.png">
+<link rel="apple-touch-icon" sizes="20x20" href="pwa-assets/apple-touch-icons/20x20.png">
+<link rel="apple-touch-icon" sizes="29x29" href="pwa-assets/apple-touch-icons/29x29.png">
+<link rel="apple-touch-icon" sizes="32x32" href="pwa-assets/apple-touch-icons/32x32.png">
+<link rel="apple-touch-icon" sizes="40x40" href="pwa-assets/apple-touch-icons/40x40.png">
+<link rel="apple-touch-icon" sizes="50x50" href="pwa-assets/apple-touch-icons/50x50.png">
+<link rel="apple-touch-icon" sizes="57x57" href="pwa-assets/apple-touch-icons/57x57.png">
+<link rel="apple-touch-icon" sizes="58x58" href="pwa-assets/apple-touch-icons/58x58.png">
+<link rel="apple-touch-icon" sizes="60x60" href="pwa-assets/apple-touch-icons/60x60.png">
+<link rel="apple-touch-icon" sizes="64x64" href="pwa-assets/apple-touch-icons/64x64.png">
+<link rel="apple-touch-icon" sizes="72x72" href="pwa-assets/apple-touch-icons/72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="pwa-assets/apple-touch-icons/76x76.png">
+<link rel="apple-touch-icon" sizes="80x80" href="pwa-assets/apple-touch-icons/80x80.png">
+<link rel="apple-touch-icon" sizes="87x87" href="pwa-assets/apple-touch-icons/87x87.png">
+<link rel="apple-touch-icon" sizes="100x100" href="pwa-assets/apple-touch-icons/100x100.png">
+<link rel="apple-touch-icon" sizes="114x114" href="pwa-assets/apple-touch-icons/114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="pwa-assets/apple-touch-icons/120x120.png">
+<link rel="apple-touch-icon" sizes="128x128" href="pwa-assets/apple-touch-icons/128x128.png">
+<link rel="apple-touch-icon" sizes="144x144" href="pwa-assets/apple-touch-icons/144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="pwa-assets/apple-touch-icons/152x152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="pwa-assets/apple-touch-icons/167x167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="pwa-assets/apple-touch-icons/180x180.png">
+<link rel="apple-touch-icon" sizes="192x192" href="pwa-assets/apple-touch-icons/192x192.png">
+<link rel="apple-touch-icon" sizes="256x256" href="pwa-assets/apple-touch-icons/256x256.png">
+<link rel="apple-touch-icon" sizes="512x512" href="pwa-assets/apple-touch-icons/512x512.png">
+<link rel="apple-touch-icon" sizes="1024x1024" href="pwa-assets/apple-touch-icons/1024x1024.png">
+```
+
+4. Include Apple's Splash Screens in the `index.html` file:
+
+```html
+<link
+  href="pwa-assets/apple-splash-screens/640x1136.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/750x1334.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/828x1792.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1125x2436.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1136x640.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1242x2208.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1242x2688.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1334x750.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1536x2048.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1668x2224.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1668x2388.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/1792x828.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/2048x1536.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/2048x2732.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/2208x1242.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/2224x1668.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/2388x1668.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/2436x1125.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/2688x1242.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+/>
+<link
+  href="pwa-assets/apple-splash-screens/2732x2048.png"
+  rel="apple-touch-startup-image"
+  media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+/>
+```
 
 
 
