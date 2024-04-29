@@ -34,7 +34,7 @@ $ localkit
 
 
 
-### Build Output
+## Build Output
 
 Once the build has completed, it will output the following contents in the directory from which you invoked the CLI:
 
@@ -66,7 +66,7 @@ favicon-build-${TIMESTAMP}
 
 
 
-### Usage
+## Usage
 
 1. Include the favicon.ico into the project's root
 2. Place the `favicons` directory inside of the project's root. Resulting in `/${PROJECT_ROOT}/favicons`
