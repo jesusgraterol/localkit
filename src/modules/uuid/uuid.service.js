@@ -4,51 +4,32 @@ import {
   validate as uuidValidate,
 } from 'uuid';
 
+/* ************************************************************************************************
+ *                                         IMPLEMENTATION                                         *
+ ************************************************************************************************ */
+
 /**
- * UUID Service Factory
- * Service in charge of managing Universally Unique Identifiers.
+ * Creates an RFC version 4 (random) UUID.
+ * @returns string
  */
-const uuidServiceFactory = () => {
-  /**
-   * Creates an RFC version 4 (random) UUID.
-   * @returns string
-   */
-  const generate = () => uuidv4();
+const generate = () => uuidv4();
 
 
-  /**
-   * Ensures the provided value is a valid uuid and that is version 4.
-   * @param {*} uuid
-   * @returns boolean
-   */
-  const validate = (uuid) => uuidValidate(uuid) && uuidVersion(uuid) === 4;
+/**
+ * Ensures the provided value is a valid uuid and that is version 4.
+ * @param {*} uuid
+ * @returns boolean
+ */
+const validate = (uuid) => uuidValidate(uuid) && uuidVersion(uuid) === 4;
 
 
 
 
 
-  /* **************
-   * MODULE BUILD *
-   ************** */
-  return Object.freeze({
-    generate,
-    validate,
-  });
+/* ************************************************************************************************
+ *                                         MODULE EXPORTS                                         *
+ ************************************************************************************************ */
+export {
+  generate,
+  validate,
 };
-
-
-
-
-/**
- * Global Instance
- */
-const UUIDService = uuidServiceFactory();
-
-
-
-
-
-/**
- * Module Exports
- */
-export default UUIDService;

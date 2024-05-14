@@ -2,11 +2,9 @@ import { jest } from '@jest/globals';
 import fs from 'fs';
 import pathHelper from 'path';
 
-
-
-/**
- * Spy Factories
- */
+/* ************************************************************************************************
+ *                                          SPY FACTORIES                                         *
+ ************************************************************************************************ */
 const accessSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'access').mockImplementation(
   (path, callback) => callback(cbReturnVal),
 );
@@ -56,9 +54,10 @@ const copyFileSpyFactory = (cbReturnError) => jest.spyOn(fs, 'copyFile').mockImp
 
 
 
-/**
- * Misc Test Helpers
- */
+
+/* ************************************************************************************************
+ *                                          MISC HELPERS                                          *
+ ************************************************************************************************ */
 const buildFileSystemElement = (path, isFile, creation) => ({
   path,
   baseName: pathHelper.basename(path),
@@ -96,9 +95,10 @@ const validateSpyInteractions = (
 
 
 
-/**
- * Module Exports
- */
+
+/* ************************************************************************************************
+ *                                         MODULE EXPORTS                                         *
+ ************************************************************************************************ */
 export {
   // spy factories
   accessSpyFactory,
