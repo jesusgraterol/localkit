@@ -3,13 +3,9 @@ import select from '@inquirer/select';
 import FileSystemService from './modules/shared/file-system/file-system.service.js';
 import Utilities from './modules/shared/utilities/utilities.js';
 
-
-
-
-
-/**
- * Module Launchers
- */
+/* ************************************************************************************************
+ *                                        MODULE LAUNCHERS                                        *
+ ************************************************************************************************ */
 import passwordModuleLauncher from './modules/password/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
@@ -19,13 +15,6 @@ import pwaAssetsBuilderModuleLauncher from './modules/pwa-assets-builder/launche
 import aes256ModuleLauncher from './modules/aes256/launcher.js';
 import md5ModuleLauncher from './modules/md5/launcher.js';
 
-
-
-
-
-/**
- * Module List
- */
 const MODULES = [
   {
     name: 'Password',
@@ -81,9 +70,9 @@ const MODULES = [
 
 
 
-/**
- * Module Menu
- */
+/* ************************************************************************************************
+ *                                         INPUT HANDLER                                          *
+ ************************************************************************************************ */
 const packageFile = await FileSystemService.readPackageFile();
 console.log(Utilities.buildCLIHeader(packageFile?.version));
 const answer = await select({
@@ -101,10 +90,9 @@ const answer = await select({
 
 
 
-/**
- * Module Execution
- * Retrieve the module based on the user's selection and execute the launcher.
- */
+/* ************************************************************************************************
+ *                                           EXECUTION                                            *
+ ************************************************************************************************ */
 try {
   const module = MODULES.find((mod) => mod.value === answer);
   await module.launcher();
