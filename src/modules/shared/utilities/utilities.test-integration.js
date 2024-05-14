@@ -1,5 +1,9 @@
 import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect } from '@jest/globals';
-import Utilities from './utilities.js';
+import { delay } from './utilities.js';
+
+/* ************************************************************************************************
+ *                                             TESTS                                              *
+ ************************************************************************************************ */
 
 describe('Asynchronous Delayer', () => {
   beforeAll(() => { });
@@ -13,7 +17,7 @@ describe('Asynchronous Delayer', () => {
   test('can delay any action for any number of seconds', async () => {
     const delaySeconds = 0.5;
     const start = Date.now();
-    await Utilities.delay(delaySeconds);
+    await delay(delaySeconds);
     expect(Date.now()).toBeGreaterThanOrEqual(start + (delaySeconds * 1000));
   });
 });

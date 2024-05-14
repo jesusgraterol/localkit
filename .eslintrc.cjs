@@ -32,5 +32,6 @@ module.exports = {
     'no-multiple-empty-lines': ['error', { max: 5, maxEOF: 0 }],
     'no-underscore-dangle': 'off',
     'import/extensions': 'off',
+    'import/prefer-default-export': 'off',
   },
 };
