@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 import select from '@inquirer/select';
-import FileSystemService from './modules/shared/file-system/file-system.service.js';
-import Utilities from './modules/shared/utilities/utilities.js';
+import { buildCLIHeader } from './modules/shared/utilities/utilities.js';
+import { readPackageFile } from './modules/shared/file-system/file-system.service.js';
 
 /* ************************************************************************************************
  *                                        MODULE LAUNCHERS                                        *
@@ -73,8 +73,8 @@ const MODULES = [
 /* ************************************************************************************************
  *                                         INPUT HANDLER                                          *
  ************************************************************************************************ */
-const packageFile = await FileSystemService.readPackageFile();
-console.log(Utilities.buildCLIHeader(packageFile?.version));
+const packageFile = await readPackageFile();
+console.log(buildCLIHeader(packageFile?.version));
 const answer = await select({
   message: 'Select a module',
   choices: MODULES.map((module) => ({
