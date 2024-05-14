@@ -1,12 +1,12 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
-import YoutubeDownloaderValidations from './youtube-downloader.validations.js';
-import YouTubeDownloaderService from './youtube-downloader.service.js';
-import Utilities from '../shared/utilities/utilities.js';
+import { print } from '../shared/utilities/utilities.js';
+import { isURLValid } from './youtube-downloader.validations.js';
+import { downloadVideo, downloadAudio } from './youtube-downloader.service.js';
 
-/**
- * Module Launcher
- */
+/* ************************************************************************************************
+ *                                        MODULE LAUNCHER                                         *
+ ************************************************************************************************ */
 export default async function moduleLauncher() {
   // read the user input
   const answers = {
@@ -28,23 +28,23 @@ export default async function moduleLauncher() {
     }),
     url: await input({
       message: 'Enter the URL',
-      validate: ((v) => YoutubeDownloaderValidations.isURLValid(v)),
+      validate: ((v) => isURLValid(v)),
     }),
   };
 
   // execute the apropriate action
   switch (answers.action) {
     case 'download_video': {
-      const fileName = await YouTubeDownloaderService.downloadVideo(answers.url);
-      Utilities.print('YoutubeDownloader.downloadVideo', [
+      const fileName = await downloadVideo(answers.url);
+      print('YoutubeDownloader.downloadVideo', [
         'Downloaded Video:',
         fileName,
       ], true);
       break;
     }
     case 'download_audio': {
-      const fileName = await YouTubeDownloaderService.downloadAudio(answers.url);
-      Utilities.print('YoutubeDownloader.downloadAudio', [
+      const fileName = await downloadAudio(answers.url);
+      print('YoutubeDownloader.downloadAudio', [
         'Downloaded Audio:',
         fileName,
       ], true);
