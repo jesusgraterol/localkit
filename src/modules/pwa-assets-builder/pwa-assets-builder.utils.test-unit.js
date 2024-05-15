@@ -1,10 +1,19 @@
 import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
 import { Buffer } from 'node:buffer';
 import sharp from 'sharp';
-import MANIFEST_FILE from './manifest-template.js';
-import Utilities from '../shared/utilities/utilities.js';
-import PWAAssetsBuilderUtils from './pwa-assets-builder.utils.js';
+import { MANIFEST_FILE } from './manifest-template.js';
+import { prettifyImageDimensions } from '../shared/utilities/utilities.js';
+import {
+  generateAssetName,
+  generateBackgroundImage,
+  generateLogoImage,
+  buildManifestFile,
+  buildReceiptFile,
+} from './pwa-assets-builder.utils.js';
 
+/* ************************************************************************************************
+ *                                             MOCKS                                              *
+ ************************************************************************************************ */
 
 /**
  * Sharp Mock
@@ -21,6 +30,12 @@ jest.mock('sharp', () => jest.fn(() => ({
 
 
 
+
+
+/* ************************************************************************************************
+ *                                             TESTS                                              *
+ ************************************************************************************************ */
+
 describe('Assets Build Utilities', () => {
   beforeAll(() => { });
 
@@ -35,13 +50,13 @@ describe('Assets Build Utilities', () => {
   afterEach(() => { });
 
   test('can generate the name for an asset', () => {
-    expect(PWAAssetsBuilderUtils.generateAssetName({ width: 256, height: 256 })).toBe('256x256.png');
-    expect(PWAAssetsBuilderUtils.generateAssetName({ width: 128, height: 64 }, '.jpg')).toBe('128x64.jpg');
-    expect(PWAAssetsBuilderUtils.generateAssetName({ width: 512, height: 512 }, '.webp')).toBe('512x512.webp');
+    expect(generateAssetName({ width: 256, height: 256 })).toBe('256x256.png');
+    expect(generateAssetName({ width: 128, height: 64 }, '.jpg')).toBe('128x64.jpg');
+    expect(generateAssetName({ width: 512, height: 512 }, '.webp')).toBe('512x512.webp');
   });
 
   test('can generate the background image', () => {
-    PWAAssetsBuilderUtils.generateBackgroundImage({ width: 128, height: 128 }, '#000000');
+    generateBackgroundImage({ width: 128, height: 128 }, '#000000');
     expect(sharp).toHaveBeenCalledWith({
       create: {
         width: 128,
@@ -53,7 +68,7 @@ describe('Assets Build Utilities', () => {
   });
 
   test('cannot generate the logo image if the source file has the wrong dimensions', async () => {
-    await expect(() => PWAAssetsBuilderUtils.generateLogoImage(
+    await expect(() => generateLogoImage(
       'fakePath.png',
       { logoScale: 0.5 },
       { width: 512, height: 512 },
@@ -61,7 +76,7 @@ describe('Assets Build Utilities', () => {
   });
 
   test('can generate a logo image', async () => {
-    const logoImage = await PWAAssetsBuilderUtils.generateLogoImage(
+    const logoImage = await generateLogoImage(
       'fakePath.png',
       { logoScale: 0.5 },
       { width: 128, height: 128 },
@@ -85,7 +100,7 @@ describe('Manifest Build Utilities', () => {
   afterEach(() => { });
 
   test('can build the manifest file based on a list of icons', () => {
-    const manifest = PWAAssetsBuilderUtils.buildManifestFile([
+    const manifest = buildManifestFile([
       { dimensions: { width: 48, height: 48 }, logoScale: 0.037 },
       { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
     ], '#0C0C0C');
@@ -141,7 +156,7 @@ describe('Receipt Build Utilities', () => {
         { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
       ],
     };
-    const receipt = PWAAssetsBuilderUtils.buildReceiptFile(sourcePath, bgColor, id, outputConfig);
+    const receipt = buildReceiptFile(sourcePath, bgColor, id, outputConfig);
 
     // ensure it contains the core info
     expect(receipt).toContain(sourcePath);
@@ -151,7 +166,7 @@ describe('Receipt Build Utilities', () => {
     Object.keys(outputConfig).forEach((category) => {
       expect(receipt).toContain(category);
       outputConfig[category].forEach((asset) => (
-        expect(receipt).toContain(`${Utilities.prettifyImageDimensions(asset.dimensions)}.png`)
+        expect(receipt).toContain(`${prettifyImageDimensions(asset.dimensions)}.png`)
       ));
     });
   });

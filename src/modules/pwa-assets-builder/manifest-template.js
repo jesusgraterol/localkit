@@ -7,7 +7,7 @@
  * https://developer.mozilla.org/en-US/docs/Web/Manifest
  * https://web.dev/learn/pwa/web-app-manifest
  */
-const MANIFEST_FILE = {
+const MANIFEST_FILE = Object.freeze({
   id: '/',
   scope: '/',
   start_url: '/',
@@ -27,10 +27,12 @@ const MANIFEST_FILE = {
   file_handlers: [],
   share_target: {},
   icons: [],
+});
+
+
+/* ************************************************************************************************
+ *                                         MODULE EXPORTS                                         *
+ ************************************************************************************************ */
+export {
+  MANIFEST_FILE,
 };
-
-
-/**
- * Module Exports
- */
-export default MANIFEST_FILE;

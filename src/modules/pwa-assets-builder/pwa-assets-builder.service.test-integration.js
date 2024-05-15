@@ -1,9 +1,12 @@
 import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
-import Utilities from '../shared/utilities/utilities.js';
-import FileSystemService from '../shared/file-system/file-system.service.js';
-import CONFIG from './pwa-assets-builder.config.js';
-import Service from './pwa-assets-builder.service.js';
+import { prettifyImageDimensions } from '../shared/utilities/utilities.js';
+import { pathExists, deleteDirectory } from '../shared/file-system/file-system.service.js';
+import { CONFIG } from './pwa-assets-builder.config.js';
+import { build } from './pwa-assets-builder.service.js';
 
+/* ************************************************************************************************
+ *                                             MOCKS                                              *
+ ************************************************************************************************ */
 
 /**
  * PWA Assets Builder Config Mock
@@ -37,6 +40,12 @@ jest.mock('./pwa-assets-builder.config.js', () => {
 
 
 
+
+
+/* ************************************************************************************************
+ *                                             TESTS                                              *
+ ************************************************************************************************ */
+
 describe('Build Process', () => {
   beforeAll(() => { });
 
@@ -47,27 +56,27 @@ describe('Build Process', () => {
   afterEach(() => { });
 
   test('can build the PWA Assets', async () => {
-    const id = await Service.build('./pwa-assetsample.png', '#0C0C0C');
+    const id = await build('./pwa-assetsample.png', '#0C0C0C');
     const outputPath = `${id}/pwa-assets`;
-    await expect(FileSystemService.pathExists(id)).resolves.toBeTruthy();
-    await expect(FileSystemService.pathExists(`${id}/source.png`)).resolves.toBeTruthy();
-    await expect(FileSystemService.pathExists(outputPath)).resolves.toBeTruthy();
+    await expect(pathExists(id)).resolves.toBeTruthy();
+    await expect(pathExists(`${id}/source.png`)).resolves.toBeTruthy();
+    await expect(pathExists(outputPath)).resolves.toBeTruthy();
 
     const assetsExistence = await Promise.all(Object.keys(CONFIG.output).reduce(
       (prev, currentCat) => [
         ...prev,
-        FileSystemService.pathExists(`${outputPath}/${currentCat}`),
-        ...CONFIG.output[currentCat].map((img) => FileSystemService.pathExists(
-          `${outputPath}/${currentCat}/${Utilities.prettifyImageDimensions(img.dimensions)}.png`,
+        pathExists(`${outputPath}/${currentCat}`),
+        ...CONFIG.output[currentCat].map((img) => pathExists(
+          `${outputPath}/${currentCat}/${prettifyImageDimensions(img.dimensions)}.png`,
         )),
       ],
       [],
     ));
     expect(assetsExistence.every((exists) => exists === true)).toBeTruthy();
 
-    await expect(FileSystemService.pathExists(`${id}/manifest.webmanifest`)).resolves.toBeTruthy();
-    await expect(FileSystemService.pathExists(`${id}/receipt.txt`)).resolves.toBeTruthy();
+    await expect(pathExists(`${id}/manifest.webmanifest`)).resolves.toBeTruthy();
+    await expect(pathExists(`${id}/receipt.txt`)).resolves.toBeTruthy();
 
-    await FileSystemService.deleteDirectory(id);
+    await deleteDirectory(id);
   });
 });
