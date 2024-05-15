@@ -1,8 +1,5 @@
 import { authenticator } from 'otplib';
 
-
-
-
 /**
  * Authenticator Options
  * All the available options can be found in the following URL:
@@ -23,82 +20,59 @@ authenticator.options = { window: 2, step: 30 };
 
 
 
+/* ************************************************************************************************
+ *                                        SECRET MANAGEMENT                                       *
+ ************************************************************************************************ */
+
 /**
- * OTP Service Factory
- * Service in charge of generating OTP Secrets and tokens. The lib used to simplify the process is:
- * https://github.com/JamesMGreene/node-aes256
+ * Generates a secret that can be used to initialize an OTP instance and generate tokens.
+ * @returns string
  */
-const otpServiceFactory = () => {
-  /* *******************
-   * SECRET MANAGEMENT *
-   ******************* */
+const generateSecret = () => authenticator.generateSecret();
 
-  /**
-   * Generates a secret that can be used to initialize an OTP instance and generate tokens.
-   * @returns string
-   */
-  const generateSecret = () => authenticator.generateSecret();
-
-  /**
-   * Validates the format of a given OTP secret.
-   * @param {*} secret
-   * @returns boolean
-   */
-  const isSecretFormatValid = (secret) => typeof secret === 'string' && /^[0-9a-zA-Z]{16,64}$/.test(secret);
-
-
-
-
-  /* ******************
-   * TOKEN MANAGEMENT *
-   ****************** */
-
-  /**
-   * Generates an OTP token based on given secret.
-   * @param {*} secret
-   * @returns string
-   */
-  const generateToken = (secret) => authenticator.generate(secret);
-
-  /**
-   * Validates the format of a given token. IMPORTANT: it does not check the validity based on the
-   * secret.
-   * @param {*} token
-   * @returns boolean
-   */
-  const isTokenFormatValid = (token) => typeof token === 'string' && /^[0-9]{6}$/.test(token);
+/**
+ * Validates the format of a given OTP secret.
+ * @param {*} secret
+ * @returns boolean
+ */
+const isSecretFormatValid = (secret) => typeof secret === 'string' && /^[0-9a-zA-Z]{16,64}$/.test(secret);
 
 
 
 
 
-  /* **************
-   * MODULE BUILD *
-   ************** */
-  return Object.freeze({
-    // secret management
-    generateSecret,
-    isSecretFormatValid,
+/* ************************************************************************************************
+ *                                        TOKEN MANAGEMENT                                        *
+ ************************************************************************************************ */
 
-    // token management
-    generateToken,
-    isTokenFormatValid,
-  });
+/**
+ * Generates an OTP token based on given secret.
+ * @param {*} secret
+ * @returns string
+ */
+const generateToken = (secret) => authenticator.generate(secret);
+
+/**
+ * Validates the format of a given token. IMPORTANT: it does not check the validity based on the
+ * secret.
+ * @param {*} token
+ * @returns boolean
+ */
+const isTokenFormatValid = (token) => typeof token === 'string' && /^[0-9]{6}$/.test(token);
+
+
+
+
+
+/* ************************************************************************************************
+ *                                         MODULE EXPORTS                                         *
+ ************************************************************************************************ */
+export {
+  // secret management
+  generateSecret,
+  isSecretFormatValid,
+
+  // token management
+  generateToken,
+  isTokenFormatValid,
 };
-
-
-
-
-/**
- * Global Instance
- */
-const OTPService = otpServiceFactory();
-
-
-
-
-
-/**
- * Module Exports
- */
-export default OTPService;

@@ -1,12 +1,12 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
-import OTPService from './otp.service.js';
-import Utilities from '../shared/utilities/utilities.js';
+import { print, delay, formatDate } from '../shared/utilities/utilities.js';
+import { generateSecret, isSecretFormatValid, generateToken } from './otp.service.js';
 
-/**
- * Module Launcher
- */
-export default async function moduleLauncher() {
+/* ************************************************************************************************
+ *                                        MODULE LAUNCHER                                         *
+ ************************************************************************************************ */
+export default async function launcher() {
   // read the user input
   const answer = await select({
     message: 'Select an action',
@@ -27,13 +27,13 @@ export default async function moduleLauncher() {
 
   // execute the apropriate action
   switch (answer) {
-    /**
-     * Generate Secret
-     */
+    /* ********************************************************************************************
+     *                                      GENERATE SECRET                                       *
+     ******************************************************************************************** */
     case 'generate_secret': {
-      Utilities.print('OTPService.generateSecret', [
+      print('OTPService.generateSecret', [
         'Generated OTP Secret:',
-        OTPService.generateSecret(),
+        generateSecret(),
       ], true);
       break;
     }
@@ -41,14 +41,15 @@ export default async function moduleLauncher() {
 
 
 
-    /**
-     * Generate Token
-     */
+
+    /* ********************************************************************************************
+     *                                       GENERATE TOKEN                                       *
+     ******************************************************************************************** */
     case 'generate_token': {
       // retrieve the secret
       const secret = await input({
         message: 'Enter the OTP Secret',
-        validate: ((v) => OTPService.isSecretFormatValid(v)),
+        validate: ((v) => isSecretFormatValid(v)),
       });
 
       // retrieve the duration of the token generator
@@ -66,12 +67,12 @@ export default async function moduleLauncher() {
       let prevToken;
       let generated = 0;
       while (generated < tokensTotal) {
-        const token = OTPService.generateToken(secret);
+        const token = generateToken(secret);
         if (token !== prevToken) {
           generated += 1;
-          console.log(`${generated}/${tokensTotal}) ${Utilities.formatDate(undefined, 'hh:mm:ss a')}: ${token}`);
+          console.log(`${generated}/${tokensTotal}) ${formatDate(undefined, 'hh:mm:ss a')}: ${token}`);
           // eslint-disable-next-line no-await-in-loop
-          await Utilities.delay(5);
+          await delay(5);
         }
         prevToken = token;
       }
