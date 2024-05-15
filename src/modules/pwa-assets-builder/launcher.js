@@ -5,10 +5,10 @@ import { readPathContent } from '../shared/file-system/file-system.service.js';
 import { isHexadecimalColorValid } from './pwa-assets-builder.validations.js';
 import { build } from './pwa-assets-builder.service.js';
 
-/**
- * Module Launcher
- */
-export default async function moduleLauncher() {
+/* ************************************************************************************************
+ *                                        MODULE LAUNCHER                                         *
+ ************************************************************************************************ */
+export default async function launcher() {
   // read the contents of the current working directory
   const { files } = await readPathContent('./', ['.png']);
   if (!files.length) {

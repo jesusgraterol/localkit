@@ -7,7 +7,7 @@ import { downloadVideo, downloadAudio } from './youtube-downloader.service.js';
 /* ************************************************************************************************
  *                                        MODULE LAUNCHER                                         *
  ************************************************************************************************ */
-export default async function moduleLauncher() {
+export default async function launcher() {
   // read the user input
   const answers = {
     action: await select({
