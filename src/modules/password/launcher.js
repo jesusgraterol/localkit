@@ -1,12 +1,12 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
-import PasswordService from './password.service.js';
-import Utilities from '../shared/utilities/utilities.js';
+import { print } from '../shared/utilities/utilities.js';
+import { STRENGTH_ALIAS, generatePassword, calculateStrength } from './password.service.js';
 
-/**
- * Module Launcher
- */
-export default async function moduleLauncher() {
+/* ************************************************************************************************
+ *                                        MODULE LAUNCHER                                         *
+ ************************************************************************************************ */
+export default async function launcher() {
   // read the user input
   const answer = await select({
     message: 'Select an action',
@@ -27,9 +27,9 @@ export default async function moduleLauncher() {
 
   // execute the apropriate action
   switch (answer) {
-    /**
-     * Generate Password
-     */
+    /* ********************************************************************************************
+     *                                     GENERATE PASSWORD                                      *
+     ******************************************************************************************** */
     case 'generate': {
       // extract the configuration
       const answers = {
@@ -65,7 +65,7 @@ export default async function moduleLauncher() {
       };
 
       // generate the password
-      const password = PasswordService.generatePassword(
+      const password = generatePassword(
         Number(answers.passwordLength),
         answers.includeNumbers === 'yes',
         answers.includeLowerCase === 'yes',
@@ -74,8 +74,8 @@ export default async function moduleLauncher() {
       );
 
       // output it
-      Utilities.print('PasswordService.generatePassword', [
-        `${PasswordService.STRENGTH_ALIAS[PasswordService.calculateStrength(password)]} Password:`,
+      print('PasswordService.generatePassword', [
+        `${STRENGTH_ALIAS[calculateStrength(password)]} Password:`,
         password,
       ], true);
       break;
@@ -85,13 +85,13 @@ export default async function moduleLauncher() {
 
 
 
-    /**
-     * Calculate Password Strength
-     */
+    /* ********************************************************************************************
+     *                                CALCULATE PASSWORD STRENGTH                                 *
+     ******************************************************************************************** */
     case 'calculate_strength': {
       const password = await input({ message: 'Enter the password', validate: ((v) => v.length > 0) });
-      Utilities.print('PasswordService.calculateStrength', [
-        `${PasswordService.STRENGTH_ALIAS[PasswordService.calculateStrength(password)]} Password:`,
+      print('PasswordService.calculateStrength', [
+        `${STRENGTH_ALIAS[calculateStrength(password)]} Password:`,
         password,
       ]);
       break;
