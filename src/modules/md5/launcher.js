@@ -43,7 +43,7 @@ export default async function launcher() {
     case 'validate': {
       const h = await input({ message: 'Enter the md5 hash', validate: ((v) => v.length > 0) });
       print('MD5Service.validate', [
-        hash,
+        h,
         `Is ${validate(h) ? 'a VALID' : 'an INVALID'} md5 hash`,
       ]);
       break;
