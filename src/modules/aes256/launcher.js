@@ -1,12 +1,12 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
-import AES256Service from './aes256.service.js';
-import Utilities from '../shared/utilities/utilities.js';
+import { print } from '../shared/utilities/utilities.js';
+import { encrypt, decrypt } from './aes256.service.js';
 
-/**
- * Module Launcher
- */
-export default async function moduleLauncher() {
+/* ************************************************************************************************
+ *                                        MODULE LAUNCHER                                         *
+ ************************************************************************************************ */
+export default async function launcher() {
   // read the user input
   const answer = await select({
     message: 'Select an action',
@@ -27,9 +27,9 @@ export default async function moduleLauncher() {
 
   // execute the apropriate action
   switch (answer) {
-    /**
-     * Encrypt
-     */
+    /* ********************************************************************************************
+     *                                          ENCRYPT                                           *
+     ******************************************************************************************** */
     case 'encrypt': {
       // extract the input
       const answers = {
@@ -38,10 +38,10 @@ export default async function moduleLauncher() {
       };
 
       // encrypt the message
-      const encryptedMessage = AES256Service.encrypt(answers.password, answers.message);
+      const encryptedMessage = encrypt(answers.password, answers.message);
 
       // print the results
-      Utilities.print('AES256Service.encrypt', [
+      print('AES256Service.encrypt', [
         'Original Message:',
         answers.message,
         '\nPassword:',
@@ -56,9 +56,9 @@ export default async function moduleLauncher() {
 
 
 
-    /**
-     * Decrypt
-     */
+    /* ********************************************************************************************
+     *                                          DECRYPT                                           *
+     ******************************************************************************************** */
     case 'decrypt': {
       // extract the input
       const answers = {
@@ -67,10 +67,10 @@ export default async function moduleLauncher() {
       };
 
       // decrypt the message
-      const decryptedMessage = AES256Service.decrypt(answers.password, answers.message);
+      const decryptedMessage = decrypt(answers.password, answers.message);
 
       // print the results
-      Utilities.print('AES256Service.decrypt', [
+      print('AES256Service.decrypt', [
         'Encrypted Message:',
         answers.message,
         '\nPassword:',
