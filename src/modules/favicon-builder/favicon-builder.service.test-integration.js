@@ -1,7 +1,7 @@
 import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
 import { prettifyImageDimensions } from '../shared/utilities/utilities.js';
 import { pathExists, deleteDirectory } from '../shared/file-system/file-system.service.js';
-import CONFIG from './favicon-builder.config.js';
+import { CONFIG } from './favicon-builder.config.js';
 import { build } from './favicon-builder.service.js';
 
 /* ************************************************************************************************
@@ -17,10 +17,10 @@ jest.mock('./favicon-builder.config.js', () => {
   const originalModule = jest.requireActual('./favicon-builder.config.js');
   return {
     __esModule: true,
-    default: {
+    CONFIG: {
       outputDimensions: [
-        originalModule.default.outputDimensions[0],
-        originalModule.default.outputDimensions.at(-1),
+        originalModule.CONFIG.outputDimensions[0],
+        originalModule.CONFIG.outputDimensions.at(-1),
       ],
     },
   };

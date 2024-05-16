@@ -17,21 +17,21 @@ jest.mock('./pwa-assets-builder.config.js', () => {
   const originalModule = jest.requireActual('./pwa-assets-builder.config.js');
   return {
     __esModule: true,
-    default: {
-      ...originalModule.default,
+    CONFIG: {
+      ...originalModule.CONFIG,
       output: {
-        ...originalModule.default.output,
+        ...originalModule.CONFIG.output,
         icons: [
-          originalModule.default.output.icons[0],
-          originalModule.default.output.icons.at(-1),
+          originalModule.CONFIG.output.icons[0],
+          originalModule.CONFIG.output.icons.at(-1),
         ],
         'apple-touch-icons': [
-          originalModule.default.output['apple-touch-icons'][0],
-          originalModule.default.output['apple-touch-icons'].at(-1),
+          originalModule.CONFIG.output['apple-touch-icons'][0],
+          originalModule.CONFIG.output['apple-touch-icons'].at(-1),
         ],
         'apple-splash-screens': [
-          originalModule.default.output['apple-splash-screens'][0],
-          originalModule.default.output['apple-splash-screens'].at(-1),
+          originalModule.CONFIG.output['apple-splash-screens'][0],
+          originalModule.CONFIG.output['apple-splash-screens'].at(-1),
         ],
       },
     },
