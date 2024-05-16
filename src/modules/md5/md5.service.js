@@ -1,48 +1,29 @@
 import md5 from 'md5';
 
+/* ************************************************************************************************
+ *                                         IMPLEMENTATION                                         *
+ ************************************************************************************************ */
+
 /**
- * MD5 Service Factory
- * Service in charge of managing md5 (Message-Digest Algorithm) Hashes.
+ * Creates a md5 hash from a given message.
+ * @returns string
  */
-const mdtServiceFactory = () => {
-  /**
-   * Creates a md5 hash from a given message.
-   * @returns string
-   */
-  const hash = (message) => md5(message);
+const hash = (message) => md5(message);
 
-  /**
-   * Ensures the provided value is a valid md5 hash.
-   * @param {*} hashString
-   * @returns boolean
-   */
-  const validate = (hashString) => /^[a-f0-9]{32}$/gi.test(hashString);
+/**
+ * Ensures the provided value is a valid md5 hash.
+ * @param {*} hashString
+ * @returns boolean
+ */
+const validate = (hashString) => /^[a-f0-9]{32}$/gi.test(hashString);
 
 
 
 
-
-  /* **************
-   * MODULE BUILD *
-   ************** */
-  return Object.freeze({
-    hash,
-    validate,
-  });
+/* ************************************************************************************************
+ *                                         MODULE EXPORTS                                         *
+ ************************************************************************************************ */
+export {
+  hash,
+  validate,
 };
-
-
-
-
-/**
- * Global Instance
- */
-const MD5Service = mdtServiceFactory();
-
-
-
-
-/**
- * Module Exports
- */
-export default MD5Service;

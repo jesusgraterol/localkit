@@ -1,12 +1,12 @@
 import select from '@inquirer/select';
 import { input } from '@inquirer/prompts';
-import MD5Service from './md5.service.js';
-import Utilities from '../shared/utilities/utilities.js';
+import { print } from '../shared/utilities/utilities.js';
+import { hash, validate } from './md5.service.js';
 
-/**
- * Module Launcher
- */
-export default async function moduleLauncher() {
+/* ************************************************************************************************
+ *                                        MODULE LAUNCHER                                         *
+ ************************************************************************************************ */
+export default async function launcher() {
   // read the user input
   const answer = await select({
     message: 'Select an action',
@@ -32,19 +32,19 @@ export default async function moduleLauncher() {
         message: 'Enter the message you wish to hash',
         validate: ((v) => v.length > 0),
       });
-      Utilities.print('MD5Service.hash', [
+      print('MD5Service.hash', [
         'Original:',
         message,
         '\n\nmd5 Hash:',
-        MD5Service.hash(message),
+        hash(message),
       ], true);
       break;
     }
     case 'validate': {
-      const hash = await input({ message: 'Enter the md5 hash', validate: ((v) => v.length > 0) });
-      Utilities.print('MD5Service.validate', [
+      const h = await input({ message: 'Enter the md5 hash', validate: ((v) => v.length > 0) });
+      print('MD5Service.validate', [
         hash,
-        `Is ${MD5Service.validate(hash) ? 'a VALID' : 'an INVALID'} md5 hash`,
+        `Is ${validate(h) ? 'a VALID' : 'an INVALID'} md5 hash`,
       ]);
       break;
     }
