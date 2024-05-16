@@ -2,7 +2,7 @@
  * PWA Assets Builder Configuration
  * The configuration that will be used in order to generate the PWA Assets.
  */
-const CONFIG = Object.freeze({
+const CONFIG = {
   // the exact width and height the logo image needs to be in order for the assets to be generated
   logoDimensionsRequirement: { width: 1024, height: 1024 },
 
@@ -146,7 +146,9 @@ const CONFIG = Object.freeze({
       { dimensions: { width: 500, height: 500 }, logoScale: 0.32 },
     ],
   },
-});
+};
+
+
 
 
 

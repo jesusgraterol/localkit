@@ -1,8 +1,12 @@
 import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
-import Utilities from '../shared/utilities/utilities.js';
-import FileSystemService from '../shared/file-system/file-system.service.js';
-import FaviconBuilderService from './favicon-builder.service.js';
+import { prettifyImageDimensions } from '../shared/utilities/utilities.js';
+import { pathExists, deleteDirectory } from '../shared/file-system/file-system.service.js';
 import CONFIG from './favicon-builder.config.js';
+import { build } from './favicon-builder.service.js';
+
+/* ************************************************************************************************
+ *                                             MOCKS                                              *
+ ************************************************************************************************ */
 
 /**
  * Favicon Builder Config Mock
@@ -23,6 +27,13 @@ jest.mock('./favicon-builder.config.js', () => {
 });
 
 
+
+
+
+/* ************************************************************************************************
+ *                                             TESTS                                              *
+ ************************************************************************************************ */
+
 describe('Build Process', () => {
   beforeAll(() => { });
 
@@ -33,18 +44,18 @@ describe('Build Process', () => {
   afterEach(() => { });
 
   test('can build the Favicon Assets', async () => {
-    const id = await FaviconBuilderService.build('./favicon-assetsample.png');
-    expect(await FileSystemService.pathExists(id)).toBe(true);
-    expect(await FileSystemService.pathExists(`${id}/favicon.ico`)).toBe(true);
-    expect(await FileSystemService.pathExists(`${id}/receipt.txt`)).toBe(true);
-    expect(await FileSystemService.pathExists(`${id}/source.png`)).toBe(true);
-    expect(await FileSystemService.pathExists(`${id}/favicons`)).toBe(true);
+    const id = await build('./favicon-assetsample.png');
+    expect(await pathExists(id)).toBe(true);
+    expect(await pathExists(`${id}/favicon.ico`)).toBe(true);
+    expect(await pathExists(`${id}/receipt.txt`)).toBe(true);
+    expect(await pathExists(`${id}/source.png`)).toBe(true);
+    expect(await pathExists(`${id}/favicons`)).toBe(true);
     const variations = await Promise.all(
       CONFIG.outputDimensions.map(
-        (dim) => FileSystemService.pathExists(`${id}/favicons/${Utilities.prettifyImageDimensions(dim)}.png`),
+        (dim) => pathExists(`${id}/favicons/${prettifyImageDimensions(dim)}.png`),
       ),
     );
     expect(variations.every((exists) => exists === true)).toBe(true);
-    await FileSystemService.deleteDirectory(id);
+    await deleteDirectory(id);
   });
 });

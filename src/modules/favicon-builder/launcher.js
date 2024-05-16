@@ -1,14 +1,14 @@
 import select from '@inquirer/select';
-import Utilities from '../shared/utilities/utilities.js';
-import FileSystemService from '../shared/file-system/file-system.service.js';
-import FaviconBuilderService from './favicon-builder.service.js';
+import { print } from '../shared/utilities/utilities.js';
+import { readPathContent } from '../shared/file-system/file-system.service.js';
+import { build } from './favicon-builder.service.js';
 
-/**
- * Module Launcher
- */
-export default async function moduleLauncher() {
+/* ************************************************************************************************
+ *                                        MODULE LAUNCHER                                         *
+ ************************************************************************************************ */
+export default async function launcher() {
   // read the contents of the current working directory
-  const { files } = await FileSystemService.readPathContent('./', ['.png']);
+  const { files } = await readPathContent('./', ['.png']);
   if (!files.length) {
     throw new Error('The Favicon Builder requires a .png image as the source file.');
   }
@@ -21,10 +21,10 @@ export default async function moduleLauncher() {
   });
 
   // execute the build
-  const buildID = await FaviconBuilderService.build(sourceFilePath);
+  const buildID = await build(sourceFilePath);
 
   // print the result of the build
-  Utilities.print('FaviconBuilderService.build', [
+  print('FaviconBuilderService.build', [
     'Input:',
     sourceFilePath,
     '\n\nOutput:',
