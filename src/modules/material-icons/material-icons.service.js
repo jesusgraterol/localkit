@@ -45,6 +45,9 @@ const OUT_DIR = 'material-icons';
 // the icons' source file name
 const ICONS_FILE_NAME = 'icons.woff2';
 
+// the name of the stylesheet file
+const STYLESHEET_FILE_NAME = 'index.css';
+
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -72,6 +75,7 @@ export {
   ICON_STYLES,
   OUT_DIR,
   ICONS_FILE_NAME,
+  STYLESHEET_FILE_NAME,
 
   // implementation
   install,

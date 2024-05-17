@@ -1,7 +1,12 @@
 import select from '@inquirer/select';
-import { input } from '@inquirer/prompts';
-import { print, delay, formatDate } from '../shared/utilities/utilities.js';
-import { ICON_STYLES, install } from './material-icons.service.js';
+import { print } from '../shared/utilities/utilities.js';
+import {
+  ICON_STYLES,
+  OUT_DIR,
+  ICONS_FILE_NAME,
+  STYLESHEET_FILE_NAME,
+  install,
+} from './material-icons.service.js';
 
 /* ************************************************************************************************
  *                                        MODULE LAUNCHER                                         *
@@ -23,7 +28,9 @@ export default async function launcher() {
   // install the icons
   await install(answers.styleName, answers.filled);
   print('MaterialIconsService.install', [
-    `${STRENGTH_ALIAS[calculateStrength(password)]} Password:`,
-    password,
+    `${OUT_DIR}/`,
+    `  ${ICONS_FILE_NAME}`,
+    `  ${STYLESHEET_FILE_NAME}`,
+    'Review the Material Icons documentation (localkit/Material Icons) for further instructions',
   ], true);
 }

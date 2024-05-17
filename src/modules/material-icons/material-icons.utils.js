@@ -1,4 +1,4 @@
-
+import { join } from 'node:path';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -6,17 +6,18 @@
 
 /**
  * Builds the content that will be inserted into the stylesheet that imports the icons.
+ * @param {*} iconsFileName
  * @param {*} filled
  * @returns string
  */
-const buildStyleSheet = (filled) => (`/* ************************************************************************************************
+const buildStyleSheet = (iconsFileName, filled) => (`/* ************************************************************************************************
 *                                           FONT FACE                                            *
 ************************************************************************************************ */
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(icons.woff2) format('woff2');
+  src: url(${iconsFileName}) format('woff2');
 }\n\n\n\n\n
 /* ************************************************************************************************
  *                                           BASE CLASS                                           *
@@ -47,7 +48,13 @@ const buildStyleSheet = (filled) => (`/* ***************************************
 .md-icon.md-72 { font-size: 72px; }
 `);
 
-
+/**
+ * Builds a path for a given file based on the output directory.
+ * @param {*} outDir
+ * @param {*} fileName
+ * @returns string
+ */
+const buildPath = (outDir, fileName) => join(outDir, fileName);
 
 
 
@@ -57,4 +64,5 @@ const buildStyleSheet = (filled) => (`/* ***************************************
 export {
   // implementation
   buildStyleSheet,
+  buildPath,
 };
