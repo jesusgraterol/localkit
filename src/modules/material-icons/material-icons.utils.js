@@ -35,7 +35,7 @@ const buildStyleSheet = (iconsFileName, filled) => (`/* ************************
   word-wrap: normal;
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;${filled ? '\nfont-variation-settings: \'FILL\' 1, \'wght\' 700, \'GRAD\' 0, \'opsz\' 48;' : ''}
+  -webkit-font-smoothing: antialiased;${filled ? '\n  font-variation-settings: \'FILL\' 1, \'wght\' 700, \'GRAD\' 0, \'opsz\' 48;' : ''}
 }\n\n\n\n\n
 /* ************************************************************************************************
  *                                              SIZES                                             *

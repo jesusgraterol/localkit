@@ -16,17 +16,20 @@ export default async function launcher() {
   const answers = {
     styleName: await select({
       message: 'Select icon\'s style',
-      choices: ICON_STYLES.map((style) => style.name),
+      choices: ICON_STYLES.map((style) => ({ value: style.name })),
       loop: false,
     }),
     filled: await select({
       message: 'Filled?',
-      choices: ['Yes', 'No'],
+      choices: [{ value: 'No' }, { value: 'Yes' }],
     }),
   };
 
   // install the icons
-  await install(answers.styleName, answers.filled);
+  await install(
+    ICON_STYLES.find((style) => style.name === answers.styleName),
+    answers.filled === 'Yes',
+  );
   print('MaterialIconsService.install', [
     `${OUT_DIR}/`,
     `  ${ICONS_FILE_NAME}`,

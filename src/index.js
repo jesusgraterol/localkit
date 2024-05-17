@@ -12,6 +12,7 @@ import otpModuleLauncher from './modules/otp/launcher.js';
 import youtubeDownloaderModuleLauncher from './modules/youtube-downloader/launcher.js';
 import faviconBuilderModuleLauncher from './modules/favicon-builder/launcher.js';
 import pwaAssetsBuilderModuleLauncher from './modules/pwa-assets-builder/launcher.js';
+import materialIconsLauncher from './modules/material-icons/launcher.js';
 import aes256ModuleLauncher from './modules/aes256/launcher.js';
 import md5ModuleLauncher from './modules/md5/launcher.js';
 
@@ -51,6 +52,12 @@ const MODULES = [
     value: 'pwa_assets_builder',
     description: 'Build all the images required for a PWA to be published',
     launcher: pwaAssetsBuilderModuleLauncher,
+  },
+  {
+    name: 'Material Icons',
+    value: 'material_icons',
+    description: 'Download and install Material Icons in your web app',
+    launcher: materialIconsLauncher,
   },
   {
     name: 'AES256',

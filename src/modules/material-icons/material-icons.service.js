@@ -1,3 +1,11 @@
+import { Buffer } from 'node:buffer';
+import {
+  pathExists,
+  deleteDirectory,
+  writeFile,
+  makeDirectory,
+} from '../shared/file-system/file-system.service.js';
+import { buildStyleSheet, buildPath } from './material-icons.utils.js';
 
 /**
  * Material Icons
@@ -14,7 +22,7 @@
  * https://developers.google.com/fonts/docs/material_symbols
  *
  *
- * IMPORTANT: The filled icons don't have a specific file, they can be enabled by setting the 
+ * IMPORTANT: The filled icons don't have a specific file, they can be enabled by setting the
  * variation settings property as follows:
  * font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;
  */
@@ -27,15 +35,15 @@
 const ICON_STYLES = [
   {
     name: 'Outlined',
-    url: 'https://github.com/google/material-design-icons/blob/master/variablefont/MaterialSymbolsOutlined%5BFILL%2CGRAD%2Copsz%2Cwght%5D.woff2',
+    url: 'https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/MaterialSymbolsOutlined%5BFILL%2CGRAD%2Copsz%2Cwght%5D.woff2',
   },
   {
     name: 'Rounded',
-    url: 'https://github.com/google/material-design-icons/blob/master/variablefont/MaterialSymbolsRounded%5BFILL%2CGRAD%2Copsz%2Cwght%5D.woff2',
+    url: 'https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/MaterialSymbolsRounded%5BFILL%2CGRAD%2Copsz%2Cwght%5D.woff2',
   },
   {
     name: 'Sharp',
-    url: 'https://github.com/google/material-design-icons/blob/master/variablefont/MaterialSymbolsSharp%5BFILL%2CGRAD%2Copsz%2Cwght%5D.woff2',
+    url: 'https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/MaterialSymbolsSharp%5BFILL%2CGRAD%2Copsz%2Cwght%5D.woff2',
   },
 ];
 
@@ -49,18 +57,52 @@ const ICONS_FILE_NAME = 'icons.woff2';
 const STYLESHEET_FILE_NAME = 'index.css';
 
 
+
+
+
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
+
+/**
+ * Downloads the icon's file based on a style URL.
+ * @param {*} url
+ * @returns Promise<ArrayBuffer>
+ */
+const __downloadIcons = (url) => fetch(url).then((response) => response.arrayBuffer());
 
 /**
  * Downloads and generates the required stylesheet for the provided style.
  * @param {*} style
  * @param {?} filled
  * @returns Promise<void>
+ * @throws
+ * - If the OUT_DIR already exists
  */
 const install = async (style, filled = false) => {
+  // ensure the outDir doesn't exist
+  if (await pathExists(OUT_DIR)) {
+    throw new Error(`The icons cannot be installed because the directory '${OUT_DIR}' already exists`);
+  }
 
+  // attempt to perform the installation
+  try {
+    // create the icons' directory
+    await makeDirectory(OUT_DIR);
+
+    // download the icons file
+    const icons = await __downloadIcons(style.url);
+    await writeFile(buildPath(OUT_DIR, ICONS_FILE_NAME), Buffer.from(icons));
+
+    // build and store the stylesheet
+    await writeFile(
+      buildPath(OUT_DIR, STYLESHEET_FILE_NAME),
+      buildStyleSheet(ICONS_FILE_NAME, filled),
+    );
+  } catch (e) {
+    console.error(e);
+    await deleteDirectory(OUT_DIR);
+  }
 };
 
 
