@@ -12,7 +12,7 @@ The modules are:
 - [YoutubeDownloader:](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md) download videos/audio files from YouTube
 - [Favicon Builder:](./readme-assets/modules/FAVICON_BUILDER/README.md) build all the favicon files required by modern web apps
 - [PWA Assets Builder:](./readme-assets/modules/PWA_ASSETS_BUILDER/README.md) build all the assets required for a PWA to be published
-- [Material Icons:](./readme-assets/modules/MATERIAL_ICONS/README.md) download and install the Material Icons on a web app
+- [Material Icons:](./readme-assets/modules/MATERIAL_ICONS/README.md) download and install the Material Icons on a web application
 - [AES256:](./readme-assets/modules/AES256/README.md) encrypt and decrypt messages with the AES256 algorithm
 - [MD5:](./readme-assets/modules/MD5/README.md) hash and validate messages with the MD5 Algorithm
 
