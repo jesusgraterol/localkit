@@ -136,7 +136,7 @@ $ npm run test:integration
 - [sharp](https://github.com/lovell/sharp)
 - [png-to-ico](https://github.com/steambap/png-to-ico)
 - [ffmpeg](https://ffmpeg.org/)
-
+- [Material Design Icons](https://github.com/google/material-design-icons)
 
 
 
@@ -151,5 +151,5 @@ $ npm run test:integration
 - [awesome-meta-and-manifest](https://github.com/gokulkrishh/awesome-meta-and-manifest)
 - [PWABuilder](https://www.pwabuilder.com/imageGenerator)
 - [pwa-asset-generator](https://github.com/elegantapp/pwa-asset-generator)
-
+- [Material Symbols Guide](https://developers.google.com/fonts/docs/material_symbols)
 

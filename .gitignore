@@ -3,6 +3,7 @@ node_modules
 # build dirs
 pwa-assets-build-*/
 favicon-build-*/
+material-icons
 
 # sample assets
 # these files are now stored in the project in order to simplify automated and manual testing.
@@ -10,3 +11,4 @@ favicon-build-*/
 
 # mock files used as helpers for trying Node APIs
 *-mock.js
+
