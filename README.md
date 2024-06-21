@@ -7,6 +7,7 @@ The localkit CLI provides a series of utilities that can be used by web develope
 The modules are:
 
 - [Password:](./readme-assets/modules/PASSWORD/README.md) generate and analyze passwords
+- [Random Bytes:](./readme-assets/modules/RANDOM_BYTES/README.md) generate and validate Base64URL encoded sequences of random bytes
 - [UUID:](./readme-assets/modules/UUID/README.md) generate and validate UUIDs (Universally Unique Identifiers)
 - [OTP:](./readme-assets/modules/OTP/README.md) generate OTP (One Time Password) secrets and tokens
 - [YoutubeDownloader:](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md) download videos/audio files from YouTube
