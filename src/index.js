@@ -7,6 +7,7 @@ import { readPackageFile } from './modules/shared/file-system/file-system.servic
  *                                        MODULE LAUNCHERS                                        *
  ************************************************************************************************ */
 import passwordModuleLauncher from './modules/password/launcher.js';
+import randomBytesLauncher from './modules/random-bytes/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
 import youtubeDownloaderModuleLauncher from './modules/youtube-downloader/launcher.js';
@@ -22,6 +23,12 @@ const MODULES = [
     value: 'password',
     description: 'Generate and analyze passwords',
     launcher: passwordModuleLauncher,
+  },
+  {
+    name: 'Random Bytes',
+    value: 'random_bytes',
+    description: 'Generate a sequence of random bytes',
+    launcher: randomBytesLauncher,
   },
   {
     name: 'UUID',
