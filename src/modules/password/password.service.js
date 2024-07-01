@@ -7,7 +7,7 @@ import { passwordStrength } from 'check-password-strength';
 
 // the list of characters that won't be included into passwords in order to avoid issues. e.g.
 // when using one of these values in a .env file.
-const __EXCLUDE_CHARACTERS = '"\'={}`';
+const __EXCLUDE_CHARACTERS = '"\'={}`$';
 
 // the aliases that describe the strength of a password
 const STRENGTH_ALIAS = ['Very Weak', 'Weak', 'Medium', 'Strong'];
