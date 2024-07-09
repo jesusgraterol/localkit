@@ -10,12 +10,12 @@ import passwordModuleLauncher from './modules/password/launcher.js';
 import randomBytesLauncher from './modules/random-bytes/launcher.js';
 import uuidModuleLauncher from './modules/uuid/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
+import aes256ModuleLauncher from './modules/aes256/launcher.js';
+import md5ModuleLauncher from './modules/md5/launcher.js';
 import youtubeDownloaderModuleLauncher from './modules/youtube-downloader/launcher.js';
 import faviconBuilderModuleLauncher from './modules/favicon-builder/launcher.js';
 import pwaAssetsBuilderModuleLauncher from './modules/pwa-assets-builder/launcher.js';
 import materialIconsLauncher from './modules/material-icons/launcher.js';
-import aes256ModuleLauncher from './modules/aes256/launcher.js';
-import md5ModuleLauncher from './modules/md5/launcher.js';
 
 const MODULES = [
   {
@@ -43,6 +43,18 @@ const MODULES = [
     launcher: otpModuleLauncher,
   },
   {
+    name: 'AES256',
+    value: 'aes256',
+    description: 'Encrypt and decrypt messages with the AES256 algorithm',
+    launcher: aes256ModuleLauncher,
+  },
+  {
+    name: 'MD5',
+    value: 'md5',
+    description: 'Hash and validate messages with the MD5 Algorithm',
+    launcher: md5ModuleLauncher,
+  },
+  {
     name: 'YouTube Downloader',
     value: 'youtube_downloader',
     description: 'Gownload videos/audio files from YouTube',
@@ -66,18 +78,6 @@ const MODULES = [
     description: 'Download and install Material Icons in your web app',
     launcher: materialIconsLauncher,
   },
-  {
-    name: 'AES256',
-    value: 'aes256',
-    description: 'Encrypt and decrypt messages with the AES256 algorithm',
-    launcher: aes256ModuleLauncher,
-  },
-  {
-    name: 'MD5',
-    value: 'md5',
-    description: 'Hash and validate messages with the MD5 Algorithm',
-    launcher: md5ModuleLauncher,
-  },
 ];
 
 
@@ -97,6 +97,7 @@ const answer = await select({
     description: module.description,
     disabled: module.launcher === undefined ? '@TODO' : false,
   })),
+  pageSize: 100,
   loop: false,
 });
 
