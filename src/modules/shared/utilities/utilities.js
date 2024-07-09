@@ -38,20 +38,11 @@ const formatDate = (
   dateFormat = 'dd/MM/yyyy, hh:mm:ss a',
 ) => format(typeof timestamp === 'number' ? new Date(timestamp) : new Date(), dateFormat);
 
-
 /**
- * Builds the header of the CLI based on the extracted version.
- * @param {?} version
+ * Builds the CLI's header - ready to be printed.
  * @returns string
  */
-const buildCLIHeader = (version) => {
-  let header = 'localkit';
-  if (typeof version === 'string') {
-    header += ` v${version}`;
-  }
-  return `\n${header}\n`;
-};
-
+const buildCLIHeader = () => '\nlocalkit\n';
 
 /**
  * Outputs the given content to the terminal.
@@ -76,7 +67,6 @@ const print = (title, content, includeDate = false, includeBorders = true) => {
   }
   if (includeBorders) console.log('\n========================================');
 };
-
 
 /**
  * Creates a delay which duration is based on the amount of provided seconds.

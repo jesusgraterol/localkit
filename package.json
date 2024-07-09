@@ -1,6 +1,6 @@
 {
   "name": "localkit",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "The localkit CLI provides a series of utilities that can be used by web developers to enhance their workflow.",
   "main": "src/index.js",
   "type": "module",

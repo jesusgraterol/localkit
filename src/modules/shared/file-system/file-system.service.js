@@ -2,19 +2,6 @@ import fs from 'fs';
 import pathHelper from 'path';
 
 /* ************************************************************************************************
- *                                           CONSTANTS                                            *
- ************************************************************************************************ */
-
-// the list of possible paths in which the package.json file can be found
-const __PACKAGE_FILE_PATHS = [
-  '/usr/local/lib/node_modules/localkit/package.json',
-];
-
-
-
-
-
-/* ************************************************************************************************
  *                                       GENERAL MANAGEMENT                                       *
  ************************************************************************************************ */
 
@@ -257,32 +244,6 @@ const copyFile = (originPath, destinationPath) => new Promise((resolve, reject) 
 
 
 /* ************************************************************************************************
- *                                           MISC HELPERS                                         *
- ************************************************************************************************ */
-
-/**
- * Attempts to read the package file resursively. If it is unable to do so, it returns undefined.
- * @param {*} nextIndex
- * @returns Promise<string|undefined>
- */
-const readPackageFile = async (nextIndex = 0) => {
-  // declare the base case
-  if (nextIndex === __PACKAGE_FILE_PATHS.length) {
-    return undefined;
-  }
-
-  // attempt to read the file
-  try {
-    return await readFile(__PACKAGE_FILE_PATHS[nextIndex]);
-  } catch (e) {
-    return readPackageFile(nextIndex + 1);
-  }
-};
-
-
-
-
-/* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
@@ -299,7 +260,4 @@ export {
   readFile,
   deleteFile,
   copyFile,
-
-  // misc helpers
-  readPackageFile,
 };
