@@ -2,7 +2,7 @@
 
 ![localkit](./readme-assets/screenshot-01.png)
 
-The localkit CLI provides a series of utilities that can be used by web developers to enhance their workflow.
+Boost your web development workflow with [`localkit`](https://www.npmjs.com/package/localkit), an open-source CLI that simplifies common tasks like password generation, Base64URL encoding, UUID creation, OTP management, encryption, hashing, YouTube downloads, favicon creation, PWA asset generation, and Material Icon installation. Save time and focus on building amazing web apps!
 
 The modules are:
 
