@@ -2,7 +2,7 @@
 
 ![localkit](./readme-assets/screenshot-01.png)
 
-Boost your web development workflow with [`localkit`](https://www.npmjs.com/package/localkit), an open-source CLI that simplifies common tasks like password generation, Base64URL encoding, UUID creation, OTP management, encryption, hashing, YouTube downloads, favicon creation, PWA asset generation, and Material Icon installation. Save time and focus on building amazing web apps!
+Boost your web development workflow with [`localkit`](https://www.npmjs.com/package/localkit), an open-source CLI that simplifies common tasks like password generation, Base64URL encoding, UUID creation, OTP management, encryption, hashing, favicon creation, PWA asset generation, and Material Icon installation. Save time and focus on building amazing web apps!
 
 The modules are:
 
@@ -12,7 +12,6 @@ The modules are:
 - [OTP:](./readme-assets/modules/OTP/README.md) generate OTP (One Time Password) secrets and tokens
 - [AES256:](./readme-assets/modules/AES256/README.md) encrypt and decrypt messages with the AES256 algorithm
 - [MD5:](./readme-assets/modules/MD5/README.md) hash and validate messages with the MD5 Algorithm
-- [YoutubeDownloader:](./readme-assets/modules/YOUTUBE_DOWNLOADER/README.md) download videos/audio files from YouTube
 - [Favicon Builder:](./readme-assets/modules/FAVICON_BUILDER/README.md) build all the favicon files required by modern web apps
 - [PWA Assets Builder:](./readme-assets/modules/PWA_ASSETS_BUILDER/README.md) build all the assets required for a PWA to be published
 - [Material Icons:](./readme-assets/modules/MATERIAL_ICONS/README.md) download and install the Material Icons on a web application

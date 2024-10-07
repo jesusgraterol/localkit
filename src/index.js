@@ -11,7 +11,6 @@ import uuidModuleLauncher from './modules/uuid/launcher.js';
 import otpModuleLauncher from './modules/otp/launcher.js';
 import aes256ModuleLauncher from './modules/aes256/launcher.js';
 import md5ModuleLauncher from './modules/md5/launcher.js';
-import youtubeDownloaderModuleLauncher from './modules/youtube-downloader/launcher.js';
 import faviconBuilderModuleLauncher from './modules/favicon-builder/launcher.js';
 import pwaAssetsBuilderModuleLauncher from './modules/pwa-assets-builder/launcher.js';
 import materialIconsLauncher from './modules/material-icons/launcher.js';
@@ -52,12 +51,6 @@ const MODULES = [
     value: 'md5',
     description: 'Hash and validate messages with the MD5 Algorithm',
     launcher: md5ModuleLauncher,
-  },
-  {
-    name: 'YouTube Downloader',
-    value: 'youtube_downloader',
-    description: 'Gownload videos/audio files from YouTube',
-    launcher: youtubeDownloaderModuleLauncher,
   },
   {
     name: 'Favicon Builder',
