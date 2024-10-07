@@ -26,6 +26,9 @@ The modules are:
 1) Install the CLI Globally
 ```bash
 $ npm install -g localkit
+
+# can be updated with
+$ npm update -g localkit
 ```
 
 2) Run it with:
