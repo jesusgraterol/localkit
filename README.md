@@ -2,7 +2,7 @@
 
 ![localkit](./readme-assets/screenshot-01.png)
 
-Boost your web development workflow with [`localkit`](https://www.npmjs.com/package/localkit), an open-source CLI that simplifies common tasks like password generation, Base64URL encoding, UUID creation, OTP management, encryption, hashing, favicon creation, PWA asset generation, and Material Icon installation. Save time and focus on building amazing web apps!
+The [`localkit`](https://www.npmjs.com/package/localkit) package is an open-source command-line interface (CLI) designed to streamline your web development workflow. It provides a suite of tools for common tasks, including secure password generation, Base64URL encoding/decoding, UUID creation, OTP management, encryption, hashing, favicon creation, PWA asset generation, and Material Icon installation.
 
 The modules are:
 
@@ -23,17 +23,17 @@ The modules are:
 
 ## Getting Started
 
-1) Install the CLI Globally
+Install the CLI Globally
 ```bash
-$ npm install -g localkit
+npm install -g localkit
 
 # can be updated with
-$ npm update -g localkit
+npm update -g localkit
 ```
 
-2) Run it with:
+Run it with:
 ```bash
-$ localkit
+localkit
 ```
 
 <br/>
@@ -44,38 +44,25 @@ If you wish to make use of the LocaLKit CLI to perform sensitive operations, I s
 
 ### Requirements
 
-- GIT
-- NodeJS ^v21.0.0
-- NPM ^v10.2.0
+- Git
+- NodeJS ^v22.11.0
+- NPM ^10.9.0
 
 ### Installation
 
-1) Clone the repository
+Clone the repository
 ```bash
-$ git clone git@github.com:your-username/localkit.git
+git clone git@github.com:your-username/localkit.git
 ```
 
-2) Install the dependencies
+Install the dependencies
 ```bash
-$ npm install
+npm install
 ```
 
-3) Run it
+Run it
 ```bash
-$ npm start
-```
-
-
-
-
-
-
-<br/>
-
-## Deployment
-
-```bash
-$ npm publish
+npm start
 ```
 
 
@@ -95,21 +82,12 @@ $ npm publish
 ## Running the Tests
 
 ```bash
-# Unit Tests
-$ npm run test:unit
+# unit tests
+npm run test:unit
 
-# Integration Tests
-$ npm run test:integration
+# integration tests
+npm run test:integration
 ```
-
-
-
-
-<br/>
-
-## @TODO
-
-[ ] Implement the JavaScript/Typescript/CSS file template generators
 
 
 
@@ -121,25 +99,6 @@ $ npm run test:integration
 [MIT](https://choosealicense.com/licenses/mit/)
 
 
-
-
-<br/>
-
-## Acknowledgments
-
-- [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
-- [node-aes256](https://github.com/JamesMGreene/node-aes256)
-- [check-password-strength](https://github.com/deanilvincent/check-password-strength)
-- [date-fns](https://github.com/date-fns/date-fns)
-- [generate-password](https://github.com/brendanashworth/generate-password)
-- [node-md5](https://github.com/pvorb/node-md5)
-- [uuid](https://github.com/uuidjs/uuid)
-- [otplib](https://github.com/yeojz/otplib)
-- [ytdl](https://github.com/fent/node-ytdl-core)
-- [sharp](https://github.com/lovell/sharp)
-- [png-to-ico](https://github.com/steambap/png-to-ico)
-- [ffmpeg](https://ffmpeg.org/)
-- [Material Design Icons](https://github.com/google/material-design-icons)
 
 
 
@@ -155,4 +114,17 @@ $ npm run test:integration
 - [PWABuilder](https://www.pwabuilder.com/imageGenerator)
 - [pwa-asset-generator](https://github.com/elegantapp/pwa-asset-generator)
 - [Material Symbols Guide](https://developers.google.com/fonts/docs/material_symbols)
+
+
+
+
+
+
+<br/>
+
+## Deployment
+
+```bash
+npm publish
+```
 
