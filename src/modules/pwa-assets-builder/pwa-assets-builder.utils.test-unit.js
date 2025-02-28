@@ -113,13 +113,13 @@ describe('Manifest Build Utilities', () => {
           src: 'pwa-assets/icons/48x48.png',
           sizes: '48x48',
           type: 'image/png',
-          purpose: 'any',
+          purpose: 'maskable any',
         },
         {
           src: 'pwa-assets/icons/1024x1024.png',
           sizes: '1024x1024',
           type: 'image/png',
-          purpose: 'any',
+          purpose: 'maskable any',
         },
       ],
     });
