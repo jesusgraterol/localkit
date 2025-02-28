@@ -4,3 +4,4 @@ favicon-assetsample.png
 jest.test-integration.config.json
 jest.test-unit.config.json
 pwa-assetsample.png
+*.test-*.js
