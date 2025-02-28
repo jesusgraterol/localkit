@@ -97,7 +97,7 @@ const __buildManifestIcon = (icon) => {
     src: `pwa-assets/icons/${dimStr}.png`,
     sizes: dimStr,
     type: 'image/png',
-    purpose: 'any',
+    purpose: 'maskable any',
   };
 };
 
