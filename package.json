@@ -1,6 +1,6 @@
 {
   "name": "localkit",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "The localkit package is an open-source command-line interface (CLI) designed to streamline your web development workflow. It provides a suite of tools for common tasks, including secure password generation, Base64URL encoding/decoding, UUID creation, OTP management, encryption, hashing, favicon creation, PWA asset generation, and Material Icon installation.",
   "main": "src/index.js",
   "type": "module",
