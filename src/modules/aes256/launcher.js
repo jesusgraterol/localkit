@@ -33,28 +33,28 @@ export default async function launcher() {
     case 'encrypt': {
       // extract the input
       const answers = {
-        message: await input({ message: 'Enter the message', validate: ((v) => v.length > 0) }),
-        password: await input({ message: 'Enter the password', validate: ((v) => v.length > 0) }),
+        message: await input({ message: 'Enter the message', validate: (v) => v.length > 0 }),
+        password: await input({ message: 'Enter the password', validate: (v) => v.length > 0 }),
       };
 
       // encrypt the message
       const encryptedMessage = encrypt(answers.password, answers.message);
 
       // print the results
-      print('AES256Service.encrypt', [
-        'Original Message:',
-        answers.message,
-        '\nPassword:',
-        answers.password,
-        '\nEncrypted Message:',
-        encryptedMessage,
-      ], true);
+      print(
+        'AES256Service.encrypt',
+        [
+          'Original Message:',
+          answers.message,
+          '\nPassword:',
+          answers.password,
+          '\nEncrypted Message:',
+          encryptedMessage,
+        ],
+        true,
+      );
       break;
     }
-
-
-
-
 
     /* ********************************************************************************************
      *                                          DECRYPT                                           *
@@ -62,22 +62,29 @@ export default async function launcher() {
     case 'decrypt': {
       // extract the input
       const answers = {
-        message: await input({ message: 'Enter the encrypted message', validate: ((v) => v.length > 0) }),
-        password: await input({ message: 'Enter the password', validate: ((v) => v.length > 0) }),
+        message: await input({
+          message: 'Enter the encrypted message',
+          validate: (v) => v.length > 0,
+        }),
+        password: await input({ message: 'Enter the password', validate: (v) => v.length > 0 }),
       };
 
       // decrypt the message
       const decryptedMessage = decrypt(answers.password, answers.message);
 
       // print the results
-      print('AES256Service.decrypt', [
-        'Encrypted Message:',
-        answers.message,
-        '\nPassword:',
-        answers.password,
-        '\nOriginal Message:',
-        decryptedMessage,
-      ], true);
+      print(
+        'AES256Service.decrypt',
+        [
+          'Encrypted Message:',
+          answers.message,
+          '\nPassword:',
+          answers.password,
+          '\nOriginal Message:',
+          decryptedMessage,
+        ],
+        true,
+      );
       break;
     }
     default:

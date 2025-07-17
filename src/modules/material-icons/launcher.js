@@ -15,7 +15,7 @@ export default async function launcher() {
   // read the user input
   const answers = {
     styleName: await select({
-      message: 'Select icon\'s style',
+      message: "Select icon's style",
       choices: ICON_STYLES.map((style) => ({ value: style.name })),
       loop: false,
     }),
@@ -30,10 +30,14 @@ export default async function launcher() {
     ICON_STYLES.find((style) => style.name === answers.styleName),
     answers.filled === 'Yes',
   );
-  print('MaterialIconsService.install', [
-    `${OUT_DIR}/`,
-    `  ${ICONS_FILE_NAME}`,
-    `  ${STYLESHEET_FILE_NAME}`,
-    'Review the Material Icons documentation (localkit/Material Icons) for further instructions',
-  ], true);
+  print(
+    'MaterialIconsService.install',
+    [
+      `${OUT_DIR}/`,
+      `  ${ICONS_FILE_NAME}`,
+      `  ${STYLESHEET_FILE_NAME}`,
+      'Review the Material Icons documentation (localkit/Material Icons) for further instructions',
+    ],
+    true,
+  );
 }

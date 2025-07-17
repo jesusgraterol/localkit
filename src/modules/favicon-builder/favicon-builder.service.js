@@ -24,10 +24,7 @@ import {
  */
 const build = async (sourcePath) => {
   // read the source path
-  const sourceFile = await readSourcePath(
-    sourcePath,
-    CONFIG.outputDimensions.at(-1),
-  );
+  const sourceFile = await readSourcePath(sourcePath, CONFIG.outputDimensions.at(-1));
 
   // initialize the identifier
   const id = generateBuildID('favicon');
@@ -40,10 +37,11 @@ const build = async (sourcePath) => {
     await makeDirectory(`${id}/favicons`);
 
     // generate all the output sizes
-    await Promise.all(CONFIG.outputDimensions.map((dim) => sourceFile.resize(
-      dim.width,
-      dim.height,
-    ).toFile(getFaviconPathByDimensions(id, dim))));
+    await Promise.all(
+      CONFIG.outputDimensions.map((dim) =>
+        sourceFile.resize(dim.width, dim.height).toFile(getFaviconPathByDimensions(id, dim)),
+      ),
+    );
 
     // create a copy of the source file
     await copyFile(sourcePath, `${id}/source.png`);
@@ -66,9 +64,6 @@ const build = async (sourcePath) => {
     throw e;
   }
 };
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

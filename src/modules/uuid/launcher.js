@@ -28,17 +28,11 @@ export default async function launcher() {
   // execute the apropriate action
   switch (answer) {
     case 'generate':
-      print('UUIDService.generate', [
-        'Generated UUID:',
-        generate(),
-      ], true);
+      print('UUIDService.generate', ['Generated UUID:', generate()], true);
       break;
     case 'validate': {
-      const uuid = await input({ message: 'Enter the uuid v4', validate: ((v) => v.length > 0) });
-      print('UUIDService.validate', [
-        `${validate(uuid) ? 'VALID' : 'INVALID'} UUID:`,
-        uuid,
-      ]);
+      const uuid = await input({ message: 'Enter the uuid v4', validate: (v) => v.length > 0 });
+      print('UUIDService.validate', [`${validate(uuid) ? 'VALID' : 'INVALID'} UUID:`, uuid]);
       break;
     }
     default:

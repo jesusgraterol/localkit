@@ -41,9 +41,9 @@ const __buildAsset = async (baseDirPath, logoSourcePath, backgroundColor, asset)
   );
 
   // compose the asset image and save it
-  await bgImage.composite(
-    [{ input: logoImage, blend: 'over' }],
-  ).toFile(`${baseDirPath}/${generateAssetName(asset.dimensions)}`);
+  await bgImage
+    .composite([{ input: logoImage, blend: 'over' }])
+    .toFile(`${baseDirPath}/${generateAssetName(asset.dimensions)}`);
 };
 
 /**
@@ -59,35 +59,23 @@ const __buildCategory = async (assetsRootPath, logoSourcePath, backgroundColor, 
   await makeDirectory(baseDirPath);
 
   // build all the assets
-  await Promise.all(CONFIG.output[category].map((asset) => __buildAsset(
-    baseDirPath,
-    logoSourcePath,
-    backgroundColor,
-    asset,
-  )));
+  await Promise.all(
+    CONFIG.output[category].map((asset) =>
+      __buildAsset(baseDirPath, logoSourcePath, backgroundColor, asset),
+    ),
+  );
 };
-
-
-
 
 /**
  * Builds and saves the manifest file.
  * @param {*} buildID
  * @returns Promise<void>
  */
-const __buildAndSaveManifestFile = (buildID, backgroundColor) => writeFile(
-  `${buildID}/manifest.webmanifest`,
-  JSON.stringify(
-    buildManifestFile(
-      CONFIG.output.icons,
-      backgroundColor,
-    ),
-    undefined,
-    2,
-  ),
-);
-
-
+const __buildAndSaveManifestFile = (buildID, backgroundColor) =>
+  writeFile(
+    `${buildID}/manifest.webmanifest`,
+    JSON.stringify(buildManifestFile(CONFIG.output.icons, backgroundColor), undefined, 2),
+  );
 
 /**
  * Builds and saves the receipt file.
@@ -104,19 +92,11 @@ const __buildAndSaveReceiptFile = (
   buildID,
   assetsRootPath,
   outputConfig,
-) => writeFile(
-  `${buildID}/receipt.txt`,
-  buildReceiptFile(
-    sourcePath,
-    backgroundColor,
-    buildID,
-    assetsRootPath,
-    outputConfig,
-  ),
-);
-
-
-
+) =>
+  writeFile(
+    `${buildID}/receipt.txt`,
+    buildReceiptFile(sourcePath, backgroundColor, buildID, assetsRootPath, outputConfig),
+  );
 
 /* ************************************************************************************************
  *                                         BUILD PROCESS                                          *
@@ -143,12 +123,11 @@ const build = async (logoSourcePath, backgroundColor) => {
     const categories = Object.keys(CONFIG.output);
 
     // generate all the assets for all of the categories
-    await Promise.all(categories.map((category) => __buildCategory(
-      assetsRootPath,
-      logoSourcePath,
-      backgroundColor,
-      category,
-    )));
+    await Promise.all(
+      categories.map((category) =>
+        __buildCategory(assetsRootPath, logoSourcePath, backgroundColor, category),
+      ),
+    );
 
     // generate the manifest file
     await __buildAndSaveManifestFile(id, backgroundColor);
@@ -167,9 +146,6 @@ const build = async (logoSourcePath, backgroundColor) => {
     throw e;
   }
 };
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

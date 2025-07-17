@@ -31,16 +31,9 @@ export default async function launcher() {
      *                                      GENERATE SECRET                                       *
      ******************************************************************************************** */
     case 'generate_secret': {
-      print('OTPService.generateSecret', [
-        'Generated OTP Secret:',
-        generateSecret(),
-      ], true);
+      print('OTPService.generateSecret', ['Generated OTP Secret:', generateSecret()], true);
       break;
     }
-
-
-
-
 
     /* ********************************************************************************************
      *                                       GENERATE TOKEN                                       *
@@ -49,16 +42,19 @@ export default async function launcher() {
       // retrieve the secret
       const secret = await input({
         message: 'Enter the OTP Secret',
-        validate: ((v) => isSecretFormatValid(v)),
+        validate: (v) => isSecretFormatValid(v),
       });
 
       // retrieve the duration of the token generator
       const tokensTotal = await select({
         message: 'Select the duration of the Token Generator Instance',
         choices: [
-          { name: '5 minutes', value: 10 }, { name: '30 minutes', value: 60 },
-          { name: '1 hour', value: 120 }, { name: '2 hours', value: 240 },
-          { name: '6 hours', value: 720 }, { name: '12 hours', value: 1440 },
+          { name: '5 minutes', value: 10 },
+          { name: '30 minutes', value: 60 },
+          { name: '1 hour', value: 120 },
+          { name: '2 hours', value: 240 },
+          { name: '6 hours', value: 720 },
+          { name: '12 hours', value: 1440 },
         ],
         loop: false,
       });
@@ -70,7 +66,9 @@ export default async function launcher() {
         const token = generateToken(secret);
         if (token !== prevToken) {
           generated += 1;
-          console.log(`${generated}/${tokensTotal}) ${formatDate(undefined, 'hh:mm:ss a')}: ${token}`);
+          console.log(
+            `${generated}/${tokensTotal}) ${formatDate(undefined, 'hh:mm:ss a')}: ${token}`,
+          );
           // eslint-disable-next-line no-await-in-loop
           await delay(5);
         }

@@ -6,13 +6,13 @@ import { buildStyleSheet, buildPath } from './material-icons.utils.js';
  ************************************************************************************************ */
 
 describe('buildStyleSheet', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can build a stylesheet for icons that are not filled', () => {
     const stylesheet = buildStyleSheet('icons.woff2', false);
@@ -28,10 +28,6 @@ describe('buildStyleSheet', () => {
     expect(stylesheet).toContain('font-variation-settings');
   });
 });
-
-
-
-
 
 describe('buildPath', () => {
   test('can build a path for a file', () => {

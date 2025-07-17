@@ -32,13 +32,13 @@ import {
  ************************************************************************************************ */
 
 describe('General Management', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can identify when a path does not exist', async () => {
     const accessSpy = accessSpyFactory(new Error('The path does not exist!'));
@@ -74,17 +74,27 @@ describe('General Management', () => {
       buildFileSystemElement('./realdir/c-file.jpg', true, 1709482230981),
       buildFileSystemElement('./realdir/a-file.json', true, 1709482230982),
     ];
-    const readdirSpy = readdirSpyFactory(null, els.map((el) => el.baseName));
-    const lstatSpy = lstatSpyFactory(els.map((el) => ({
-      isFile: () => el.isFile,
-      birthtimeMs: el.creation,
-    })));
+    const readdirSpy = readdirSpyFactory(
+      null,
+      els.map((el) => el.baseName),
+    );
+    const lstatSpy = lstatSpyFactory(
+      els.map((el) => ({
+        isFile: () => el.isFile,
+        birthtimeMs: el.creation,
+      })),
+    );
     await expect(readPathContent('./realdir')).resolves.toStrictEqual({
       directories: [els[0]],
       files: [els[3], els[1], els[2]],
     });
     validateSpyInteractions(expect, readdirSpy, 1, ['./realdir']);
-    validateSpyInteractions(expect, lstatSpy, 4, els.map((el) => el.path));
+    validateSpyInteractions(
+      expect,
+      lstatSpy,
+      4,
+      els.map((el) => el.path),
+    );
   });
 
   test('can read a directory and filter files by extension', async () => {
@@ -93,37 +103,45 @@ describe('General Management', () => {
       buildFileSystemElement('./realdir/c-file.jpg', true, 1709482230981),
       buildFileSystemElement('./realdir/a-file.json', true, 1709482230982),
     ];
-    const readdirSpy = readdirSpyFactory(null, els.map((el) => el.baseName));
-    const lstatSpy = lstatSpyFactory(els.map((el) => ({
-      isFile: () => el.isFile,
-      birthtimeMs: el.creation,
-    })));
+    const readdirSpy = readdirSpyFactory(
+      null,
+      els.map((el) => el.baseName),
+    );
+    const lstatSpy = lstatSpyFactory(
+      els.map((el) => ({
+        isFile: () => el.isFile,
+        birthtimeMs: el.creation,
+      })),
+    );
     await expect(readPathContent('./realdir', ['.png'])).resolves.toStrictEqual({
       directories: [],
       files: [els[0]],
     });
     validateSpyInteractions(expect, readdirSpy, 1, ['./realdir']);
-    validateSpyInteractions(expect, lstatSpy, 3, els.map((el) => el.path));
+    validateSpyInteractions(
+      expect,
+      lstatSpy,
+      3,
+      els.map((el) => el.path),
+    );
   });
 });
 
-
-
-
-
 describe('Directory Management', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can handle an error when deleting a directory', async () => {
     const rmSpy = rmSpyFactory(new Error('Some weird error!'));
     await expect(deleteDirectory('./non-existent')).rejects.toThrow('Some weird error!');
-    validateSpyInteractions(expect, rmSpy, 1, [['./non-existent', { force: true, recursive: true }]]);
+    validateSpyInteractions(expect, rmSpy, 1, [
+      ['./non-existent', { force: true, recursive: true }],
+    ]);
   });
 
   test('can delete a directory', async () => {
@@ -153,37 +171,38 @@ describe('Directory Management', () => {
   });
 });
 
-
-
-
 describe('File Management', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   describe('writeFile', () => {
-    beforeAll(() => { });
+    beforeAll(() => {});
 
-    afterAll(() => { });
+    afterAll(() => {});
 
-    beforeEach(() => { });
+    beforeEach(() => {});
 
-    afterEach(() => { });
+    afterEach(() => {});
 
     test('can write a file with standard text', async () => {
       const writeFileSpy = writeFileSpyFactory();
       await expect(writeFile('./existent.txt', 'Hello!')).resolves.toBe(undefined);
-      validateSpyInteractions(expect, writeFileSpy, 1, [['./existent.txt', 'Hello!', { encoding: 'utf-8' }]]);
+      validateSpyInteractions(expect, writeFileSpy, 1, [
+        ['./existent.txt', 'Hello!', { encoding: 'utf-8' }],
+      ]);
     });
 
     test('can write a file with JSON data (the content is automatically stringified)', async () => {
       const writeFileSpy = writeFileSpyFactory();
       await expect(writeFile('./existent.json', { x: 'Hi!' })).resolves.toBe(undefined);
-      validateSpyInteractions(expect, writeFileSpy, 1, [['./existent.json', JSON.stringify({ x: 'Hi!' }), { encoding: 'utf-8' }]]);
+      validateSpyInteractions(expect, writeFileSpy, 1, [
+        ['./existent.json', JSON.stringify({ x: 'Hi!' }), { encoding: 'utf-8' }],
+      ]);
     });
 
     test('can write a file with Buffer data', async () => {
@@ -195,24 +214,26 @@ describe('File Management', () => {
     test('can handle an error when writing a file', async () => {
       const writeFileSpy = writeFileSpyFactory(new Error('Ops! There was an error!'));
       await expect(writeFile('./wrong-file', '')).rejects.toThrow('Ops! There was an error!');
-      validateSpyInteractions(expect, writeFileSpy, 1, [['./wrong-file', '', { encoding: 'utf-8' }]]);
+      validateSpyInteractions(expect, writeFileSpy, 1, [
+        ['./wrong-file', '', { encoding: 'utf-8' }],
+      ]);
     });
   });
 
   describe('readFile', () => {
-    beforeAll(() => { });
+    beforeAll(() => {});
 
-    afterAll(() => { });
+    afterAll(() => {});
 
-    beforeEach(() => { });
+    beforeEach(() => {});
 
-    afterEach(() => { });
+    afterEach(() => {});
 
     test('cannot read a file that does not exist', async () => {
       const accessSpy = accessSpyFactory(new Error('Does not exist!'));
-      await expect(
-        readFile('./non-existent.txt'),
-      ).rejects.toThrow('The file ./non-existent.txt does not exist.');
+      await expect(readFile('./non-existent.txt')).rejects.toThrow(
+        'The file ./non-existent.txt does not exist.',
+      );
       validateSpyInteractions(expect, accessSpy, 1, [['./non-existent.txt']]);
     });
 
@@ -244,13 +265,13 @@ describe('File Management', () => {
   });
 
   describe('deleteFile', () => {
-    beforeAll(() => { });
+    beforeAll(() => {});
 
-    afterAll(() => { });
+    afterAll(() => {});
 
-    beforeEach(() => { });
+    beforeEach(() => {});
 
-    afterEach(() => { });
+    afterEach(() => {});
 
     test('can handle an error when attempting to delete a file', async () => {
       const unlinkSpy = unlinkSpyFactory(new Error('Some nasty error!'));
@@ -266,17 +287,19 @@ describe('File Management', () => {
   });
 
   describe('copyFile', () => {
-    beforeAll(() => { });
+    beforeAll(() => {});
 
-    afterAll(() => { });
+    afterAll(() => {});
 
-    beforeEach(() => { });
+    beforeEach(() => {});
 
-    afterEach(() => { });
+    afterEach(() => {});
 
     test('can handle an error when attempting to copy a file', async () => {
       const copySpy = copyFileSpyFactory(new Error('Some nasty error!'));
-      await expect(copyFile('./some-file.txt', './other-file.txt')).rejects.toThrow('Some nasty error!');
+      await expect(copyFile('./some-file.txt', './other-file.txt')).rejects.toThrow(
+        'Some nasty error!',
+      );
       validateSpyInteractions(expect, copySpy, 1, [['./some-file.txt', './other-file.txt']]);
     });
 

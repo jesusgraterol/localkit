@@ -1,9 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-irregular-whitespace */
 
-
-
-
 export const LONG_MESSAGE = `
 <!DOCTYPE html>
   <!-- saved from url=(0037)https://jestjs.io/docs/using-matchers -->

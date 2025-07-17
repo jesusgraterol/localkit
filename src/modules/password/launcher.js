@@ -36,30 +36,42 @@ export default async function launcher() {
         passwordLength: await input({
           message: 'Enter the desired length',
           default: '50',
-          validate: ((v) => v.length > 0 && !Number.isNaN(v) && v >= 6 && v <= 10000),
+          validate: (v) => v.length > 0 && !Number.isNaN(v) && v >= 6 && v <= 10000,
         }),
         includeNumbers: await select({
           message: 'Include Numbers?',
           default: 'yes',
-          choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
+          choices: [
+            { name: 'Yes', value: 'yes' },
+            { name: 'No', value: 'no' },
+          ],
           loop: false,
         }),
         includeLowerCase: await select({
           message: 'Include LowerCase Letters?',
           default: 'yes',
-          choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
+          choices: [
+            { name: 'Yes', value: 'yes' },
+            { name: 'No', value: 'no' },
+          ],
           loop: false,
         }),
         includeUpperCase: await select({
           message: 'Include UpperCase Letters?',
           default: 'yes',
-          choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
+          choices: [
+            { name: 'Yes', value: 'yes' },
+            { name: 'No', value: 'no' },
+          ],
           loop: false,
         }),
         includeSymbols: await select({
           message: 'Include Symbols?',
           default: 'yes',
-          choices: [{ name: 'Yes', value: 'yes' }, { name: 'No', value: 'no' }],
+          choices: [
+            { name: 'Yes', value: 'yes' },
+            { name: 'No', value: 'no' },
+          ],
           loop: false,
         }),
       };
@@ -74,22 +86,22 @@ export default async function launcher() {
       );
 
       // output it
-      print('PasswordService.generatePassword', [
-        `${STRENGTH_ALIAS[calculateStrength(password)]} Password:`,
-        password,
-      ], true);
+      print(
+        'PasswordService.generatePassword',
+        [`${STRENGTH_ALIAS[calculateStrength(password)]} Password:`, password],
+        true,
+      );
       break;
     }
-
-
-
-
 
     /* ********************************************************************************************
      *                                CALCULATE PASSWORD STRENGTH                                 *
      ******************************************************************************************** */
     case 'calculate_strength': {
-      const password = await input({ message: 'Enter the password', validate: ((v) => v.length > 0) });
+      const password = await input({
+        message: 'Enter the password',
+        validate: (v) => v.length > 0,
+      });
       print('PasswordService.calculateStrength', [
         `${STRENGTH_ALIAS[calculateStrength(password)]} Password:`,
         password,

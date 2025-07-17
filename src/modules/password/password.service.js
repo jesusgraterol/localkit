@@ -40,10 +40,6 @@ const __STRENGTH_OPTIONS = [
   },
 ];
 
-
-
-
-
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
@@ -92,15 +88,14 @@ const generatePassword = (
   // ensure the password is not too weak
   const strength = calculateStrength(password);
   if (strength < minStrength) {
-    throw new Error(`The generated password: ${password} is ${STRENGTH_ALIAS[strength]} and should not be used.`);
+    throw new Error(
+      `The generated password: ${password} is ${STRENGTH_ALIAS[strength]} and should not be used.`,
+    );
   }
 
   // finally, return it
   return password;
 };
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

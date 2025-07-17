@@ -10,33 +10,35 @@ import pathHelper from 'path';
  * @param {*} path
  * @returns Promise<boolean>
  */
-const pathExists = (path) => new Promise((resolve) => {
-  fs.access(path, (error) => {
-    // If there is an error, means the path doesnt exist. Otherwise, it does
-    resolve(error === null);
+const pathExists = (path) =>
+  new Promise((resolve) => {
+    fs.access(path, (error) => {
+      // If there is an error, means the path doesnt exist. Otherwise, it does
+      resolve(error === null);
+    });
   });
-});
 
 /**
  * Builds an item object based on a given path.
  * @param {*} path
  * @returns Promise<IPathItem>
  */
-const __buildPathItem = (path) => new Promise((resolve, reject) => {
-  fs.lstat(path, (error, stats) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve({
-        path,
-        baseName: pathHelper.basename(path),
-        ext: pathHelper.extname(path),
-        isFile: stats.isFile(),
-        creation: Math.round(stats.birthtimeMs),
-      });
-    }
+const __buildPathItem = (path) =>
+  new Promise((resolve, reject) => {
+    fs.lstat(path, (error, stats) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve({
+          path,
+          baseName: pathHelper.basename(path),
+          ext: pathHelper.extname(path),
+          isFile: stats.isFile(),
+          creation: Math.round(stats.birthtimeMs),
+        });
+      }
+    });
   });
-});
 
 /**
  * Sort function used to organize files by name alphabetically.
@@ -65,41 +67,38 @@ const __sortByName = (a, b) => {
  * @param {?} includeExtensions
  * @returns Promise<{directories: IPathItem[], files: IPathItem[]}[]>
  */
-const readPathContent = (path, includeExtensions = []) => new Promise((resolve, reject) => {
-  fs.readdir(path, async (error, content) => {
-    if (error) {
-      reject(error);
-    } else {
-      // init the content lists
-      const directories = [];
-      const files = [];
+const readPathContent = (path, includeExtensions = []) =>
+  new Promise((resolve, reject) => {
+    fs.readdir(path, async (error, content) => {
+      if (error) {
+        reject(error);
+      } else {
+        // init the content lists
+        const directories = [];
+        const files = [];
 
-      // read the contents and apply the file filter (if provided)
-      const items = await Promise.all(content.map(
-        (contentItem) => __buildPathItem(`${path}/${contentItem}`),
-      ));
-      items.forEach((item) => {
-        if (!item.isFile) {
-          directories.push(item);
-        } else if (
-          !includeExtensions.length
-          || includeExtensions.includes(item.ext.toLowerCase())
-        ) {
-          files.push(item);
-        }
-      });
+        // read the contents and apply the file filter (if provided)
+        const items = await Promise.all(
+          content.map((contentItem) => __buildPathItem(`${path}/${contentItem}`)),
+        );
+        items.forEach((item) => {
+          if (!item.isFile) {
+            directories.push(item);
+          } else if (
+            !includeExtensions.length ||
+            includeExtensions.includes(item.ext.toLowerCase())
+          ) {
+            files.push(item);
+          }
+        });
 
-      // finally, sort the items alphabetically and resolve them
-      files.sort(__sortByName);
-      directories.sort(__sortByName);
-      resolve({ directories, files });
-    }
+        // finally, sort the items alphabetically and resolve them
+        files.sort(__sortByName);
+        directories.sort(__sortByName);
+        resolve({ directories, files });
+      }
+    });
   });
-});
-
-
-
-
 
 /* ************************************************************************************************
  *                                      DIRECTORY MANAGEMENT                                      *
@@ -110,15 +109,16 @@ const readPathContent = (path, includeExtensions = []) => new Promise((resolve, 
  * @param {*} path
  * @returns Promise<void>
  */
-const deleteDirectory = (path) => new Promise((resolve, reject) => {
-  fs.rm(path, { force: true, recursive: true }, (error) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve();
-    }
+const deleteDirectory = (path) =>
+  new Promise((resolve, reject) => {
+    fs.rm(path, { force: true, recursive: true }, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
   });
-});
 
 /**
  * Creates a directory at a given path. Note that if the directory exists, it will delete all
@@ -142,10 +142,6 @@ const makeDirectory = async (path) => {
   });
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         FILE MANAGEMENT                                        *
  ************************************************************************************************ */
@@ -160,9 +156,10 @@ const makeDirectory = async (path) => {
  */
 const writeFile = (filePath, data, options = {}) => {
   // if it is a json file and the provided data is an object, stringify it. Otherwise, leave it
-  const content = pathHelper.extname(filePath) === '.json' && typeof data === 'object'
-    ? JSON.stringify(data)
-    : data;
+  const content =
+    pathHelper.extname(filePath) === '.json' && typeof data === 'object'
+      ? JSON.stringify(data)
+      : data;
 
   // create a local copy of the options
   const opts = { ...options };
@@ -192,7 +189,7 @@ const writeFile = (filePath, data, options = {}) => {
  */
 const readFile = async (filePath) => {
   // ensure the file exists
-  if (!await pathExists(filePath)) throw new Error(`The file ${filePath} does not exist.`);
+  if (!(await pathExists(filePath))) throw new Error(`The file ${filePath} does not exist.`);
 
   // read it and return its contents
   return new Promise((resolve, reject) => {
@@ -213,15 +210,16 @@ const readFile = async (filePath) => {
  * @param {*} path
  * @returns Promise<void>
  */
-const deleteFile = (path) => new Promise((resolve, reject) => {
-  fs.unlink(path, (error) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve();
-    }
+const deleteFile = (path) =>
+  new Promise((resolve, reject) => {
+    fs.unlink(path, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
   });
-});
 
 /**
  * Copies a file from the origin to the destination.
@@ -229,19 +227,16 @@ const deleteFile = (path) => new Promise((resolve, reject) => {
  * @param {*} destinationPath
  * @returns Promise<void>
  */
-const copyFile = (originPath, destinationPath) => new Promise((resolve, reject) => {
-  fs.copyFile(originPath, destinationPath, (error) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve();
-    }
+const copyFile = (originPath, destinationPath) =>
+  new Promise((resolve, reject) => {
+    fs.copyFile(originPath, destinationPath, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
   });
-});
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

@@ -25,7 +25,7 @@ The modules are:
 
 Install the CLI Globally
 ```bash
-npm install -g localkit
+npm i -g localkit
 
 # can be updated with
 npm update -g localkit
@@ -114,17 +114,4 @@ npm run test:integration
 - [PWABuilder](https://www.pwabuilder.com/imageGenerator)
 - [pwa-asset-generator](https://github.com/elegantapp/pwa-asset-generator)
 - [Material Symbols Guide](https://developers.google.com/fonts/docs/material_symbols)
-
-
-
-
-
-
-<br/>
-
-## Deployment
-
-```bash
-npm publish
-```
 

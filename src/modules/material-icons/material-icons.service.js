@@ -56,10 +56,6 @@ const ICONS_FILE_NAME = 'icons.woff2';
 // the name of the stylesheet file
 const STYLESHEET_FILE_NAME = 'index.css';
 
-
-
-
-
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
@@ -82,7 +78,9 @@ const __downloadIcons = (url) => fetch(url).then((response) => response.arrayBuf
 const install = async (style, filled = false) => {
   // ensure the outDir doesn't exist
   if (await pathExists(OUT_DIR)) {
-    throw new Error(`The icons cannot be installed because the directory '${OUT_DIR}' already exists`);
+    throw new Error(
+      `The icons cannot be installed because the directory '${OUT_DIR}' already exists`,
+    );
   }
 
   // attempt to perform the installation
@@ -104,10 +102,6 @@ const install = async (style, filled = false) => {
     await deleteDirectory(OUT_DIR);
   }
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

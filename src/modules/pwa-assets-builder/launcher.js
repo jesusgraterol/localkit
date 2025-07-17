@@ -32,10 +32,5 @@ export default async function launcher() {
   const buildID = await build(sourceFilePath, bgColor);
 
   // print the result of the build
-  print('PWAAssetBuilderService.build', [
-    'Input:',
-    sourceFilePath,
-    '\n\nOutput:',
-    buildID,
-  ], true);
+  print('PWAAssetBuilderService.build', ['Input:', sourceFilePath, '\n\nOutput:', buildID], true);
 }

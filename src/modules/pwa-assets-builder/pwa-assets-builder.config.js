@@ -29,7 +29,7 @@ const CONFIG = {
       { dimensions: { width: 20, height: 20 }, logoScale: 0.014 },
       { dimensions: { width: 29, height: 29 }, logoScale: 0.022 },
       { dimensions: { width: 32, height: 32 }, logoScale: 0.024 },
-      { dimensions: { width: 40, height: 40 }, logoScale: 0.030 },
+      { dimensions: { width: 40, height: 40 }, logoScale: 0.03 },
       { dimensions: { width: 50, height: 50 }, logoScale: 0.037 },
       { dimensions: { width: 57, height: 57 }, logoScale: 0.043 },
       { dimensions: { width: 58, height: 58 }, logoScale: 0.043 },
@@ -67,50 +67,26 @@ const CONFIG = {
       { dimensions: { width: 1792, height: 828 }, logoScale: 0.215 },
       { dimensions: { width: 2048, height: 1536 }, logoScale: 0.321 },
       { dimensions: { width: 2048, height: 2732 }, logoScale: 0.417 },
-      { dimensions: { width: 2208, height: 1242 }, logoScale: 0.300 },
+      { dimensions: { width: 2208, height: 1242 }, logoScale: 0.3 },
       { dimensions: { width: 2224, height: 1668 }, logoScale: 0.345 },
       { dimensions: { width: 2388, height: 1668 }, logoScale: 0.367 },
       { dimensions: { width: 2436, height: 1125 }, logoScale: 0.295 },
       { dimensions: { width: 2688, height: 1242 }, logoScale: 0.328 },
       { dimensions: { width: 2732, height: 2048 }, logoScale: 0.415 },
     ],
-    telegram: [
-      { dimensions: { width: 512, height: 512 }, logoScale: 0.32 },
-    ],
-    facebook: [
-      { dimensions: { width: 720, height: 720 }, logoScale: 0.42 },
-    ],
-    github: [
-      { dimensions: { width: 500, height: 500 }, logoScale: 0.32 },
-    ],
-    instagram: [
-      { dimensions: { width: 1000, height: 1000 }, logoScale: 0.65 },
-    ],
-    linkedin: [
-      { dimensions: { width: 400, height: 400 }, logoScale: 0.24 },
-    ],
-    notification: [
-      { dimensions: { width: 256, height: 256 }, logoScale: 0.18 },
-    ],
-    tiktok: [
-      { dimensions: { width: 200, height: 200 }, logoScale: 0.12 },
-    ],
-    twitter: [
-      { dimensions: { width: 400, height: 400 }, logoScale: 0.24 },
-    ],
-    whatsapp: [
-      { dimensions: { width: 500, height: 500 }, logoScale: 0.32 },
-    ],
+    telegram: [{ dimensions: { width: 512, height: 512 }, logoScale: 0.32 }],
+    facebook: [{ dimensions: { width: 720, height: 720 }, logoScale: 0.42 }],
+    github: [{ dimensions: { width: 500, height: 500 }, logoScale: 0.32 }],
+    instagram: [{ dimensions: { width: 1000, height: 1000 }, logoScale: 0.65 }],
+    linkedin: [{ dimensions: { width: 400, height: 400 }, logoScale: 0.24 }],
+    notification: [{ dimensions: { width: 256, height: 256 }, logoScale: 0.18 }],
+    tiktok: [{ dimensions: { width: 200, height: 200 }, logoScale: 0.12 }],
+    twitter: [{ dimensions: { width: 400, height: 400 }, logoScale: 0.24 }],
+    whatsapp: [{ dimensions: { width: 500, height: 500 }, logoScale: 0.32 }],
   },
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  CONFIG,
-};
+export { CONFIG };

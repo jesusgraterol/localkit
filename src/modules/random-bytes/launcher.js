@@ -33,7 +33,7 @@ export default async function launcher() {
         size: await input({
           message: 'Enter the desired size (bytes to generate)',
           default: '128',
-          validate: ((v) => v.length > 0 && !Number.isNaN(v) && v >= 6 && v <= 2000000000),
+          validate: (v) => v.length > 0 && !Number.isNaN(v) && v >= 6 && v <= 2000000000,
         }),
       };
 
@@ -41,14 +41,15 @@ export default async function launcher() {
       const secret = generate(Number(answers.size));
 
       // output it
-      print('RandomBytesService.generate', [
-        `Secret (${answers.size} bytes | ${secret.length} characters):`,
-        secret,
-      ], true);
+      print(
+        'RandomBytesService.generate',
+        [`Secret (${answers.size} bytes | ${secret.length} characters):`, secret],
+        true,
+      );
       break;
     }
     case 'validate': {
-      const secret = await input({ message: 'Enter the secret', validate: ((v) => v.length > 0) });
+      const secret = await input({ message: 'Enter the secret', validate: (v) => v.length > 0 });
       print('RandomBytesService.validate', [
         `${validate(secret) ? 'VALID' : 'INVALID'} Base64URL Secret:`,
         secret,

@@ -16,10 +16,6 @@ import { authenticator } from 'otplib';
  */
 authenticator.options = { window: 2, step: 30 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                        SECRET MANAGEMENT                                       *
  ************************************************************************************************ */
@@ -35,11 +31,8 @@ const generateSecret = () => authenticator.generateSecret();
  * @param {*} secret
  * @returns boolean
  */
-const isSecretFormatValid = (secret) => typeof secret === 'string' && /^[0-9a-zA-Z]{16,64}$/.test(secret);
-
-
-
-
+const isSecretFormatValid = (secret) =>
+  typeof secret === 'string' && /^[0-9a-zA-Z]{16,64}$/.test(secret);
 
 /* ************************************************************************************************
  *                                        TOKEN MANAGEMENT                                        *
@@ -59,10 +52,6 @@ const generateToken = (secret) => authenticator.generate(secret);
  * @returns boolean
  */
 const isTokenFormatValid = (token) => typeof token === 'string' && /^[0-9]{6}$/.test(token);
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

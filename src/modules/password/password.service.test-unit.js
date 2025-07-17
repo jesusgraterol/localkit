@@ -6,35 +6,35 @@ import { generatePassword, calculateStrength } from './password.service.js';
  ************************************************************************************************ */
 
 describe('Password Generator', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can generate passwords with any configuration', () => {
     expect(/^[0-9a-z]{10}$/.test(generatePassword(10, true, true, false, false))).toBe(true);
     expect(/^[0-9a-zA-Z]{20}$/.test(generatePassword(20, true, true, true, false))).toBe(true);
     expect(/^[a-zA-Z]{35}$/.test(generatePassword(35, false, true, true, false))).toBe(true);
-    expect(/^[!@#$%^&*()+_\-=}{[\]|:;"/?.><,`~]{35}$/.test(generatePassword(35, false, false, false, true))).toBe(true);
+    expect(
+      /^[!@#$%^&*()+_\-=}{[\]|:;"/?.><,`~]{35}$/.test(
+        generatePassword(35, false, false, false, true),
+      ),
+    ).toBe(true);
     expect(/^.{100}$/.test(generatePassword(100, true, true, true, true))).toBe(true);
   });
 });
 
-
-
-
-
 describe('Password Strength Calculator', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can calculate the score of invalid passwords', () => {
     expect(calculateStrength()).toEqual(0);

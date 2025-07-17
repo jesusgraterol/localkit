@@ -1,4 +1,13 @@
-import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
+import {
+  describe,
+  test,
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  expect,
+  jest,
+} from '@jest/globals';
 import { prettifyImageDimensions } from '../shared/utilities/utilities.js';
 import { pathExists, deleteDirectory } from '../shared/file-system/file-system.service.js';
 import { CONFIG } from './pwa-assets-builder.config.js';
@@ -21,10 +30,7 @@ jest.mock('./pwa-assets-builder.config.js', () => {
       ...originalModule.CONFIG,
       output: {
         ...originalModule.CONFIG.output,
-        icons: [
-          originalModule.CONFIG.output.icons[0],
-          originalModule.CONFIG.output.icons.at(-1),
-        ],
+        icons: [originalModule.CONFIG.output.icons[0], originalModule.CONFIG.output.icons.at(-1)],
         'apple-touch-icons': [
           originalModule.CONFIG.output['apple-touch-icons'][0],
           originalModule.CONFIG.output['apple-touch-icons'].at(-1),
@@ -38,22 +44,18 @@ jest.mock('./pwa-assets-builder.config.js', () => {
   };
 });
 
-
-
-
-
 /* ************************************************************************************************
  *                                             TESTS                                              *
  ************************************************************************************************ */
 
 describe('Build Process', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can build the PWA Assets', async () => {
     const id = await build('./pwa-assetsample.png', '#0C0C0C');
@@ -62,16 +64,20 @@ describe('Build Process', () => {
     await expect(pathExists(`${id}/source.png`)).resolves.toBeTruthy();
     await expect(pathExists(outputPath)).resolves.toBeTruthy();
 
-    const assetsExistence = await Promise.all(Object.keys(CONFIG.output).reduce(
-      (prev, currentCat) => [
-        ...prev,
-        pathExists(`${outputPath}/${currentCat}`),
-        ...CONFIG.output[currentCat].map((img) => pathExists(
-          `${outputPath}/${currentCat}/${prettifyImageDimensions(img.dimensions)}.png`,
-        )),
-      ],
-      [],
-    ));
+    const assetsExistence = await Promise.all(
+      Object.keys(CONFIG.output).reduce(
+        (prev, currentCat) => [
+          ...prev,
+          pathExists(`${outputPath}/${currentCat}`),
+          ...CONFIG.output[currentCat].map((img) =>
+            pathExists(
+              `${outputPath}/${currentCat}/${prettifyImageDimensions(img.dimensions)}.png`,
+            ),
+          ),
+        ],
+        [],
+      ),
+    );
     expect(assetsExistence.every((exists) => exists === true)).toBeTruthy();
 
     await expect(pathExists(`${id}/manifest.webmanifest`)).resolves.toBeTruthy();

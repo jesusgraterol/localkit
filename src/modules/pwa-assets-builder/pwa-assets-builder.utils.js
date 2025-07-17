@@ -12,7 +12,8 @@ import { MANIFEST_FILE } from './manifest-template.js';
  * @param {?} ext
  * @returns string
  */
-const generateAssetName = (dimensions, ext = '.png') => `${prettifyImageDimensions(dimensions)}${ext}`;
+const generateAssetName = (dimensions, ext = '.png') =>
+  `${prettifyImageDimensions(dimensions)}${ext}`;
 
 /**
  * Creates the image that will be used for the background in every asset.
@@ -20,14 +21,15 @@ const generateAssetName = (dimensions, ext = '.png') => `${prettifyImageDimensio
  * @param {*} backgroundColor
  * @returns sharp.Sharp
  */
-const generateBackgroundImage = (dimensions, backgroundColor) => sharp({
-  create: {
-    width: dimensions.width,
-    height: dimensions.height,
-    channels: 3,
-    background: backgroundColor,
-  },
-});
+const generateBackgroundImage = (dimensions, backgroundColor) =>
+  sharp({
+    create: {
+      width: dimensions.width,
+      height: dimensions.height,
+      channels: 3,
+      background: backgroundColor,
+    },
+  });
 
 /**
  * Scales a given pixel number based.
@@ -60,10 +62,12 @@ const generateLogoImage = async (logoSourcePath, asset, requiredDimensions) => {
   const logoImage = sharp(logoSourcePath);
   const metadata = await logoImage.metadata();
   if (
-    metadata.width !== requiredDimensions.width
-    || metadata.height !== requiredDimensions.height
+    metadata.width !== requiredDimensions.width ||
+    metadata.height !== requiredDimensions.height
   ) {
-    throw new Error(`The required logo dimensions are: ${prettifyImageDimensions(requiredDimensions)}. Received: ${prettifyImageDimensions(metadata)}`);
+    throw new Error(
+      `The required logo dimensions are: ${prettifyImageDimensions(requiredDimensions)}. Received: ${prettifyImageDimensions(metadata)}`,
+    );
   }
 
   // calculate the scaled dimensions
@@ -73,14 +77,8 @@ const generateLogoImage = async (logoSourcePath, asset, requiredDimensions) => {
   );
 
   // return the scaled logo
-  return logoImage.resize(
-    scaledDimensions.width,
-    scaledDimensions.height,
-  ).toBuffer();
+  return logoImage.resize(scaledDimensions.width, scaledDimensions.height).toBuffer();
 };
-
-
-
 
 /* ************************************************************************************************
  *                                    MANIFEST BUILD UTILITIES                                    *
@@ -114,9 +112,6 @@ const buildManifestFile = (icons, backgroundColor) => ({
   icons: icons.map(__buildManifestIcon),
 });
 
-
-
-
 /* ************************************************************************************************
  *                                    RECEIPT BUILD UTILITIES                                     *
  ************************************************************************************************ */
@@ -134,10 +129,12 @@ const __getAssetNameByDimensions = (dimensions) => `${prettifyImageDimensions(di
  * @param {*} outputDimensions
  * @returns string
  */
-const __generateAssetVariationsReceipt = (prefix, outputDimensions) => outputDimensions.reduce(
-  (prev, current, index) => `${prev}${index !== 0 ? '\n' : ''}${prefix}${__getAssetNameByDimensions(current.dimensions)}`,
-  '',
-);
+const __generateAssetVariationsReceipt = (prefix, outputDimensions) =>
+  outputDimensions.reduce(
+    (prev, current, index) =>
+      `${prev}${index !== 0 ? '\n' : ''}${prefix}${__getAssetNameByDimensions(current.dimensions)}`,
+    '',
+  );
 
 /**
  * Builds the contents that will be stored in the receipt file.
@@ -170,14 +167,12 @@ const buildReceiptFile = (sourcePath, backgroundColor, buildID, outputConfig) =>
 
   // footer
   receipt += '\n\nFor more information on how to include these assets in your project, visit:';
-  receipt += '\nhttps://github.com/jesusgraterol/localkit/blob/main/readme-assets/modules/PWA_ASSETS_BUILDER/README.md';
+  receipt +=
+    '\nhttps://github.com/jesusgraterol/localkit/blob/main/readme-assets/modules/PWA_ASSETS_BUILDER/README.md';
 
   // finally, return the receipt
   return receipt;
 };
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

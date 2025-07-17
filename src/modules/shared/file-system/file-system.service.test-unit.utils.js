@@ -5,55 +5,45 @@ import pathHelper from 'path';
 /* ************************************************************************************************
  *                                          SPY FACTORIES                                         *
  ************************************************************************************************ */
-const accessSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'access').mockImplementation(
-  (path, callback) => callback(cbReturnVal),
-);
+const accessSpyFactory = (cbReturnVal) =>
+  jest.spyOn(fs, 'access').mockImplementation((path, callback) => callback(cbReturnVal));
 
 const lstatSpyFactory = (cbReturnVals) => {
   const mock = jest.spyOn(fs, 'lstat');
-  cbReturnVals.forEach(
-    (cbVal) => mock.mockImplementationOnce((path, callback) => callback(null, cbVal)),
+  cbReturnVals.forEach((cbVal) =>
+    mock.mockImplementationOnce((path, callback) => callback(null, cbVal)),
   );
   return mock;
 };
 
-const readdirSpyFactory = (
-  cbReturnError,
-  cbReturnVal = undefined,
-) => jest.spyOn(fs, 'readdir').mockImplementation(
-  (path, callback) => callback(cbReturnError, cbReturnVal),
-);
+const readdirSpyFactory = (cbReturnError, cbReturnVal = undefined) =>
+  jest
+    .spyOn(fs, 'readdir')
+    .mockImplementation((path, callback) => callback(cbReturnError, cbReturnVal));
 
-const rmSpyFactory = (cbReturnError) => jest.spyOn(fs, 'rm').mockImplementation(
-  (path, options, callback) => callback(cbReturnError),
-);
+const rmSpyFactory = (cbReturnError) =>
+  jest.spyOn(fs, 'rm').mockImplementation((path, options, callback) => callback(cbReturnError));
 
-const mkdirSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'mkdir').mockImplementation(
-  (path, callback) => callback(cbReturnVal),
-);
+const mkdirSpyFactory = (cbReturnVal) =>
+  jest.spyOn(fs, 'mkdir').mockImplementation((path, callback) => callback(cbReturnVal));
 
-const writeFileSpyFactory = (cbReturnVal) => jest.spyOn(fs, 'writeFile').mockImplementation(
-  (path, content, options, callback) => callback(cbReturnVal),
-);
+const writeFileSpyFactory = (cbReturnVal) =>
+  jest
+    .spyOn(fs, 'writeFile')
+    .mockImplementation((path, content, options, callback) => callback(cbReturnVal));
 
-const readFileSpyFactory = (
-  cbReturnErr,
-  cbReturnVal = undefined,
-) => jest.spyOn(fs, 'readFile').mockImplementation(
-  (path, callback) => callback(cbReturnErr, cbReturnVal),
-);
+const readFileSpyFactory = (cbReturnErr, cbReturnVal = undefined) =>
+  jest
+    .spyOn(fs, 'readFile')
+    .mockImplementation((path, callback) => callback(cbReturnErr, cbReturnVal));
 
-const unlinkSpyFactory = (cbReturnError) => jest.spyOn(fs, 'unlink').mockImplementation(
-  (path, callback) => callback(cbReturnError),
-);
+const unlinkSpyFactory = (cbReturnError) =>
+  jest.spyOn(fs, 'unlink').mockImplementation((path, callback) => callback(cbReturnError));
 
-const copyFileSpyFactory = (cbReturnError) => jest.spyOn(fs, 'copyFile').mockImplementation(
-  (originPath, destinationPath, callback) => callback(cbReturnError),
-);
-
-
-
-
+const copyFileSpyFactory = (cbReturnError) =>
+  jest
+    .spyOn(fs, 'copyFile')
+    .mockImplementation((originPath, destinationPath, callback) => callback(cbReturnError));
 
 /* ************************************************************************************************
  *                                          MISC HELPERS                                          *
@@ -91,10 +81,6 @@ const validateSpyInteractions = (
   }
   if (clearMock) spyFunc.mockClear();
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

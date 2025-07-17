@@ -6,13 +6,13 @@ import { hash, validate } from './md5.service.js';
  ************************************************************************************************ */
 
 describe('MD5 Management', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can hash a given message (1)', () => {
     const h = hash('Hello world! this is a hashed message');
@@ -22,7 +22,9 @@ describe('MD5 Management', () => {
   });
 
   test('can hash a given message (2)', () => {
-    const h = hash('Hello world! this is a hashed message. However, this is going to be a longer text. Much longer just to make sure. This is gonna be a little bit strange as there are spaces now.');
+    const h = hash(
+      'Hello world! this is a hashed message. However, this is going to be a longer text. Much longer just to make sure. This is gonna be a little bit strange as there are spaces now.',
+    );
     expect(h).toBe('deb2a9bcea2fe472b92ad224a058fdc1');
   });
 

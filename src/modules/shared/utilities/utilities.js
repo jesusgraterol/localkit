@@ -19,10 +19,6 @@ const generateBuildID = (buildName) => `${buildName}-build-${Date.now()}`;
  */
 const prettifyImageDimensions = ({ width = 0, height = 0 } = {}) => `${width}x${height}`;
 
-
-
-
-
 /* ************************************************************************************************
  *                                          MISC HELPERS                                          *
  ************************************************************************************************ */
@@ -33,10 +29,8 @@ const prettifyImageDimensions = ({ width = 0, height = 0 } = {}) => `${width}x${
  * @param {?} dateFormat
  * @returns string
  */
-const formatDate = (
-  timestamp = undefined,
-  dateFormat = 'dd/MM/yyyy, hh:mm:ss a',
-) => format(typeof timestamp === 'number' ? new Date(timestamp) : new Date(), dateFormat);
+const formatDate = (timestamp = undefined, dateFormat = 'dd/MM/yyyy, hh:mm:ss a') =>
+  format(typeof timestamp === 'number' ? new Date(timestamp) : new Date(), dateFormat);
 
 /**
  * Builds the CLI's header - ready to be printed.
@@ -72,10 +66,10 @@ const print = (title, content, includeDate = false, includeBorders = true) => {
  * Creates a delay which duration is based on the amount of provided seconds.
  * @returns Promise<void>
  */
-const delay = (seconds) => new Promise((resolve) => { setTimeout(resolve, seconds * 1000); });
-
-
-
+const delay = (seconds) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, seconds * 1000);
+  });
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

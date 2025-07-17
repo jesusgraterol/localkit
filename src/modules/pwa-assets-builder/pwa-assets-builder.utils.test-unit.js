@@ -1,4 +1,13 @@
-import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
+import {
+  describe,
+  test,
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  expect,
+  jest,
+} from '@jest/globals';
 import { Buffer } from 'node:buffer';
 import sharp from 'sharp';
 import { MANIFEST_FILE } from './manifest-template.js';
@@ -21,23 +30,21 @@ import {
  */
 const MOCK_DIMENSIONS = { width: 128, height: 128 };
 const MOCK_LOGO_IMAGE = Buffer.from('mock_logo_image');
-jest.mock('sharp', () => jest.fn(() => ({
-  metadata: () => Promise.resolve(MOCK_DIMENSIONS),
-  resize: () => ({
-    toBuffer: () => Promise.resolve(MOCK_LOGO_IMAGE),
-  }),
-})));
-
-
-
-
+jest.mock('sharp', () =>
+  jest.fn(() => ({
+    metadata: () => Promise.resolve(MOCK_DIMENSIONS),
+    resize: () => ({
+      toBuffer: () => Promise.resolve(MOCK_LOGO_IMAGE),
+    }),
+  })),
+);
 
 /* ************************************************************************************************
  *                                             TESTS                                              *
  ************************************************************************************************ */
 
 describe('Assets Build Utilities', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
   afterAll(() => {
     sharp.mockRestore();
@@ -47,7 +54,7 @@ describe('Assets Build Utilities', () => {
     sharp.mockClear();
   });
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can generate the name for an asset', () => {
     expect(generateAssetName({ width: 256, height: 256 })).toBe('256x256.png');
@@ -68,11 +75,9 @@ describe('Assets Build Utilities', () => {
   });
 
   test('cannot generate the logo image if the source file has the wrong dimensions', async () => {
-    await expect(() => generateLogoImage(
-      'fakePath.png',
-      { logoScale: 0.5 },
-      { width: 512, height: 512 },
-    )).rejects.toThrow('The required logo dimensions are: 512x512. Received: 128x128');
+    await expect(() =>
+      generateLogoImage('fakePath.png', { logoScale: 0.5 }, { width: 512, height: 512 }),
+    ).rejects.toThrow('The required logo dimensions are: 512x512. Received: 128x128');
   });
 
   test('can generate a logo image', async () => {
@@ -86,24 +91,23 @@ describe('Assets Build Utilities', () => {
   });
 });
 
-
-
-
-
 describe('Manifest Build Utilities', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
   afterAll(() => {});
 
   beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can build the manifest file based on a list of icons', () => {
-    const manifest = buildManifestFile([
-      { dimensions: { width: 48, height: 48 }, logoScale: 0.037 },
-      { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
-    ], '#0C0C0C');
+    const manifest = buildManifestFile(
+      [
+        { dimensions: { width: 48, height: 48 }, logoScale: 0.037 },
+        { dimensions: { width: 1024, height: 1024 }, logoScale: 0.65 },
+      ],
+      '#0C0C0C',
+    );
     expect(manifest).toStrictEqual({
       ...MANIFEST_FILE,
       theme_color: '#0C0C0C',
@@ -126,18 +130,14 @@ describe('Manifest Build Utilities', () => {
   });
 });
 
-
-
-
-
 describe('Receipt Build Utilities', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
   afterAll(() => {});
 
   beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can build the receipt file', () => {
     // init a fake id as well as the root path for the asets
@@ -165,9 +165,9 @@ describe('Receipt Build Utilities', () => {
     expect(receipt).toContain(bgColor);
     Object.keys(outputConfig).forEach((category) => {
       expect(receipt).toContain(category);
-      outputConfig[category].forEach((asset) => (
-        expect(receipt).toContain(`${prettifyImageDimensions(asset.dimensions)}.png`)
-      ));
+      outputConfig[category].forEach((asset) =>
+        expect(receipt).toContain(`${prettifyImageDimensions(asset.dimensions)}.png`),
+      );
     });
   });
 });
