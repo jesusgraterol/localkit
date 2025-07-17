@@ -6,13 +6,13 @@ import { generate, validate } from './uuid.service.js';
  ************************************************************************************************ */
 
 describe('UUID Management', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can generate a valid id', () => {
     const uuid = generate();

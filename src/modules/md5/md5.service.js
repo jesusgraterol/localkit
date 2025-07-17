@@ -17,13 +17,7 @@ const hash = (message) => md5(message);
  */
 const validate = (hashString) => /^[a-f0-9]{32}$/gi.test(hashString);
 
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  hash,
-  validate,
-};
+export { hash, validate };

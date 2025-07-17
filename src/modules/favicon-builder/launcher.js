@@ -24,10 +24,5 @@ export default async function launcher() {
   const buildID = await build(sourceFilePath);
 
   // print the result of the build
-  print('FaviconBuilderService.build', [
-    'Input:',
-    sourceFilePath,
-    '\n\nOutput:',
-    buildID,
-  ], true);
+  print('FaviconBuilderService.build', ['Input:', sourceFilePath, '\n\nOutput:', buildID], true);
 }

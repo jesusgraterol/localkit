@@ -18,17 +18,14 @@ import {
 // the base path that will be used for the tests
 const basePath = generate();
 
-
-
-
 /* ************************************************************************************************
  *                                             TESTS                                              *
  ************************************************************************************************ */
 
 describe('General Management', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
   beforeEach(async () => {
     await makeDirectory(basePath);
@@ -106,10 +103,6 @@ describe('General Management', () => {
   });
 });
 
-
-
-
-
 describe('Directory Management', () => {
   beforeAll(async () => {
     await makeDirectory(basePath);
@@ -119,9 +112,9 @@ describe('Directory Management', () => {
     await deleteDirectory(basePath);
   });
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can create an empty directory and verify its existance:', async () => {
     const path = `${basePath}/blank-dir`;
@@ -138,7 +131,6 @@ describe('Directory Management', () => {
     expect(await pathExists(path)).toBe(false);
   });
 
-
   test('can override an existing dir:', async () => {
     const path = `${basePath}/to-be-deleted-dir`;
     await makeDirectory(path);
@@ -151,7 +143,6 @@ describe('Directory Management', () => {
     expect(await pathExists(`${path}/temp-dir`)).toBe(false);
   });
 
-
   test('can create a tree of nested directories and files. Then delete the parent node:', async () => {
     const path = `${basePath}/dir-tree`;
     await makeDirectory(path);
@@ -161,7 +152,8 @@ describe('Directory Management', () => {
     await makeDirectory(`${path}/child-3`);
     await makeDirectory(`${path}/child-3/grand-child-01`);
     await writeFile(`${path}/child-3/grand-child-01/some-obj.json`, {
-      foo: 'bar', bar: 'foo',
+      foo: 'bar',
+      bar: 'foo',
     });
 
     // ensure all the dirs have been created
@@ -191,10 +183,6 @@ describe('Directory Management', () => {
   });
 });
 
-
-
-
-
 describe('File Management', () => {
   beforeAll(async () => {
     await makeDirectory(basePath);
@@ -204,9 +192,9 @@ describe('File Management', () => {
     await deleteDirectory(basePath);
   });
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can write a text file, verify its existance and read its contents', async () => {
     const path = `${basePath}/text-file.txt`;
@@ -220,7 +208,10 @@ describe('File Management', () => {
   test('can write a json file, verify its existance and read its contents', async () => {
     const path = `${basePath}/json-file.json`;
     const content = {
-      foo: 'bar', baz: 'foo', hello: true, num: 123456,
+      foo: 'bar',
+      baz: 'foo',
+      hello: true,
+      num: 123456,
     };
     expect(await pathExists(path)).toBe(false);
     await writeFile(path, content);
@@ -230,9 +221,7 @@ describe('File Management', () => {
 
   test('throws an error if tries to read a file that does not exist', async () => {
     const path = `${basePath}/non-existent.txt`;
-    await expect(
-      () => readFile(path),
-    ).rejects.toThrow(`The file ${path} does not exist.`);
+    await expect(() => readFile(path)).rejects.toThrow(`The file ${path} does not exist.`);
   });
 
   test('can write a file and delete it afterwards', async () => {

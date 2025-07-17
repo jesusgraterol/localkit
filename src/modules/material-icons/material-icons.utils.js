@@ -10,7 +10,10 @@ import { join } from 'node:path';
  * @param {*} filled
  * @returns string
  */
-const buildStyleSheet = (iconsFileName, filled) => (`/* ************************************************************************************************
+const buildStyleSheet = (
+  iconsFileName,
+  filled,
+) => `/* ************************************************************************************************
 *                                           FONT FACE                                            *
 ************************************************************************************************ */
 @font-face {
@@ -35,7 +38,7 @@ const buildStyleSheet = (iconsFileName, filled) => (`/* ************************
   word-wrap: normal;
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;${filled ? '\n  font-variation-settings: \'FILL\' 1, \'wght\' 700, \'GRAD\' 0, \'opsz\' 48;' : ''}
+  -webkit-font-smoothing: antialiased;${filled ? "\n  font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;" : ''}
 }\n\n\n\n\n
 /* ************************************************************************************************
  *                                              SIZES                                             *
@@ -46,7 +49,7 @@ const buildStyleSheet = (iconsFileName, filled) => (`/* ************************
 .md-icon.md-48 { font-size: 48px; }
 .md-icon.md-60 { font-size: 60px; }
 .md-icon.md-72 { font-size: 72px; }
-`);
+`;
 
 /**
  * Builds a path for a given file based on the output directory.
@@ -55,8 +58,6 @@ const buildStyleSheet = (iconsFileName, filled) => (`/* ************************
  * @returns string
  */
 const buildPath = (outDir, fileName) => join(outDir, fileName);
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

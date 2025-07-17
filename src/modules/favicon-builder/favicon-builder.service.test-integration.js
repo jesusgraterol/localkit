@@ -1,4 +1,13 @@
-import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect, jest } from '@jest/globals';
+import {
+  describe,
+  test,
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  expect,
+  jest,
+} from '@jest/globals';
 import { prettifyImageDimensions } from '../shared/utilities/utilities.js';
 import { pathExists, deleteDirectory } from '../shared/file-system/file-system.service.js';
 import { CONFIG } from './favicon-builder.config.js';
@@ -26,22 +35,18 @@ jest.mock('./favicon-builder.config.js', () => {
   };
 });
 
-
-
-
-
 /* ************************************************************************************************
  *                                             TESTS                                              *
  ************************************************************************************************ */
 
 describe('Build Process', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can build the Favicon Assets', async () => {
     const id = await build('./favicon-assetsample.png');
@@ -51,8 +56,8 @@ describe('Build Process', () => {
     expect(await pathExists(`${id}/source.png`)).toBe(true);
     expect(await pathExists(`${id}/favicons`)).toBe(true);
     const variations = await Promise.all(
-      CONFIG.outputDimensions.map(
-        (dim) => pathExists(`${id}/favicons/${prettifyImageDimensions(dim)}.png`),
+      CONFIG.outputDimensions.map((dim) =>
+        pathExists(`${id}/favicons/${prettifyImageDimensions(dim)}.png`),
       ),
     );
     expect(variations.every((exists) => exists === true)).toBe(true);

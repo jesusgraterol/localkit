@@ -1,9 +1,5 @@
 import { describe, test, afterAll, afterEach, beforeAll, beforeEach, expect } from '@jest/globals';
-import {
-  generateBuildID,
-  prettifyImageDimensions,
-  formatDate,
-} from './utilities.js';
+import { generateBuildID, prettifyImageDimensions, formatDate } from './utilities.js';
 
 /* ************************************************************************************************
  *                                           CONSTANTS                                            *
@@ -12,22 +8,18 @@ import {
 // RegEx to validate formatted dates
 const dateRegEx = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4},\s[0-9]{2}:[0-9]{2}:[0-9]{2}\s(AM|PM)/;
 
-
-
-
-
 /* ************************************************************************************************
  *                                             TESTS                                              *
  ************************************************************************************************ */
 
 describe('Build Helpers', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can generate an identifier for a build', () => {
     expect(generateBuildID('favicon')).toMatch(/^favicon-build-[0-9]+$/);
@@ -41,18 +33,14 @@ describe('Build Helpers', () => {
   });
 });
 
-
-
-
-
 describe('Date Formatting', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can properly format the current time', () => {
     const date = formatDate();
@@ -70,9 +58,7 @@ describe('Date Formatting', () => {
 
   test('can properly format a time from the past', () => {
     expect(formatDate(1672622975000)).toEqual('01/01/2023, 09:29:35 PM');
-    expect(
-      formatDate(1672622975000, 'dd/MM/yyyy, hh:mm:ss a'),
-    ).toEqual('01/01/2023, 09:29:35 PM');
+    expect(formatDate(1672622975000, 'dd/MM/yyyy, hh:mm:ss a')).toEqual('01/01/2023, 09:29:35 PM');
     expect(formatDate(1672622975000, 'dd/MM/yyyy')).toEqual('01/01/2023');
     expect(formatDate(1672622975000, 'hh:mm:ss a')).toEqual('09:29:35 PM');
   });

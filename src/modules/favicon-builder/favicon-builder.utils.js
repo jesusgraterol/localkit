@@ -18,7 +18,8 @@ const __getFaviconNameByDimensions = (dimensions) => `${prettifyImageDimensions(
  * @param {*} dimensions
  * @returns string
  */
-const getFaviconPathByDimensions = (buildID, dimensions) => `${buildID}/favicons/${__getFaviconNameByDimensions(dimensions)}`;
+const getFaviconPathByDimensions = (buildID, dimensions) =>
+  `${buildID}/favicons/${__getFaviconNameByDimensions(dimensions)}`;
 
 /**
  * Reads the file from the source path, ensures it meets the dimensions requirement and returns
@@ -34,19 +35,17 @@ const readSourcePath = async (sourcePath, dimensionsRequirement) => {
   // extract the metadata and ensure it matches the requirements
   const metadata = await source.metadata();
   if (
-    dimensionsRequirement.width > metadata.width
-    || dimensionsRequirement.height > metadata.height
+    dimensionsRequirement.width > metadata.width ||
+    dimensionsRequirement.height > metadata.height
   ) {
-    throw new Error(`The dimensions of the source file should be: ${prettifyImageDimensions(dimensionsRequirement)} minimum`);
+    throw new Error(
+      `The dimensions of the source file should be: ${prettifyImageDimensions(dimensionsRequirement)} minimum`,
+    );
   }
 
   // return the instance of the source file
   return source;
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                          BUILD RECEIPT                                         *
@@ -58,10 +57,12 @@ const readSourcePath = async (sourcePath, dimensionsRequirement) => {
  * @param {*} outputDimensions
  * @returns string
  */
-const __generateFaviconVariationsReceipt = (prefix, outputDimensions) => outputDimensions.reduce(
-  (prev, current, index) => `${prev}${index !== 0 ? '\n' : ''}${prefix}${__getFaviconNameByDimensions(current)}`,
-  '',
-);
+const __generateFaviconVariationsReceipt = (prefix, outputDimensions) =>
+  outputDimensions.reduce(
+    (prev, current, index) =>
+      `${prev}${index !== 0 ? '\n' : ''}${prefix}${__getFaviconNameByDimensions(current)}`,
+    '',
+  );
 
 /**
  * Builds the receipt once all the build files have been generated.
@@ -89,15 +90,12 @@ const generateBuildReceipt = (sourcePath, buildID, outputDimensions) => {
 
   // footer
   receipt += '\n\nFor more information on how to include these assets in your project, visit:';
-  receipt += '\nhttps://github.com/jesusgraterol/localkit/blob/main/readme-assets/modules/FAVICON_BUILDER/README.md';
+  receipt +=
+    '\nhttps://github.com/jesusgraterol/localkit/blob/main/readme-assets/modules/FAVICON_BUILDER/README.md';
 
   // finally, return the receipt
   return receipt;
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

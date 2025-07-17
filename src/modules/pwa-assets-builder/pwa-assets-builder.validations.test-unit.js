@@ -6,13 +6,13 @@ import { isHexadecimalColorValid } from './pwa-assets-builder.validations.js';
  ************************************************************************************************ */
 
 describe('General Validations', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can identify valid colors in hexadecimal formats', () => {
     expect(isHexadecimalColorValid('#000000')).toBe(true);

@@ -18,13 +18,7 @@ const generate = (size) => randomBytes(size).toString('base64url');
  */
 const validate = (secret) => /^[a-zA-Z0-9-_]{6,}$/.test(secret);
 
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  generate,
-  validate,
-};
+export { generate, validate };

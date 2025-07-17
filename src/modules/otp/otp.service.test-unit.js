@@ -11,19 +11,23 @@ import {
  ************************************************************************************************ */
 
 describe('OTP Secret Management', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can validate the format of a secret', () => {
     expect(isSecretFormatValid('NB2RGV2KAY2CMACD')).toBe(true);
     expect(isSecretFormatValid('KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLD')).toBe(true);
-    expect(isSecretFormatValid('KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLDKVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLD')).toBe(true);
-    expect(isSecretFormatValid('KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLDKVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLDD')).toBe(false);
+    expect(
+      isSecretFormatValid('KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLDKVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLD'),
+    ).toBe(true);
+    expect(
+      isSecretFormatValid('KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLDKVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLDD'),
+    ).toBe(false);
     expect(isSecretFormatValid('12345a')).toBe(false);
     expect(isSecretFormatValid()).toBe(false);
     expect(isSecretFormatValid(123456)).toBe(false);
@@ -38,18 +42,14 @@ describe('OTP Secret Management', () => {
   });
 });
 
-
-
-
-
 describe('OTP Token Management', () => {
-  beforeAll(() => { });
+  beforeAll(() => {});
 
-  afterAll(() => { });
+  afterAll(() => {});
 
-  beforeEach(() => { });
+  beforeEach(() => {});
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   test('can validate the format of a token', () => {
     expect(isTokenFormatValid('123456')).toBe(true);

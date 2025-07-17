@@ -34,20 +34,16 @@ const encrypt = (password, message) => {
   // ensure the message can be properly decrypted
   const decryptedMessage = decrypt(password, encryptedMessage);
   if (message !== decryptedMessage) {
-    throw new Error(`The message was encrypted but did not pass the verification: ${message} != ${decryptedMessage}`);
+    throw new Error(
+      `The message was encrypted but did not pass the verification: ${message} != ${decryptedMessage}`,
+    );
   }
 
   // finally, return the encrypted message
   return encryptedMessage;
 };
 
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  decrypt,
-  encrypt,
-};
+export { decrypt, encrypt };
