@@ -1,6 +1,6 @@
 {
   "name": "localkit",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "The localkit package is an open-source command-line interface (CLI) designed to streamline your web development workflow. It provides a suite of tools for common tasks, including secure password generation, Base64URL encoding/decoding, UUID creation, OTP management, encryption, hashing, favicon creation, PWA asset generation, and Material Icon installation.",
   "main": "src/index.js",
   "type": "module",
@@ -36,7 +36,7 @@
     "prettier": "3.6.2"
   },
   "dependencies": {
-    "@inquirer/prompts": "3.3.2",
+    "@inquirer/prompts": "8.3.2",
     "@inquirer/select": "1.3.3",
     "aes256": "1.1.0",
     "check-password-strength": "2.0.10",
