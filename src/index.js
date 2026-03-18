@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 import select from '@inquirer/select';
 import { buildCLIHeader } from './modules/shared/utilities/utilities.js';
 
